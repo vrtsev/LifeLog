@@ -13,7 +13,10 @@ gem 'uglifier', '>= 1.3.0'
 
 # View gems
 gem 'bootstrap', '~> 4.0.0.alpha6'
-gem 'haml'
+gem 'haml-rails'
+
+# Authentication
+gem 'devise'
 
 group :development, :test do
   gem 'pry-rails', platform: :mri
