@@ -1,0 +1,21 @@
+language: ruby
+rvm:
+  - 2.3.1
+
+addons:
+  code_climate:
+    repo_token: 8ff1c12bd29afaf56c24d8e9d384a3db22792f228ca126088f761ed6f1531823
+
+services:
+  - mysql
+
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS lifelog_test;'
+
+script:
+  - bundle exec rubocop
+  - bundle exec rake
+
+after_success:
+  - bundle exec codeclimate-test-reporter

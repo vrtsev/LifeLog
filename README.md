@@ -1,4 +1,4 @@
-# LifeLog
+# LifeLog [![Build Status](https://travis-ci.org/vrtsev/LifeLog.svg?branch=master)](https://travis-ci.org/vrtsev/LifeLog) [![Code Climate](https://codeclimate.com/github/vrtsev/LifeLog/badges/gpa.svg)](https://codeclimate.com/github/vrtsev/LifeLog) [![Test Coverage](https://codeclimate.com/github/vrtsev/LifeLog/badges/coverage.svg)](https://codeclimate.com/github/vrtsev/LifeLog/coverage)
 
 ## LifeLog is a comprehensive resource that will give users the opportunity to:
 
