@@ -23,6 +23,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'listen', '~> 3.0.5'
   gem 'rubocop'
   gem 'spring'
@@ -31,7 +32,14 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem 'cucumber'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'poltergeist'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5'
   gem 'simplecov'
 end
