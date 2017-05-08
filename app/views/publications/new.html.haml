@@ -1,0 +1,44 @@
+%h1 New post
+
+= form_for :post, url: publications_path, method: :post do |f|
+  - if @post.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+      %ul
+        - @post.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :content
+    = f.text_area :content
+  .field
+    = f.label :supplemented
+    = f.check_box :supplemented
+  .field
+    = f.label :pinned
+    = f.check_box :pinned
+  .field
+    = f.label :visible
+    = f.check_box :visible
+  .field
+    = f.label :commenting
+    = f.check_box :commenting
+  .field
+    = f.label :supplement_date
+    = f.datetime_select :supplement_date
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :category_id
+    = f.number_field :category_id
+  .field
+    = f.label :type
+    = f.text_field :type
+  .actions
+    = f.submit 'Save'
+
+= link_to 'Back', publications_path

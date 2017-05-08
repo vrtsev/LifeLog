@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502124114) do
+ActiveRecord::Schema.define(version: 20170506120127) do
+
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.text     "content",         limit: 65535
+    t.boolean  "supplemented",                  default: true
+    t.boolean  "pinned",                        default: false
+    t.boolean  "visible",                       default: true
+    t.boolean  "commenting",                    default: true
+    t.datetime "supplement_date"
+    t.integer  "user_id",                                       null: false
+    t.integer  "category_id"
+    t.string   "type"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.index ["category_id"], name: "index_posts_on_category_id", using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                                  null: false
