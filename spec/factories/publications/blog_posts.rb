@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :blog_post, class: 'BlogPost' do
+  factory :blog_post, class: 'Publications::BlogPost' do
     title 'My shiny post'
     content 'Im writing booring tests'
     supplemented false

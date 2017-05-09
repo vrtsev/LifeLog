@@ -6,6 +6,6 @@ class WelcomeController < ApplicationController
   private
 
   def check_auth
-    redirect_to publications_path if user_signed_in?
+    redirect_to posts_path if user_signed_in?
   end
 end
