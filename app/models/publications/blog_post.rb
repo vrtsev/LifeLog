@@ -17,8 +17,10 @@
 #  updated_at      :datetime         not null
 #
 
-class BlogPost < Post
-  belongs_to :category, optional: true
+class Publications::BlogPost < Post
+  belongs_to :blog_category,
+             optional: true,
+             class_name: 'Publications::BlogCategory'
 
   # has_many :photos
   # has_many :files

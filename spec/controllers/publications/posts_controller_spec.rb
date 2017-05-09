@@ -1,4 +1,4 @@
-describe PublicationsController, type: :controller do
+describe Publications::PostsController, type: :controller do
   let!(:user)      { create :user }
   let!(:blog_post) { create :blog_post, user: user }
   before           { sign_in user }
@@ -44,12 +44,15 @@ describe PublicationsController, type: :controller do
       let(:valid_params) { post_params.merge(title: post_title) }
       before             { post :create, params: { post: valid_params } }
 
-      it { expect(response).to redirect_to publication_path(BlogPost.last.id) }
+      it 'redirects to created post' do
+        expect(response).to redirect_to post_path \
+          Publications::BlogPost.last.id
+      end
       it { expect(response).to have_http_status(302) }
 
       it 'creates new post in db' do
         expect { post :create, params: { post: valid_params } }
-          .to change(BlogPost, :count).by(1)
+          .to change(Publications::BlogPost, :count).by(1)
       end
 
       it 'assigns author to post' do
@@ -60,7 +63,7 @@ describe PublicationsController, type: :controller do
     context 'when post is invalid' do
       it { expect(response).to have_http_status(200) }
       it 'does not save post' do
-        expect { response }.not_to change(BlogPost, :count)
+        expect { response }.not_to change(Publications::BlogPost, :count)
       end
     end
   end
@@ -106,7 +109,7 @@ describe PublicationsController, type: :controller do
     end
 
     it 'does not change posts count' do
-      expect { response }.not_to change(BlogPost, :count)
+      expect { response }.not_to change(Publications::BlogPost, :count)
       expect { response }.not_to change(Post, :count)
     end
   end
@@ -115,7 +118,7 @@ describe PublicationsController, type: :controller do
     subject { delete :destroy, params: { id: blog_post.id } }
 
     it 'deletes post from db' do
-      expect { subject }.to change(BlogPost, :count).by(-1)
+      expect { subject }.to change(Publications::BlogPost, :count).by(-1)
     end
   end
 end
