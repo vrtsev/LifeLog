@@ -1,8 +1,9 @@
-class PublicationsController < ApplicationController
+class Publications::PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
     @posts = current_user.blog_posts
+    @categories = current_user.blog_categories
   end
 
   def show; end
@@ -17,7 +18,7 @@ class PublicationsController < ApplicationController
     @post = current_user.blog_posts.new(post_params)
 
     if @post.save
-      redirect_to publication_path(@post),
+      redirect_to post_path(@post),
                   notice: 'Post was successfully created.'
     else
       render :new
@@ -26,7 +27,7 @@ class PublicationsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to publication_path(@post),
+      redirect_to post_path(@post),
                   notice: 'Post was successfully updated.'
     else
       render :edit
@@ -35,7 +36,7 @@ class PublicationsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to publications_url, notice: 'Post was successfully destroyed.'
+    redirect_to posts_url, notice: 'Post was successfully destroyed.'
   end
 
   private
@@ -47,6 +48,6 @@ class PublicationsController < ApplicationController
   def post_params
     params.require(:post).permit \
       :title, :content, :supplemented, :pinned, :visible, :commenting,
-      :supplement_date, :category_id, :type
+      :supplement_date, :category_id
   end
 end

@@ -1,6 +1,6 @@
 %h1 New post
 
-= form_for :post, url: publications_path, method: :post do |f|
+= form_for :post, url: posts_path, method: :post do |f|
   - if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
@@ -41,4 +41,4 @@
   .actions
     = f.submit 'Save'
 
-= link_to 'Back', publications_path
+= link_to 'Back', posts_path
