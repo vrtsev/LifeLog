@@ -2,20 +2,20 @@ class Publications::PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = current_user.blog_posts
-    @categories = current_user.blog_categories
+    @posts = current_user.publication_posts
+    @categories = current_user.publication_categories
   end
 
   def show; end
 
   def new
-    @post = current_user.blog_posts.new
+    @post = current_user.publication_posts.new
   end
 
   def edit; end
 
   def create
-    @post = current_user.blog_posts.new(post_params)
+    @post = current_user.publication_posts.new(post_params)
 
     if @post.save
       redirect_to post_path(@post),
@@ -42,7 +42,7 @@ class Publications::PostsController < ApplicationController
   private
 
   def set_post
-    @post = current_user.blog_posts.find(params[:id])
+    @post = current_user.publication_posts.find(params[:id])
   end
 
   def post_params

@@ -28,8 +28,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :blog_posts, class_name: 'Publications::BlogPost'
-  has_many :blog_categories, class_name: 'Publications::BlogCategory'
+  has_many :publication_posts, class_name: 'Publication::Post'
+  has_many :publication_categories, class_name: 'Publication::Category'
   # has_many :comments
   # has_many :subscriptions
 end
