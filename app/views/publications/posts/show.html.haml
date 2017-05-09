@@ -34,3 +34,32 @@
 = link_to 'Edit', edit_post_path(@post)
 \|
 = link_to 'Back', posts_path
+
+%br
+
+%h1 Listing comments
+
+%table
+  %thead
+    %tr
+      %th Content
+      %th Post
+      %th User
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @comments.each do |comment|
+      %tr
+        %td= comment.content
+        %td= comment.post_id
+        %td= comment.user_id
+        %td= comment.type
+        %td= link_to 'Edit', edit_post_comment_path(@post, comment)
+        %td= link_to 'Destroy', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Comment', new_post_comment_path(@post)
