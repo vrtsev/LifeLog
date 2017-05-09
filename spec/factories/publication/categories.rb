@@ -12,7 +12,17 @@
 #  updated_at  :datetime         not null
 #
 
-class Publications::BlogCategory < Category
-  has_many :blog_posts
-  # has_many :sub_categories, class_name: 'BlogCategory'
+FactoryGirl.define do
+  factory :publication_category, class: 'Publication::Category' do
+    title 'Life category'
+    description 'Some description'
+    color 0
+
+    user
+  end
+
+  trait :invalid do
+    title nil
+    description 'a'
+  end
 end

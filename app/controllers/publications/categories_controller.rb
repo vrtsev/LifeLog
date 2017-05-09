@@ -4,13 +4,13 @@ class Publications::CategoriesController < ApplicationController
   def show; end
 
   def new
-    @category = current_user.blog_categories.new
+    @category = current_user.publication_categories.new
   end
 
   def edit; end
 
   def create
-    @category = current_user.blog_categories.new(category_params)
+    @category = current_user.publication_categories.new(category_params)
 
     if @category.save
       redirect_to category_path(@category),
@@ -38,7 +38,7 @@ class Publications::CategoriesController < ApplicationController
   private
 
   def set_category
-    @category = current_user.blog_categories.find(params[:id])
+    @category = current_user.publication_categories.find(params[:id])
   end
 
   def category_params
