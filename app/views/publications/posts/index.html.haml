@@ -30,9 +30,9 @@
         %td= post.user_id
         %td= post.category_id
         %td= post.type
-        %td= link_to 'Show', post_path(post)
-        %td= link_to 'Edit', edit_post_path(post)
-        %td= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Show post', post_path(post)
+        %td= link_to 'Edit post', edit_post_path(post)
+        %td= link_to 'Destroy post', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
@@ -63,9 +63,9 @@
         %td= category.color
         %td= category.user_id
         %td= category.type
-        %td= link_to 'Show', category_path(category)
-        %td= link_to 'Edit', edit_category_path(category)
-        %td= link_to 'Destroy', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Show category', category_path(category)
+        %td= link_to 'Edit category', edit_category_path(category)
+        %td= link_to 'Destroy category', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

@@ -29,5 +29,9 @@ FactoryGirl.define do
 
     user
     category_id 1
+
+    trait :invalid do
+      title nil
+    end
   end
 end
