@@ -1,4 +1,4 @@
-describe 'Categories feature', type: :feature do
+describe 'Publication categories feature', type: :feature do
   let!(:user) do
     create :user,
            name: 'Administrator',

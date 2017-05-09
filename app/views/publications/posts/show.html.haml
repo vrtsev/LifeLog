@@ -57,8 +57,8 @@
         %td= comment.post_id
         %td= comment.user_id
         %td= comment.type
-        %td= link_to 'Edit', edit_post_comment_path(@post, comment)
-        %td= link_to 'Destroy', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Edit comment', edit_post_comment_path(@post, comment)
+        %td= link_to 'Destroy comment', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
