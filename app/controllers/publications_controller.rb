@@ -17,7 +17,8 @@ class PublicationsController < ApplicationController
     @post = current_user.blog_posts.new(post_params)
 
     if @post.save
-      redirect_to publications_path, notice: 'Post was successfully created.'
+      redirect_to publication_path(@post),
+                  notice: 'Post was successfully created.'
     else
       render :new
     end

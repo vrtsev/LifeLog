@@ -24,8 +24,12 @@
 
 FactoryGirl.define do
   factory :user do
-    name 'admin'
+    name 'Administrator'
     status 'wery shiny weather'
+    photo nil
+    allow_subscriptions true
+    visible true
     sequence(:email) { |i| "example#{i + 2}@mail.com" }
+    password 'password'
   end
 end
