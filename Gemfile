@@ -13,13 +13,17 @@ gem 'uglifier', '>= 1.3.0'
 
 # View gems
 gem 'bootstrap', '~> 4.0.0.alpha6'
-gem 'haml'
+gem 'haml-rails'
+
+# Authentication
+gem 'devise'
 
 group :development, :test do
   gem 'pry-rails', platform: :mri
 end
 
 group :development do
+  gem 'annotate'
   gem 'listen', '~> 3.0.5'
   gem 'rubocop'
   gem 'spring'
@@ -28,7 +32,14 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem 'cucumber'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'poltergeist'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5'
   gem 'simplecov'
 end

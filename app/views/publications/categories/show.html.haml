@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @category.title
+%p
+  %b Description:
+  = @category.description
+%p
+  %b Color:
+  = @category.color
+%p
+  %b User:
+  = @category.user_id
+%p
+  %b Type:
+  = @category.type
+
+= link_to 'Edit', edit_category_path(@category)
+\|
+= link_to 'Back', posts_path
