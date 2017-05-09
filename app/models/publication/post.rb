@@ -25,7 +25,7 @@ class Publication::Post < Post
   # has_many :photos
   # has_many :files
   # has_many :text_blocks
-  # has_many :comments, as: :commentable
+  has_many :comments, class_name: 'Publication::Comment'
 
   validates :title, presence: true
 end

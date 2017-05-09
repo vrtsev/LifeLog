@@ -6,7 +6,9 @@ class Publications::PostsController < ApplicationController
     @categories = current_user.publication_categories
   end
 
-  def show; end
+  def show
+    @comments = @post.comments.all
+  end
 
   def new
     @post = current_user.publication_posts.new
