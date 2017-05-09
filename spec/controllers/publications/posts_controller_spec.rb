@@ -1,7 +1,7 @@
 describe Publications::PostsController, type: :controller do
-  let!(:user)      { create :user }
-  let!(:blog_post) { create :blog_post, user: user }
-  before           { sign_in user }
+  let!(:user)             { create :user }
+  let!(:publication_post) { create :publication_post, user: user }
+  before                  { sign_in user }
   # TODO: take care to include check of assigment category to post
   # let(:category) { create :category, user: user }
 
@@ -13,7 +13,7 @@ describe Publications::PostsController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { get :show, params: { id: blog_post.id } }
+    before { get :show, params: { id: publication_post.id } }
 
     it { expect(response).to render_template(:show) }
     it { expect(response).to have_http_status(:success) }
@@ -46,13 +46,13 @@ describe Publications::PostsController, type: :controller do
 
       it 'redirects to created post' do
         expect(response).to redirect_to post_path \
-          Publications::BlogPost.last.id
+          Publication::Post.last.id
       end
       it { expect(response).to have_http_status(302) }
 
       it 'creates new post in db' do
         expect { post :create, params: { post: valid_params } }
-          .to change(Publications::BlogPost, :count).by(1)
+          .to change(Publication::Post, :count).by(1)
       end
 
       it 'assigns author to post' do
@@ -63,13 +63,13 @@ describe Publications::PostsController, type: :controller do
     context 'when post is invalid' do
       it { expect(response).to have_http_status(200) }
       it 'does not save post' do
-        expect { response }.not_to change(Publications::BlogPost, :count)
+        expect { response }.not_to change(Publication::Post, :count)
       end
     end
   end
 
   describe 'GET #edit' do
-    before { get :edit, params: { id: blog_post.id } }
+    before { get :edit, params: { id: publication_post.id } }
 
     it { expect(response).to render_template(:edit) }
     it { expect(response).to have_http_status(:success) }
@@ -93,32 +93,35 @@ describe Publications::PostsController, type: :controller do
         commenting: false
       }
     end
-    before { patch :update, params: { id: blog_post.id, post: post_params } }
+    before do
+      patch :update,
+            params: { id: publication_post.id, post: post_params }
+    end
 
     it 'changes post attributes' do
-      expect(blog_post.reload.title).to eq(new_title)
-      expect(blog_post.content).to      eq(new_content)
-      expect(blog_post.supplemented).to eq(true)
-      expect(blog_post.pinned).to       eq(true)
-      expect(blog_post.visible).to      eq(false)
-      expect(blog_post.commenting).to   eq(false)
+      expect(publication_post.reload.title).to eq(new_title)
+      expect(publication_post.content).to      eq(new_content)
+      expect(publication_post.supplemented).to eq(true)
+      expect(publication_post.pinned).to       eq(true)
+      expect(publication_post.visible).to      eq(false)
+      expect(publication_post.commenting).to   eq(false)
     end
 
     it 'does not change user of post' do
-      expect(blog_post.user.id).to eq(user.id)
+      expect(publication_post.user.id).to eq(user.id)
     end
 
     it 'does not change posts count' do
-      expect { response }.not_to change(Publications::BlogPost, :count)
+      expect { response }.not_to change(Publication::Post, :count)
       expect { response }.not_to change(Post, :count)
     end
   end
 
   describe 'DELETE #destroy' do
-    subject { delete :destroy, params: { id: blog_post.id } }
+    subject { delete :destroy, params: { id: publication_post.id } }
 
     it 'deletes post from db' do
-      expect { subject }.to change(Publications::BlogPost, :count).by(-1)
+      expect { subject }.to change(Publication::Post, :count).by(-1)
     end
   end
 end
