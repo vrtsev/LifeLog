@@ -9,7 +9,21 @@ describe 'Posting feature', type: :feature do
   let!(:first_post) do
     create :publication_post,
            title: 'First post',
-           content: 'one',
+           content: 'good content',
+           user: user
+  end
+
+  let!(:first_category) do
+    create :publication_category,
+           title: 'First category',
+           description: 'one',
+           user: user
+  end
+
+  let!(:second_category) do
+    create :publication_category,
+           title: 'Second category',
+           description: 'two',
            user: user
   end
 
@@ -41,20 +55,6 @@ describe 'Posting feature', type: :feature do
     end
 
     context 'categories' do
-      let!(:first_category) do
-        create :publication_category,
-               title: 'First category',
-               description: 'one',
-               user: user
-      end
-
-      let!(:second_category) do
-        create :publication_category,
-               title: 'Second category',
-               description: 'two',
-               user: user
-      end
-
       before { visit posts_path }
 
       it 'displays all user posts' do
@@ -99,7 +99,7 @@ describe 'Posting feature', type: :feature do
         click_link 'New Post'
         fill_in 'post[title]',       with: title
         fill_in 'post[content]',     with: content
-        fill_in 'post[category_id]', with: category_id
+        select first_category.title, from: 'post[category_id]'
         click_button 'Save'
       end
 
@@ -116,8 +116,7 @@ describe 'Posting feature', type: :feature do
       before do
         visit posts_path
         click_link 'New Post'
-        fill_in 'post[content]',     with: invalid_content
-        fill_in 'post[category_id]', with: category_id
+        fill_in 'post[content]', with: invalid_content
         click_button 'Save'
       end
 
@@ -155,7 +154,7 @@ describe 'Posting feature', type: :feature do
         click_link 'Edit post'
         fill_in 'post[title]',       with: title
         fill_in 'post[content]',     with: content
-        fill_in 'post[category_id]', with: category_id
+        select first_category.title, from: 'post[category_id]'
         click_button 'Save'
       end
 
@@ -175,7 +174,6 @@ describe 'Posting feature', type: :feature do
         click_link 'Edit post'
         fill_in 'post[title]',       with: invalid_title
         fill_in 'post[content]',     with: invalid_content
-        fill_in 'post[category_id]', with: category_id
         click_button 'Save'
       end
 

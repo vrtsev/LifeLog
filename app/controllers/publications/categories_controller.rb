@@ -1,7 +1,9 @@
 class Publications::CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
 
-  def show; end
+  def show
+    @posts = @category.publication_posts
+  end
 
   def new
     @category = current_user.publication_categories.new
