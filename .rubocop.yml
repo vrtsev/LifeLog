@@ -18,6 +18,9 @@ AllCops:
     - 'vendor/**/*'
     - 'bin/spring'
 
+Style/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
