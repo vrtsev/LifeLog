@@ -34,7 +34,7 @@
     = f.number_field :user_id
   .field
     = f.label :category_id
-    = f.number_field :category_id
+    = f.select :category_id, Publication::Category.all.collect {|c| [ c.title, c.id ] }, { include_blank: true }
   .field
     = f.label :type
     = f.text_field :type
