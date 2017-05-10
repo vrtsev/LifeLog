@@ -1,0 +1,42 @@
+%h1= "Tag posts (#{@tag.name})"
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Content
+      %th Supplemented
+      %th Pinned
+      %th Visible
+      %th Commenting
+      %th Supplement date
+      %th User
+      %th Category
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= post.title
+        %td= post.content
+        %td= post.supplemented
+        %td= post.pinned
+        %td= post.visible
+        %td= post.commenting
+        %td= post.supplement_date
+        %td= post.user_id
+        %td= post.category_id
+        %td= post.type
+        %td= link_to 'Show post', post_path(post)
+        %td= link_to 'Edit post', edit_post_path(post)
+        %td= link_to 'Destroy post', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_post_path
+\|
+= link_to 'To home', posts_path
+
