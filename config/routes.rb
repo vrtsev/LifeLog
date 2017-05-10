@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :categories, except: :index, module: 'publications'
   resources :posts, module: 'publications' do
-    resources :comments
+    resources :comments, except: [:index, :show] do
+      resources :votes, only: [:create, :destroy]
+    end
   end
 end

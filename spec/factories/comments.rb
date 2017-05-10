@@ -11,9 +11,11 @@
 #  updated_at :datetime         not null
 #
 
-class Publication::Comment < Comment
-  belongs_to :post, class_name: 'Publication::Post'
+FactoryGirl.define do
+  factory :comment do
+    content 'Some example content'
 
-  has_many   :votes, class_name: 'Publication::Vote'
-  # has_many   :replies, class_name: 'Publication::Comment'
+    post
+    user
+  end
 end
