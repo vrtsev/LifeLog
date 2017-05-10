@@ -30,6 +30,10 @@
 %p
   %b Type:
   = @post.type
+%p
+  %b Tags:
+  - @post.tags.each do |tag|
+    = link_to tag.name, tag_path(tag.name)
 
 = link_to 'Edit', edit_post_path(@post)
 \|

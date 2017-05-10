@@ -8,4 +8,5 @@ Rails.application.routes.draw do
       resources :votes, only: [:create, :destroy]
     end
   end
+  resources :tags, only: :show, module: 'publications'
 end
