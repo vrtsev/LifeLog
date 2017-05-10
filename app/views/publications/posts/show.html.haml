@@ -46,6 +46,7 @@
       %th Post
       %th User
       %th Type
+      %th Votes
       %th
       %th
       %th
@@ -57,6 +58,11 @@
         %td= comment.post_id
         %td= comment.user_id
         %td= comment.type
+        %td= "#{comment.votes.count} users voted"
+        - if user_vote(comment).present?
+          %td= link_to 'Unlike', post_comment_vote_path(@post, comment, user_vote(comment)), method: :delete
+        - else
+          %td= link_to 'Vote', post_comment_votes_path(@post, comment), method: :post
         %td= link_to 'Edit comment', edit_post_comment_path(@post, comment)
         %td= link_to 'Destroy comment', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }
 
