@@ -10,8 +10,10 @@
 #  updated_at :datetime         not null
 #
 
-class Tagging < ApplicationRecord
-  belongs_to :tag
-  belongs_to :post
-  # belongs_to :goal
+FactoryGirl.define do
+  factory :tagging do
+    tag
+    post
+    # goal
+  end
 end

@@ -26,6 +26,7 @@ FactoryGirl.define do
     visible true
     commenting true
     supplement_date DateTime.current
+    all_tags 'first_tag, second_tag'
 
     user
     category_id 1
