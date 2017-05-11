@@ -8,10 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-class Tag < ApplicationRecord
-  has_many :taggings
-  has_many :posts, through: :taggings
-  has_many :goals, through: :taggings
-
-  validates :name, presence: true
+FactoryGirl.define do
+  factory :tag do
+    name 'trip'
+  end
 end
