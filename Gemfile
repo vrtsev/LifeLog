@@ -34,8 +34,6 @@ end
 group :test do
   gem 'capybara'
   gem 'codeclimate-test-reporter', '~> 1.0.0'
-  gem 'cucumber'
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'poltergeist'
