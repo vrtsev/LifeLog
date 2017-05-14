@@ -28,4 +28,9 @@ class Publication::Post < Post
   has_many :comments, class_name: 'Publication::Comment'
 
   validates :title, presence: true
+
+  scope :supplemented, (-> { where supplemented: true })
+  scope :pinned, (-> { where pinned: true })
+  scope :visible, (-> { where visible: true })
+  scope :commenting, (-> { where commenting: true })
 end

@@ -1,0 +1,65 @@
+%h1 Publication Search
+%b= "Query: #{params[:query]}"
+%br= link_to 'К постам', posts_path
+%hr
+
+
+%h3 Tags
+-if @tags.present?
+
+  - @tags.each do |tag|
+    %b= link_to tag.name, tag_path(tag.name)
+%hr
+
+
+
+%h3 Posts
+-if @posts.present?
+  %table
+    %thead
+      %tr
+        %th Title
+        %th Content
+        %th Supplemented
+        %th Pinned
+        %th Visible
+        %th Commenting
+        %th Category
+        %th
+        %th
+        %th
+    %tbody
+      - @posts.each do |post|
+        %tr
+          %td= post.title
+          %td= post.content
+          %td= post.supplemented
+          %td= post.pinned
+          %td= post.visible
+          %td= post.commenting
+          %td= post.category_id
+          %td= link_to 'Show post', post_path(post)
+%hr
+
+
+
+%h3 Comments
+-if @comments.present?
+  %table
+    %thead
+      %tr
+        %th Content
+        %th Post
+        %th User
+        %th Votes
+        %th
+        %th
+        %th
+    %tbody
+      - @comments.each do |comment|
+        %tr
+          %td= comment.content
+          %td= comment.post_id
+          %td= comment.user_id
+          %td= "#{comment.votes.count} users voted"
+%hr
