@@ -70,3 +70,45 @@
 %br
 
 = link_to 'New Category', new_category_path
+
+%hr
+
+%h1 Search and filters
+
+= form_tag search_index_path, method: :get do
+  %p
+    %b Что ищем?
+    = text_field_tag 'query', params[:query]
+
+  %p
+    %b По постам есть ограничения?
+    %p
+      = check_box_tag 'post[supplemented]'
+      = label_tag 'Дополненные'
+    %p
+      = check_box_tag 'post[pinned]'
+      = label_tag 'Закрепленные'
+    %p
+      = check_box_tag 'post[visible]'
+      = label_tag 'Видимые'
+    %p
+      = check_box_tag 'post[commenting]'
+      = label_tag 'Комментруемые'
+    %p
+      = label_tag 'Посты от'
+      = date_field_tag 'post[from_date]'
+    %p
+      = label_tag 'Посты ДО'
+      = date_field_tag 'post[to_date]'
+
+    %p
+      %b По комментахах ограничения?
+
+      %p
+        = label_tag 'Комменты от'
+        = date_field_tag 'comment[from_date]'
+      %p
+        = label_tag 'Комменты ДО'
+        = date_field_tag 'comment[to_date]'
+
+  = submit_tag "Гоу"

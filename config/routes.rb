@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     end
   end
   resources :tags, param: :name, only: :show, module: 'publications'
+  resources :search, only: :index, module: 'publications'
 end

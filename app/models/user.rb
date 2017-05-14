@@ -30,6 +30,6 @@ class User < ApplicationRecord
 
   has_many :publication_posts, class_name: 'Publication::Post'
   has_many :publication_categories, class_name: 'Publication::Category'
-  # has_many :comments
+  has_many :publication_comments, class_name: 'Publication::Comment'
   # has_many :subscriptions
 end
