@@ -15,7 +15,6 @@ class Publications::PostsSearchQuery < Publications::BaseSearchQuery
   end
 
   def find_records
-    return nil if @query.blank?
     @scope = @scope.where(
       'title LIKE :query OR content LIKE :query', query: "%#{@query}%"
     )
