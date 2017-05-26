@@ -2,7 +2,8 @@ class Publications::TagsSearchQuery < Publications::BaseSearchQuery
   private
 
   def scope
-    Tag.all
+    Tag.joins(:taggings).joins(:posts)
+       .where(posts: { user: @user }).distinct
   end
 
   def find_records
