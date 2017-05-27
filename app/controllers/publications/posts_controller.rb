@@ -1,9 +1,9 @@
 class Publications::PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_user_categories, only: %i[index new edit]
 
   def index
     @posts = current_user.publication_posts
-    @categories = current_user.publication_categories
   end
 
   def show
@@ -45,6 +45,10 @@ class Publications::PostsController < ApplicationController
 
   def set_post
     @post = current_user.publication_posts.find(params[:id])
+  end
+
+  def set_user_categories
+    @categories = current_user.publication_categories
   end
 
   def post_params
