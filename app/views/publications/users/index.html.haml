@@ -1,0 +1,23 @@
+%h1 All users
+
+%table
+  %thead
+    %tr
+      %th id
+      %th Name
+      %th Status
+      %th Subscriptions allowed?
+      %th Visible?
+      %th Email
+      %th
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.name
+        %td= user.status
+        %td= user.allow_subscriptions
+        %td= user.visible
+        %td= user.email
+        %td= link_to 'Show profile', user_path(user)

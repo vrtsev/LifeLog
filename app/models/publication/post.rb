@@ -25,7 +25,7 @@ class Publication::Post < Post
   # has_many :photos
   # has_many :files
   # has_many :text_blocks
-  has_many :comments, class_name: 'Publication::Comment'
+  has_many :comments, class_name: 'Publication::Comment', dependent: :destroy
 
   validates :title, presence: true
 

@@ -1,0 +1,102 @@
+%h1= "USER #{@user.name} PAGE"
+%h1 User::Listing posts
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Content
+      %th Supplemented
+      %th Pinned
+      %th Visible
+      %th Commenting
+      %th Supplement date
+      %th User
+      %th Category
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= post.title
+        %td= post.content
+        %td= post.supplemented
+        %td= post.pinned
+        %td= post.visible
+        %td= post.commenting
+        %td= post.supplement_date
+        %td= post.user_id
+        %td= post.category_id
+        %td= post.type
+        %td= link_to 'Show post', user_post_path(@user, post)
+
+%hr
+
+%h1 Listing categories
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Color
+      %th User
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= category.title
+        %td= category.description
+        %td= category.color
+        %td= category.user_id
+        %td= category.type
+        / %td= link_to 'Show category', user_category_path(@user, category)
+
+%hr
+
+/ %h1 Search and filters
+
+/ = form_tag search_index_path, method: :get do
+/   %p
+/     %b Enter your search query
+/     = text_field_tag 'query', params[:query]
+
+/   %p
+/     %b Posts conditions
+/     %p
+/       = check_box_tag 'post[supplemented]'
+/       = label_tag 'Supplemeted'
+/     %p
+/       = check_box_tag 'post[pinned]'
+/       = label_tag 'Pinned'
+/     %p
+/       = check_box_tag 'post[visible]'
+/       = label_tag 'Visible'
+/     %p
+/       = check_box_tag 'post[commenting]'
+/       = label_tag 'commenting'
+/     %p
+/       = label_tag 'Posts from'
+/       = date_field_tag 'post[from_date]'
+/     %p
+/       = label_tag 'Posts to'
+/       = date_field_tag 'post[to_date]'
+
+/     %p
+/       %b Comments conditions
+
+/       %p
+/         = label_tag 'Comments from'
+/         = date_field_tag 'comment[from_date]'
+/       %p
+/         = label_tag 'Comments to'
+/         = date_field_tag 'comment[to_date]'
+
+/   = submit_tag "Search"
