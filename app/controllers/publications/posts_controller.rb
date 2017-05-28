@@ -1,6 +1,6 @@
 class Publications::PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :set_user_categories, only: %i[index new edit]
+  before_action :set_user_categories, except: %i[show destroy]
 
   def index
     @posts = current_user.publication_posts

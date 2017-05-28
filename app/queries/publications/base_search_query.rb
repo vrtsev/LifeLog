@@ -14,15 +14,11 @@ class Publications::BaseSearchQuery
 
   private
 
-  def scope
-    raise NotImplemetedError
-  end
+  def scope; end
 
   def apply_filters!
     find_records
   end
 
-  def find_records
-    raise NotImplemetedError
-  end
+  def find_records; end
 end

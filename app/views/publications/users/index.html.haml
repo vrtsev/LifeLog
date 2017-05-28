@@ -20,4 +20,4 @@
         %td= user.allow_subscriptions
         %td= user.visible
         %td= user.email
-        %td= link_to 'Show profile', user_path(user)
+        %td= link_to "Show profile of #{user.name}", user_path(user)
