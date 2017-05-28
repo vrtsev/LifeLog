@@ -5,6 +5,7 @@ describe 'Publication posting feature', type: :feature do
   let(:sun_tag)  { create :tag, name: 'first_tag' }
   let(:rain_tag) { create :tag, name: 'second_tag' }
 
+  let!(:other_user) { create :user }
   let!(:user) do
     create :user,
            name: 'Administrator',
@@ -31,6 +32,13 @@ describe 'Publication posting feature', type: :feature do
            title: 'Second category',
            description: 'two',
            user: user
+  end
+
+  let!(:other_category) do
+    create :publication_category,
+           title: 'Other category',
+           description: 'other',
+           user: other_user
   end
 
   before do
@@ -100,6 +108,14 @@ describe 'Publication posting feature', type: :feature do
       expect(page).to have_field 'post[all_tags]'
       expect(page).to have_button 'Save'
     end
+
+    it 'displays select box with only user\'s categories' do
+      expect(page).to have_select \
+        'post[category_id]', with_options: ['First category', 'Second category']
+
+      expect(page).not_to have_select \
+        'post[category_id]', with_options: ['Other category']
+    end
   end
 
   describe '#create' do
@@ -108,6 +124,7 @@ describe 'Publication posting feature', type: :feature do
     let(:first_tag)   { 'sun' }
     let(:second_tag)  { 'rain' }
     let(:category_id) { '1' }
+
     context 'valid post' do
       before do
         visit posts_path
@@ -166,6 +183,14 @@ describe 'Publication posting feature', type: :feature do
       expect(content_value).to eq first_post.content
       expect(all_tags).to eq first_post.all_tags
       expect(page).to have_button 'Save'
+    end
+
+    it 'displays select box with only user\'s categories' do
+      expect(page).to have_select \
+        'post[category_id]', with_options: ['First category', 'Second category']
+
+      expect(page).not_to have_select \
+        'post[category_id]', with_options: ['Other category']
     end
   end
 
