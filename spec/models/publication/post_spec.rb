@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id              :integer          not null, primary key
+#  title           :string(255)
+#  content         :text(65535)
+#  supplemented    :boolean          default("1")
+#  pinned          :boolean          default("0")
+#  visible         :boolean          default("1")
+#  commenting      :boolean          default("1")
+#  supplement_date :datetime
+#  user_id         :integer          not null
+#  category_id     :integer
+#  type            :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 describe Publication::Post, type: :model do
   subject    { described_class.new }
   let(:user) { create :user }
@@ -9,7 +28,7 @@ describe Publication::Post, type: :model do
 
     it 'belongs to category' do
       expect(
-        described_class.reflect_on_association(:publication_category).macro
+        described_class.reflect_on_association(:category).macro
       ).to eq :belongs_to
     end
 

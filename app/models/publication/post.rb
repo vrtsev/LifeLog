@@ -18,7 +18,7 @@
 #
 
 class Publication::Post < Post
-  belongs_to :publication_category,
+  belongs_to :category,
              optional: true,
              class_name: 'Publication::Category'
 
