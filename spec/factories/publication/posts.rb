@@ -28,7 +28,7 @@ FactoryGirl.define do
     supplement_date DateTime.current
 
     user
-    category_id 1
+    category { FactoryGirl.create(:publication_category) }
 
     trait :invalid do
       title nil
