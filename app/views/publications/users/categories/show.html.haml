@@ -1,0 +1,57 @@
+%p#notice= notice
+
+%h1= "USER #{@user.name} PAGE"
+%h1 User::CATEGORY
+
+%p
+  %b Title:
+  = @category.title
+%p
+  %b Description:
+  = @category.description
+%p
+  %b Color:
+  = @category.color
+%p
+  %b User:
+  = @category.user_id
+%p
+  %b Type:
+  = @category.type
+
+= link_to 'Back', user_posts_path(@user)
+
+
+%h1 Listing posts
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Content
+      %th Supplemented
+      %th Pinned
+      %th Visible
+      %th Commenting
+      %th Supplement date
+      %th User
+      %th Category
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= post.title
+        %td= post.content
+        %td= post.supplemented
+        %td= post.pinned
+        %td= post.visible
+        %td= post.commenting
+        %td= post.supplement_date
+        %td= post.user_id
+        %td= post.category_id
+        %td= post.type
+        %td= link_to 'Show', user_post_path(@user, post)
