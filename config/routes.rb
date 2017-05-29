@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   # resources of other people
   resources :users, only: %i[index show], module: 'publications' do
-    # resources :categories, except: :index, module: 'publications'
+    resources :categories, only: :show, module: 'users'
     resources :posts, only: %i[index show], module: 'users' do
       # resources :comments, except: [:index, :show] do
         # resources :votes, only: [:create, :destroy]
