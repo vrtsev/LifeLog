@@ -18,3 +18,4 @@
 
 /config/database.yml
 /coverage
+env_variables
