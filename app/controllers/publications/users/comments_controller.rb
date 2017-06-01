@@ -1,4 +1,5 @@
 class Publications::Users::CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, :set_post
   before_action :set_comment, :check_author, only: %i[edit update destroy]
 

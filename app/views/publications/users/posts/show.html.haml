@@ -72,4 +72,4 @@
 
 %br
 
-= link_to 'New Comment', new_user_post_comment_path(@user, @post)
+= link_to 'New Comment', new_user_post_comment_path(@user, @post) if user_signed_in?
