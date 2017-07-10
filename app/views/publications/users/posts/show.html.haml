@@ -60,11 +60,11 @@
         %td= comment.post_id
         %td= comment.user_id
         %td= comment.type
-        %td= "# users voted"
-        / - if user_vote(comment).present?
-        /   %td= link_to 'Unlike', post_comment_vote_path(@post, comment, user_vote(comment)), method: :delete
-        / - else
-        /   %td= link_to 'Vote', post_comment_votes_path(@post, comment), method: :post
+        %td= "#{comment.votes.count} users voted"
+        - if user_vote_on(comment).present?
+          %td= link_to 'Unlike', user_post_comment_vote_path(@user, @post, comment, user_vote_on(comment)), method: :delete
+        - else
+          %td= link_to 'Vote', user_post_comment_votes_path(@user, @post, comment), method: :post
         %td
           - if comment.user == current_user
             = link_to 'Edit comment', edit_user_post_comment_path(@user, @post, comment)

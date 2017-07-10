@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show], module: 'publications' do
     resources :categories, only: :show, module: 'users'
     resources :posts, only: %i[index show], module: 'users' do
-      resources :comments, except: %i[index show] #do
-        # resources :votes, only: [:create, :destroy]
-      # end
+      resources :comments, except: %i[index show] do
+        resources :votes, only: %i[create destroy]
+      end
     end
     # resources :tags, param: :name, only: :show, module: 'publications'
     # resources :search, only: :index, module: 'publications'
