@@ -24,5 +24,6 @@ Rails.application.routes.draw do
     end
     # resources :tags, param: :name, only: :show, module: 'publications'
     resources :search, only: :index, module: 'users'
+    resources :follows, only: %i[create destroy], module: 'users'
   end
 end
