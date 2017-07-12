@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @follower.name %>, пользователь <%= @user.name %> создал запись '<%= @post.title %>'</h1>
+    <p>
+      <%= @post.content %><br>
+    </p>
+    <p>
+      Чтобы отключить уведомления, перейдите по ссылке: <%= @url %><br>
+    </p>
+    <p>Спасибо за то, что Вы с нами. Отличного дня! LifeLog</p>
+  </body>
+</html>

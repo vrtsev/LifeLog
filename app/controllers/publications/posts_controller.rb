@@ -20,6 +20,7 @@ class Publications::PostsController < ApplicationController
     @post = current_user.publication_posts.new(post_params)
 
     if @post.save
+      notify_followers
       redirect_to post_path(@post),
                   notice: 'Post was successfully created.'
     else
@@ -42,6 +43,12 @@ class Publications::PostsController < ApplicationController
   end
 
   private
+
+  def notify_followers
+    current_user.followers.each do |follower|
+      UserMailer.notify_follower(follower, @post.user, @post).deliver_later
+    end
+  end
 
   def set_post
     @post = current_user.publication_posts.find(params[:id])
