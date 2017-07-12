@@ -1,6 +1,5 @@
 class Publications::Users::CommentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_user, :set_post
+  before_action :authenticate_user!, :set_user, :set_post, :check_commentable
   before_action :set_comment, :check_author, only: %i[edit update destroy]
 
   def new
@@ -58,6 +57,13 @@ class Publications::Users::CommentsController < ApplicationController
     return if @comment.user == current_user
 
     flash[:error] = 'Error. You are not the author of this comment'
+    redirect_to user_post_path(@user, @post)
+  end
+
+  def check_commentable
+    return if @post.commentable
+
+    flash[:error] = "#{@user.name} has disabled commenting on this post"
     redirect_to user_post_path(@user, @post)
   end
 

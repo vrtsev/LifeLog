@@ -8,7 +8,7 @@
 #  supplemented    :boolean          default("1")
 #  pinned          :boolean          default("0")
 #  visible         :boolean          default("1")
-#  commenting      :boolean          default("1")
+#  commentable     :boolean          default("1")
 #  supplement_date :datetime
 #  user_id         :integer          not null
 #  category_id     :integer

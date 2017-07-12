@@ -17,8 +17,8 @@
   %b Visible:
   = @post.visible
 %p
-  %b Commenting:
-  = @post.commenting
+  %b Commentable:
+  = @post.commentable
 %p
   %b Supplement date:
   = @post.supplement_date
@@ -72,4 +72,7 @@
 
 %br
 
-= link_to 'New Comment', new_user_post_comment_path(@user, @post) if user_signed_in?
+- if @post.commentable
+  = link_to 'New Comment', new_user_post_comment_path(@user, @post) if user_signed_in?
+- else
+  %b User has disabled commenting on this post

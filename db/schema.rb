@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20170711173617) do
     t.boolean  "supplemented",                  default: true
     t.boolean  "pinned",                        default: false
     t.boolean  "visible",                       default: true
-    t.boolean  "commenting",                    default: true
+    t.boolean  "commentable",                   default: true
     t.datetime "supplement_date"
     t.integer  "user_id",                                       null: false
     t.integer  "category_id"
@@ -101,8 +101,10 @@ ActiveRecord::Schema.define(version: 20170711173617) do
   end
 
   create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id"
-    t.integer "comment_id"
+    t.integer "user_id",    null: false
+    t.integer "comment_id", null: false
+    t.index ["comment_id"], name: "index_votes_on_comment_id", using: :btree
+    t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
   end
 
 end

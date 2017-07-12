@@ -8,7 +8,7 @@
       %th Supplemented
       %th Pinned
       %th Visible
-      %th Commenting
+      %th Commentable
       %th Supplement date
       %th User
       %th Category
@@ -25,7 +25,7 @@
         %td= post.supplemented
         %td= post.pinned
         %td= post.visible
-        %td= post.commenting
+        %td= post.commentable
         %td= post.supplement_date
         %td= post.user_id
         %td= post.category_id
@@ -92,8 +92,8 @@
       = check_box_tag 'post[visible]'
       = label_tag 'Visible'
     %p
-      = check_box_tag 'post[commenting]'
-      = label_tag 'commenting'
+      = check_box_tag 'post[commentable]'
+      = label_tag 'commentable'
     %p
       = label_tag 'Posts from'
       = date_field_tag 'post[from_date]'

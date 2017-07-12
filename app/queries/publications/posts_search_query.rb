@@ -10,7 +10,7 @@ class Publications::PostsSearchQuery < Publications::BaseSearchQuery
     filter_supplemented if @conditions[:supplemented].present?
     filter_pinned if @conditions[:pinned].present?
     filter_visible if @conditions[:visible].present?
-    filter_commenting if @conditions[:commenting].present?
+    filter_commentable if @conditions[:commentable].present?
     filter_date
   end
 
@@ -32,8 +32,8 @@ class Publications::PostsSearchQuery < Publications::BaseSearchQuery
     @scope = @scope.visible
   end
 
-  def filter_commenting
-    @scope = @scope.commenting
+  def filter_commentable
+    @scope = @scope.commentable
   end
 
   def filter_date

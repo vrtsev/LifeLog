@@ -60,7 +60,7 @@ class Publications::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit \
-      :title, :content, :supplemented, :pinned, :visible, :commenting,
+      :title, :content, :supplemented, :pinned, :visible, :commentable,
       :supplement_date, :category_id, :all_tags
   end
 end

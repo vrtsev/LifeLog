@@ -12,7 +12,7 @@ describe Publications::PostsSearchQuery do
       supplemented: true,
       pinned: false,
       visible: false,
-      commenting: true,
+      commentable: true,
       created_at: '2017-05-05 10:41:11 UTC'
   end
 
@@ -25,7 +25,7 @@ describe Publications::PostsSearchQuery do
       supplemented: false,
       pinned: true,
       visible: true,
-      commenting: false,
+      commentable: false,
       created_at: '2017-05-10 06:13:11 UTC'
   end
 
@@ -38,7 +38,7 @@ describe Publications::PostsSearchQuery do
       supplemented: true,
       pinned: true,
       visible: false,
-      commenting: false,
+      commentable: false,
       created_at: '2017-05-15 19:25:11 UTC'
   end
 
@@ -51,7 +51,7 @@ describe Publications::PostsSearchQuery do
       supplemented: false,
       pinned: false,
       visible: true,
-      commenting: true,
+      commentable: true,
       created_at: '2017-05-20 23:06:11 UTC'
   end
 
@@ -61,7 +61,7 @@ describe Publications::PostsSearchQuery do
       title: 'Something',
       content: 'does not matter',
       visible: false,
-      commenting: false,
+      commentable: false,
       created_at: '2017-05-31 19:25:11 UTC',
       user: user
   end
@@ -92,8 +92,8 @@ describe Publications::PostsSearchQuery do
           it { expect(subject).to match_array(result_scope) }
         end
 
-        context 'when commenting condition passed' do
-          let(:conditions)   { { commenting: '1' } }
+        context 'when commentable condition passed' do
+          let(:conditions)   { { commentable: '1' } }
           let(:result_scope) { [first_post, fourth_post] }
 
           it { expect(subject).to match_array(result_scope) }
@@ -142,8 +142,8 @@ describe Publications::PostsSearchQuery do
           it { expect(subject).to match_array(result_scope) }
         end
 
-        context 'when commenting condition passed' do
-          let(:conditions)   { { commenting: '1' } }
+        context 'when commentable condition passed' do
+          let(:conditions)   { { commentable: '1' } }
           let(:result_scope) { [first_post, fourth_post] }
 
           it { expect(subject).to match_array(result_scope) }

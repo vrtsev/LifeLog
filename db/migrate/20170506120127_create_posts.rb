@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       t.boolean :supplemented, default: true
       t.boolean :pinned, default: false
       t.boolean :visible, default: true
-      t.boolean :commenting, default: true
+      t.boolean :commentable, default: true
       t.datetime :supplement_date
 
       t.integer :user_id, null: false, index: true

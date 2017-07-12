@@ -8,7 +8,7 @@
 #  supplemented    :boolean          default("1")
 #  pinned          :boolean          default("0")
 #  visible         :boolean          default("1")
-#  commenting      :boolean          default("1")
+#  commentable     :boolean          default("1")
 #  supplement_date :datetime
 #  user_id         :integer          not null
 #  category_id     :integer
@@ -32,5 +32,5 @@ class Publication::Post < Post
   scope :supplemented, (-> { where supplemented: true })
   scope :pinned, (-> { where pinned: true })
   scope :visible, (-> { where visible: true })
-  scope :commenting, (-> { where commenting: true })
+  scope :commentable, (-> { where commentable: true })
 end

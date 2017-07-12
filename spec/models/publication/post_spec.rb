@@ -8,7 +8,7 @@
 #  supplemented    :boolean          default("1")
 #  pinned          :boolean          default("0")
 #  visible         :boolean          default("1")
-#  commenting      :boolean          default("1")
+#  commentable     :boolean          default("1")
 #  supplement_date :datetime
 #  user_id         :integer          not null
 #  category_id     :integer
@@ -100,16 +100,16 @@ describe Publication::Post, type: :model do
       end
     end
 
-    describe '.commenting' do
-      let(:commentable_post)   { create :publication_post, commenting: true }
-      let(:uncommentable_post) { create :publication_post, commenting: false }
+    describe '.commentable' do
+      let(:commentable_post)   { create :publication_post, commentable: true }
+      let(:uncommentable_post) { create :publication_post, commentable: false }
 
       it do
-        expect(described_class.commenting).to include(commentable_post)
+        expect(described_class.commentable).to include(commentable_post)
       end
 
       it do
-        expect(described_class.commenting).not_to include(uncommentable_post)
+        expect(described_class.commentable).not_to include(uncommentable_post)
       end
     end
   end
