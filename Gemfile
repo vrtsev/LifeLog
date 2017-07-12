@@ -13,6 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # View gems
 gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'ckeditor'
 gem 'haml-rails'
 
 # Authentication
