@@ -11,6 +11,7 @@ class Publications::Users::CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      notify_post_author
       redirect_to user_post_path(@user, @post),
                   notice: 'Comment was successfully created.'
     else
@@ -65,6 +66,12 @@ class Publications::Users::CommentsController < ApplicationController
 
     flash[:error] = "#{@user.name} has disabled commenting on this post"
     redirect_to user_post_path(@user, @post)
+  end
+
+  def notify_post_author
+    UserMailer.notify_post_author(
+      current_user, @post.user, @comment
+    ).deliver_later
   end
 
   def comment_params
