@@ -15,4 +15,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require ckeditor/init
+//= require highlight.pack
 //= require_tree .
+
+$(function() {
+ hljs.initHighlightingOnLoad();
+});
