@@ -27,6 +27,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  mount_uploader :avatar, AvatarUploader
 
   has_many :publication_posts, class_name: 'Publication::Post'
   has_many :publication_categories, class_name: 'Publication::Category'
