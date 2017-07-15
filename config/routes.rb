@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   # PUBLICATIONS
-
   # own resources
   resources :categories, except: :index, module: 'publications'
   resources :posts, module: 'publications' do
@@ -28,7 +27,6 @@ Rails.application.routes.draw do
   end
 
   # DIARY
-
   namespace :diary do
     resources :categories
     resources :posts do
@@ -36,5 +34,10 @@ Rails.application.routes.draw do
     end
     resources :tags, param: :name, only: :show
     resources :search, only: :index
+  end
+
+  # GOALS
+  namespace :objectives do
+    resources :goals
   end
 end
