@@ -1,9 +1,5 @@
-class Publications::CommentsSearchQuery < Publications::BaseSearchQuery
+class CommentsSearchQuery < BaseSearchQuery
   private
-
-  def scope
-    @user.publication_comments
-  end
 
   def apply_filters!
     super

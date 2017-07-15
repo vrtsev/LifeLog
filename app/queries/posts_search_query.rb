@@ -1,9 +1,5 @@
-class Publications::PostsSearchQuery < Publications::BaseSearchQuery
+class PostsSearchQuery < BaseSearchQuery
   private
-
-  def scope
-    @user.publication_posts
-  end
 
   def apply_filters!
     super

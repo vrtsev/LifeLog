@@ -24,7 +24,13 @@ describe Publications::TagsSearchQuery do
   let!(:fifth_post)     { create :publication_post, user: other_user }
   let!(:fifth_tagging)  { create :tagging, tag: fifth_tag, post: fifth_post }
 
-  subject { described_class.new(user, query, conditions).results }
+  let(:scope) do
+    Tag.joins(:taggings).joins(:posts)
+       .where(posts: { user: user, type: 'Publication::Post' })
+       .distinct
+  end
+
+  subject { described_class.new(scope, query, conditions).results }
 
   describe '#results' do
     context 'when search query is specified' do

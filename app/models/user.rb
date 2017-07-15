@@ -45,6 +45,7 @@ class User < ApplicationRecord
   # Diary relations
   has_many :diary_posts, class_name: 'Diary::Post'
   has_many :diary_categories, class_name: 'Diary::Category'
+  has_many :diary_comments, class_name: 'Diary::Comment'
 
   def follow(other_user)
     following << other_user

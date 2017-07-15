@@ -1,5 +1,6 @@
 describe Publications::CommentsSearchQuery do
   let(:user)         { create :user }
+  let(:scope)        { user.publication_comments }
   let(:query)        { 'comment' }
   let(:conditions)   { nil }
 
@@ -41,7 +42,8 @@ describe Publications::CommentsSearchQuery do
       user: user
   end
 
-  subject { described_class.new(user, query, conditions).results }
+  # subject { described_class.new(user, query, conditions).results }
+  subject { described_class.new(scope, query, conditions).results }
 
   describe '#results' do
     context 'when search query is specified' do

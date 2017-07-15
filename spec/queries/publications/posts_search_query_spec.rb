@@ -1,5 +1,6 @@
 describe Publications::PostsSearchQuery do
   let(:user)       { create :user }
+  let(:scope)      { user.publication_posts }
   let(:query)      { 'post' }
   let(:conditions) { nil }
 
@@ -66,7 +67,7 @@ describe Publications::PostsSearchQuery do
       user: user
   end
 
-  subject { described_class.new(user, query, conditions).results }
+  subject { described_class.new(scope, query, conditions).results }
 
   describe '#results' do
     context 'when search query is specified' do

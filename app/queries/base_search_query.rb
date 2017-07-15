@@ -1,10 +1,9 @@
-class Publications::BaseSearchQuery
-  def initialize(user, query, conditions)
-    @user       = user
+class BaseSearchQuery
+  def initialize(scope, query, conditions)
+    @scope      = scope
     @query      = query
     @conditions = conditions || {}
 
-    @scope = scope
     apply_filters!
   end
 

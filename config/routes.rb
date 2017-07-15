@@ -35,5 +35,6 @@ Rails.application.routes.draw do
       resources :comments, except: %i[index show]
     end
     resources :tags, param: :name, only: :show
+    resources :search, only: :index
   end
 end
