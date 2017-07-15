@@ -52,8 +52,8 @@ class Diary::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(
-      :content, :supplemented, :supplement_date, :pinned, :category_id
-    )
+    params.require(:post).permit \
+      :content, :supplemented, :supplement_date, :pinned, :category_id,
+      :all_tags
   end
 end
