@@ -30,3 +30,9 @@
 = link_to 'Edit', edit_objectives_goal_path(@goal)
 \|
 = link_to 'Back', objectives_goals_path
+
+
+%h3 Subgoals:
+
+- @goal.subgoals.each do |goal|
+  %b= goal.title

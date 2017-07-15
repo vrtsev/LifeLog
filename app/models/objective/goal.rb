@@ -17,11 +17,16 @@ class Objective::Goal < ApplicationRecord
   # has_many :taggings, as: :taggable
   # has_many :tags, through: :taggings
 
-  # has_many :subgoals
   # has_many :attachments
+  has_many :subgoals, class_name: 'Objective::Goal',
+                      foreign_key: 'parent_id', dependent: :destroy
 
   belongs_to :user
+  belongs_to :parent, optional: true, class_name: 'Objective::Goal'
+
   validates :title, :user_id, presence: true
+
+  scope :base, (-> { where parent_id: nil })
 
   enum status: %i[new_goal in_progress completed canceled overdue]
 end
