@@ -18,6 +18,8 @@
 //= require highlight.pack
 //= require_tree .
 
-$(function() {
- hljs.initHighlightingOnLoad();
+$(document).on('turbolinks:load', function() {
+  $('pre').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
 });

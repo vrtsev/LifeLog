@@ -7,6 +7,7 @@ AllCops:
     - '**/config.ru'
     - '**/Gemfile'
   Exclude:
+    - 'app/uploaders/*'
     - 'db/**/*'
     - 'config/**/*'
     - 'spec/rails_helper.rb'

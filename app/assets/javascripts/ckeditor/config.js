@@ -1,34 +1,41 @@
-/*
-Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.html or http://ckeditor.com/license
-*/
+CKEDITOR.editorConfig = function(config) {
+	config.language = 'ru';
+  config.extraPlugins = 'pbckcode'; // add other plugins here (comma separated)
+	config.skin = 'moono-lisa';
 
-CKEDITOR.editorConfig = function( config )
-{
-  // Define changes to default configuration here. For example:
-  config.language = 'ru';
+	// Toolbar section
+	config.removeButtons = 'Underline,Subscript,Superscript,Undo,Cut,Redo,Copy,Paste,PasteText,PasteFromWord,Scayt,Anchor,About';
+  config.toolbarGroups = [
+		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'clipboard', groups: [ 'undo', 'clipboard' ] },
+		{ name: 'paragraph', groups: [ 'list', 'blocks', 'align' ] },
+		{ name: 'insert', groups: [ 'insert' ] },
+    '/',
+		{ name: 'styles', groups: [ 'styles' ] },
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'links', groups: [ 'links' ] },
+		{ name: 'tools', groups: [ 'tools' ] },
+		{ name: 'others', groups: [ 'others' ] },
+		{ name: 'colors', groups: [ 'colors' ] },
+		{ name: 'about', groups: [ 'about' ] },
+    { name: 'pbckcode'}
+	];
 
-  /* Filebrowser routes */
-  // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
+	// Image upload section
   config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
-
-  // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Flash dialog.
   config.filebrowserFlashBrowseUrl = "/ckeditor/attachment_files";
-
-  // The location of a script that handles file uploads in the Flash dialog.
   config.filebrowserFlashUploadUrl = "/ckeditor/attachment_files";
-
-  // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Link tab of Image dialog.
   config.filebrowserImageBrowseLinkUrl = "/ckeditor/pictures";
-
-  // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Image dialog.
   config.filebrowserImageBrowseUrl = "/ckeditor/pictures";
-
-  // The location of a script that handles file uploads in the Image dialog.
-  config.filebrowserImageUploadUrl = "/ckeditor/pictures?";
-
-  // The location of a script that handles file uploads.
+  config.filebrowserImageUploadUrl = "/ckeditor/pictures";
   config.filebrowserUploadUrl = "/ckeditor/attachment_files";
 
-  config.allowedContent = true;
+  // PBCKCODE CUSTOMIZATION
+  config.pbckcode = {
+    // An optional class to your pre tag.
+    cls: '',
+    modes: [['HTML', 'html'], ['CSS', 'css'], ['PHP', 'php'], ['JS', 'javascript'], ['Ruby', 'ruby']], 
+    theme: 'ambiance',
+    tab_size: '2'
+  };
 };
