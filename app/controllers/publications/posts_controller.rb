@@ -14,8 +14,6 @@ class Publications::PostsController < ApplicationController
     @post = current_user.publication_posts.new
   end
 
-  def edit; end
-
   def create
     @post = current_user.publication_posts.new(post_params)
 
@@ -27,6 +25,8 @@ class Publications::PostsController < ApplicationController
       render :new
     end
   end
+
+  def edit; end
 
   def update
     if @post.update(post_params)

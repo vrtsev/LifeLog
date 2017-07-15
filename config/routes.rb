@@ -23,8 +23,13 @@ Rails.application.routes.draw do
         resources :votes, only: %i[create destroy]
       end
     end
-    # resources :tags, param: :name, only: :show, module: 'publications'
     resources :search, only: :index, module: 'users'
     resources :follows, only: %i[create destroy], module: 'users'
+  end
+
+  # DIARY
+
+  namespace :diary do
+    resources :posts
   end
 end
