@@ -1,5 +1,6 @@
 class Diary::PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_user_categories, except: %i[show destroy]
 
   def index
     @posts = current_user.diary_posts
@@ -44,9 +45,13 @@ class Diary::PostsController < ApplicationController
     @post = current_user.diary_posts.find(params[:id])
   end
 
+  def set_user_categories
+    @categories = current_user.diary_categories
+  end
+
   def post_params
     params.require(:post).permit(
-      :content, :supplemented, :supplement_date, :pinned
+      :content, :supplemented, :supplement_date, :pinned, :category_id
     )
   end
 end

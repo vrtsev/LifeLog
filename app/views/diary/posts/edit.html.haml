@@ -23,9 +23,9 @@
   .field
     = f.label :user_id
     = f.number_field :user_id
-  -# .field
-  -#   = f.label :category_id
-  -#   = f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { include_blank: true }
+  .field
+    = f.label :category_id
+    = f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { include_blank: true }
   .field
     = f.label :type
     = f.text_field :type

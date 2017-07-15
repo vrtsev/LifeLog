@@ -1,0 +1,56 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @category.title
+%p
+  %b Description:
+  = @category.description
+%p
+  %b Color:
+  = @category.color
+%p
+  %b User:
+  = @category.user_id
+%p
+  %b Type:
+  = @category.type
+
+= link_to 'Edit', edit_diary_category_path(@category)
+\|
+= link_to 'Back', diary_posts_path
+
+
+%h1 Listing posts
+
+%table
+  %thead
+    %tr
+      %th Content
+      %th Supplemented
+      %th Pinned
+      %th Supplement date
+      %th User
+      %th Category
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= post.content
+        %td= post.supplemented
+        %td= post.pinned
+        %td= post.supplement_date
+        %td= post.user_id
+        %td= post.category_id
+        %td= post.type
+        %td= link_to 'Show', diary_post_path(post)
+        %td= link_to 'Edit', edit_diary_post_path(post)
+        %td= link_to 'Destroy', diary_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_diary_post_path

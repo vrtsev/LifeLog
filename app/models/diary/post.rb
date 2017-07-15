@@ -20,5 +20,7 @@
 class Diary::Post < Post
   # has_many   :attachments
   # has_many   :comments, as: :commentable
-  # belongs_to :diary_category
+  belongs_to :category,
+             optional: true,
+             class_name: 'Diary::Category'
 end

@@ -29,10 +29,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :avatar, AvatarUploader
 
+  # Publication relations
   has_many :publication_posts, class_name: 'Publication::Post'
   has_many :publication_categories, class_name: 'Publication::Category'
   has_many :publication_comments, class_name: 'Publication::Comment'
-
   has_many :active_relationships,  class_name:  'Publication::Relationship',
                                    foreign_key: 'follower_id',
                                    dependent:   :destroy
@@ -42,7 +42,9 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  # Diary relations
   has_many :diary_posts, class_name: 'Diary::Post'
+  has_many :diary_categories, class_name: 'Diary::Category'
 
   def follow(other_user)
     following << other_user

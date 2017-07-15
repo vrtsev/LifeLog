@@ -8,7 +8,7 @@
       %th Pinned
       %th Supplement date
       %th User
-      -# %th Category
+      %th Category
       %th Type
       %th
       %th
@@ -22,7 +22,7 @@
         %td= post.pinned
         %td= post.supplement_date
         %td= post.user_id
-        -# %td= post.category_id
+        %td= post.category_id
         %td= post.type
         %td= link_to 'Show post', diary_post_path(post)
         %td= link_to 'Edit post', edit_diary_post_path(post)
@@ -31,3 +31,37 @@
 %br
 
 = link_to 'New Diary post', new_diary_post_path
+
+%hr
+
+%h1 DIARY categories
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Color
+      %th User
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= category.title
+        %td= category.description
+        %td= category.color
+        %td= category.user_id
+        %td= category.type
+        %td= link_to 'Show category', diary_category_path(category)
+        %td= link_to 'Edit category', edit_diary_category_path(category)
+        %td= link_to 'Destroy category', diary_category_path(category), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Category', new_diary_category_path
+
+%hr

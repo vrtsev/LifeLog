@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   # DIARY
 
   namespace :diary do
+    resources :categories
     resources :posts
   end
 end
