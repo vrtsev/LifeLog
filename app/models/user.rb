@@ -47,6 +47,9 @@ class User < ApplicationRecord
   has_many :diary_categories, class_name: 'Diary::Category'
   has_many :diary_comments, class_name: 'Diary::Comment'
 
+  # Objective relations
+  has_many :goals, class_name: 'Objective::Goal'
+
   def follow(other_user)
     following << other_user
   end

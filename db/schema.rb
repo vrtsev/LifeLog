@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714213140) do
+ActiveRecord::Schema.define(version: 20170715191630) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 20170714213140) do
     t.datetime "updated_at",               null: false
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "goals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.text     "description", limit: 65535
+    t.integer  "status",                    default: 0
+    t.integer  "progress",                  default: 0
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "parent_id"
+    t.integer  "user_id",                               null: false
+    t.index ["user_id"], name: "index_goals_on_user_id", using: :btree
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

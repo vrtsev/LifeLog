@@ -1,0 +1,103 @@
+%h1= "GOALS of #{current_user.name}"
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Status
+      %th Progress
+      %th Start date
+      %th End date
+      %th Parent
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @goals.each do |goal|
+      %tr
+        %td= goal.title
+        %td= goal.description
+        %td= goal.status
+        %td= goal.progress
+        %td= goal.start_date
+        %td= goal.end_date
+        %td= goal.parent_id
+        %td= goal.user_id
+        %td= link_to 'Show goal', objectives_goal_path(goal)
+        %td= link_to 'Edit goal', edit_objectives_goal_path(goal)
+        %td= link_to 'Destroy goal', objectives_goal_path(goal), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Diary goal', new_objectives_goal_path
+
+-# %hr
+
+-# %h1 DIARY categories
+
+-# %table
+-#   %thead
+-#     %tr
+-#       %th Title
+-#       %th Description
+-#       %th Color
+-#       %th User
+-#       %th Type
+-#       %th
+-#       %th
+-#       %th
+
+-#   %tbody
+-#     - @categories.each do |category|
+-#       %tr
+-#         %td= category.title
+-#         %td= category.description
+-#         %td= category.color
+-#         %td= category.user_id
+-#         %td= category.type
+-#         %td= link_to 'Show category', diary_category_path(category)
+-#         %td= link_to 'Edit category', edit_diary_category_path(category)
+-#         %td= link_to 'Destroy category', diary_category_path(category), method: :delete, data: { confirm: 'Are you sure?' }
+
+-# %br
+
+-# = link_to 'New Category', new_diary_category_path
+
+-# %hr
+
+-# %h1 Search and filters
+
+-# = form_tag diary_search_index_path, method: :get do
+-#   %p
+-#     %b Enter your search query
+-#     = text_field_tag 'query', params[:query]
+
+-#   %p
+-#     %b Posts conditions
+-#     %p
+-#       = check_box_tag 'post[supplemented]'
+-#       = label_tag 'Supplemeted'
+-#     %p
+-#       = check_box_tag 'post[pinned]'
+-#       = label_tag 'Pinned'
+-#     %p
+-#       = label_tag 'Posts from'
+-#       = date_field_tag 'post[from_date]'
+-#     %p
+-#       = label_tag 'Posts to'
+-#       = date_field_tag 'post[to_date]'
+
+-#     %p
+-#       %b Comments conditions
+
+-#       %p
+-#         = label_tag 'Comments from'
+-#         = date_field_tag 'comment[from_date]'
+-#       %p
+-#         = label_tag 'Comments to'
+-#         = date_field_tag 'comment[to_date]'
+
+-#   = submit_tag "Search"

@@ -1,0 +1,32 @@
+%p#notice= notice
+
+%h1 GOAL SHOW:
+
+%p
+  %b Title:
+  = @goal.title
+%p
+  %b Description:
+  = @goal.description.html_safe
+%p
+  %b Status:
+  = @goal.status
+%p
+  %b Progress:
+  = @goal.progress
+%p
+  %b Start date:
+  = @goal.start_date
+%p
+  %b End date:
+  = @goal.end_date
+%p
+  %b Parent id:
+  = @goal.parent_id
+%p
+  %b User id:
+  = @goal.user_id
+
+= link_to 'Edit', edit_objectives_goal_path(@goal)
+\|
+= link_to 'Back', objectives_goals_path
