@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   namespace :diary do
     resources :categories
-    resources :posts
+    resources :posts do
+      resources :comments, except: %i[index show]
+    end
   end
 end

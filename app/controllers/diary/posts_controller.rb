@@ -6,7 +6,9 @@ class Diary::PostsController < ApplicationController
     @posts = current_user.diary_posts
   end
 
-  def show; end
+  def show
+    @comments = @post.comments.all
+  end
 
   def new
     @post = current_user.diary_posts.new

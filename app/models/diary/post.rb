@@ -19,7 +19,7 @@
 
 class Diary::Post < Post
   # has_many   :attachments
-  # has_many   :comments, as: :commentable
+  has_many :comments, class_name: 'Diary::Comment', dependent: :destroy
   belongs_to :category,
              optional: true,
              class_name: 'Diary::Category'
