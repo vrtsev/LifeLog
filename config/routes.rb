@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   # DIARY
   namespace :diary do
-    resources :categories
+    resources :categories, except: :index
     resources :posts do
       resources :comments, except: %i[index show]
     end
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   # GOALS
   namespace :objectives do
+    resources :categories, except: :index
     resources :goals
   end
 end

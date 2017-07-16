@@ -49,6 +49,7 @@ class User < ApplicationRecord
 
   # Objective relations
   has_many :goals, class_name: 'Objective::Goal'
+  has_many :goal_categories, class_name: 'Objective::Category'
 
   def follow(other_user)
     following << other_user

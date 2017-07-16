@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170715191630) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "parent_id"
+    t.integer  "category_id"
     t.integer  "user_id",                               null: false
     t.index ["user_id"], name: "index_goals_on_user_id", using: :btree
   end
