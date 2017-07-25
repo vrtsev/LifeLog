@@ -69,38 +69,33 @@
 = link_to 'New Category', new_objectives_category_path
 
 
--# %hr
+%h1 Search and filters
 
--# %h1 Search and filters
+= form_tag objectives_search_index_path, method: :get do
+  %p
+    %b Enter your search query
+    = text_field_tag 'query', params[:query]
 
--# = form_tag diary_search_index_path, method: :get do
--#   %p
--#     %b Enter your search query
--#     = text_field_tag 'query', params[:query]
+  %p
+    %b Goals conditions
+    %p
+      = label_tag 'Status'
+      = select_tag 'goal[status]', 
+        options_from_collection_for_select(Objective::Goal.statuses.map {|s| [s.first.humanize, s.last]}, "last", "first"), 
+        include_blank: true
+    %p
+      = label_tag 'goals start date from'
+      = date_field_tag 'goal[from_date]'
+    %p
+      = label_tag 'goals start date to'
+      = date_field_tag 'goal[to_date]'
 
--#   %p
--#     %b Posts conditions
--#     %p
--#       = check_box_tag 'post[supplemented]'
--#       = label_tag 'Supplemeted'
--#     %p
--#       = check_box_tag 'post[pinned]'
--#       = label_tag 'Pinned'
--#     %p
--#       = label_tag 'Posts from'
--#       = date_field_tag 'post[from_date]'
--#     %p
--#       = label_tag 'Posts to'
--#       = date_field_tag 'post[to_date]'
+    %p
+      %b Tasks conditions
+      %p
+        = label_tag 'Status'
+        = select_tag 'task[status]', 
+          options_from_collection_for_select(Objective::Task.statuses.map {|s| [s.first.humanize, s.last]}, "last", "first"), 
+          include_blank: true
 
--#     %p
--#       %b Comments conditions
-
--#       %p
--#         = label_tag 'Comments from'
--#         = date_field_tag 'comment[from_date]'
--#       %p
--#         = label_tag 'Comments to'
--#         = date_field_tag 'comment[to_date]'
-
--#   = submit_tag "Search"
+  = submit_tag "Search"
