@@ -14,8 +14,7 @@
 #
 
 class Objective::Goal < ApplicationRecord
-  # has_many :taggings, as: :taggable
-  # has_many :tags, through: :taggings
+  include Taggable
 
   # has_many :attachments
   has_many :subgoals, class_name: 'Objective::Goal',

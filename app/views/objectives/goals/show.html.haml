@@ -29,6 +29,10 @@
 %p
   %b User id:
   = @goal.user_id
+%p
+  %b Tags:
+  - @goal.tags.each do |tag|
+    = link_to tag.name, objectives_tag_path(tag.name)
 
 = link_to 'Edit', edit_objectives_goal_path(@goal)
 \|

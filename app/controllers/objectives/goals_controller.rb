@@ -57,7 +57,7 @@ class Objectives::GoalsController < ApplicationController
   def goal_params
     params.require(:goal).permit(
       :title, :description, :status, :start_date, :end_date, :parent_id,
-      :category_id
+      :category_id, :all_tags
     )
   end
 end
