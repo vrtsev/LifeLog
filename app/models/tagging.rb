@@ -12,6 +12,6 @@
 
 class Tagging < ApplicationRecord
   belongs_to :tag
-  belongs_to :post
-  # belongs_to :goal
+  belongs_to :post, optional: true
+  belongs_to :goal, class_name: 'Objective::Goal', optional: true
 end

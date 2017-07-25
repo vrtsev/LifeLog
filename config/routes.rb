@@ -42,5 +42,6 @@ Rails.application.routes.draw do
     resources :goals do
       resources :tasks, except: %i[index show]
     end
+    resources :tags, param: :name, only: :show
   end
 end
