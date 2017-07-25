@@ -39,3 +39,23 @@
 
 - @goal.subgoals.each do |goal|
   %b= goal.title
+
+
+%h3 Tasks:
+
+- @tasks.each do |task|
+  %p
+    %b= task.title
+    =link_to 'Edit', edit_objectives_goal_task_path(@goal, task)
+    =link_to 'Destroy', objectives_goal_task_path(@goal, task), method: :delete, data: { confirmation: 'Are you sure?' }
+
+    -if task.subtasks.present?
+      - task.subtasks.each do |subtask|
+        %p
+          = subtask.title
+          =link_to 'Edit', edit_objectives_goal_task_path(@goal, subtask)
+          =link_to 'Destroy', objectives_goal_task_path(@goal, subtask), method: :delete, data: { confirmation: 'Are you sure?' }
+      %hr
+
+
+= link_to 'New task for this goal', new_objectives_goal_task_path(@goal)

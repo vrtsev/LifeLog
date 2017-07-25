@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   # GOALS
   namespace :objectives do
     resources :categories, except: :index
-    resources :goals
+    resources :goals do
+      resources :tasks, except: %i[index show]
+    end
   end
 end

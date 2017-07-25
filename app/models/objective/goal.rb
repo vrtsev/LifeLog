@@ -20,6 +20,7 @@ class Objective::Goal < ApplicationRecord
   # has_many :attachments
   has_many :subgoals, class_name: 'Objective::Goal',
                       foreign_key: 'parent_id', dependent: :destroy
+  has_many :tasks, class_name: 'Objective::Task'
 
   belongs_to :user
   belongs_to :parent, optional: true, class_name: 'Objective::Goal'
