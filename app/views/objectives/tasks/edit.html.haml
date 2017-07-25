@@ -1,0 +1,26 @@
+%h1 Editing Task
+
+= form_for :task, url: objectives_goal_task_path(@goal, @task), method: :patch do |f|
+  - if @task.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+      %ul
+        - @task.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :status
+    = f.select :status, Objective::Task.statuses.keys.map { |s| [s.humanize, s] }
+  .field
+    = f.label :goal_id
+    = f.number_field :goal_id
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .actions
+    = f.submit 'Save'
+
+= link_to 'Back', objectives_goal_path(@goal)

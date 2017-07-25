@@ -9,6 +9,7 @@ class Objectives::GoalsController < ApplicationController
 
   def show
     @goal = current_user.goals.find(params[:id])
+    @tasks = @goal.tasks.base
   end
 
   def new
