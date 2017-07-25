@@ -10,6 +10,7 @@
 #  start_date  :datetime
 #  end_date    :datetime
 #  parent_id   :integer
+#  category_id :integer
 #  user_id     :integer          not null
 #
 
