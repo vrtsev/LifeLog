@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  root 'welcome#index'
+  root 'landing_page#index'
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   # PUBLICATIONS

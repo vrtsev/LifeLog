@@ -11,12 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+//= require semantic-ui
 //= require ckeditor/init
 //= require highlight.pack
-//= require_tree .
 
 $(document).on('turbolinks:load', function() {
   $('pre').each(function(i, block) {
