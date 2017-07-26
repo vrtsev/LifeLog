@@ -12,9 +12,9 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 # View gems
-gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'ckeditor'
 gem 'haml-rails'
+gem 'semantic-ui-sass'
 
 # Authentication
 gem 'devise'
