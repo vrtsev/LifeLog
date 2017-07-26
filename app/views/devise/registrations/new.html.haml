@@ -1,25 +1,13 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Зарегистрироваться"
-= render "devise/shared/links"
+%h4 Регистрация нового аккаунта
+
+= form_for resource, as: resource_name, url: registration_path(resource_name), html: { class: 'ui large form' } do |f|
+  .ui.stacked.segment
+    .field= f.text_field :name, placeholder: 'Имя', autofocus: true
+    .field= f.email_field :email, placeholder: 'Электронная почта'
+    .field= f.password_field :password, placeholder: "Пароль (минимум #{@minimum_password_length} символов)"
+    .field= f.password_field :password_confirmation, placeholder: 'Повторите пароль'
+
+    .actions= f.submit "Зарегистрироваться", class: 'ui fluid large teal submit button'
+
+  .additional.links
+    %p== Уже зарегистрированы? #{link_to 'Вход', new_session_path(resource_name)}

@@ -1,0 +1,32 @@
+@import "semantic-ui";
+
+body {
+  background-color: #F0F0F0;
+};
+
+body > .grid {
+  height: 100%;
+};
+
+.image {
+  margin-top: -100px;
+};
+
+.column {
+  max-width: 450px;
+};
+
+.checkbox.field {
+  text-align: left !important;  
+};
+
+.additional.links {
+  a {
+    color: #0bb69f;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 0.9em;
+  }
+};
