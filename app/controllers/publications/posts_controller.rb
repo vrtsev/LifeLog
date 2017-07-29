@@ -1,6 +1,5 @@
 class Publications::PostsController < PublicationsController
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :set_user_categories, except: %i[create update destroy]
 
   def index
     @posts = current_user.publication_posts.order(created_at: :desc)
