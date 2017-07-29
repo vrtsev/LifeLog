@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'ckeditor'
 gem 'haml-rails'
 gem 'semantic-ui-sass'
+gem 'truncate_html'
 
 # Authentication
 gem 'devise'

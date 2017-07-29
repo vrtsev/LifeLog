@@ -1,0 +1,7 @@
+<% @posts.pinned.each do |post| %>
+  <%= render partial: 'post_box', locals: { post: post } %>
+<% end %>
+
+<% @posts.unpinned.each do |post| %>
+  <%= render partial: 'post_box', locals: { post: post } %>
+<% end %>

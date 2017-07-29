@@ -1,0 +1,78 @@
+<%= form_for object, url: path, method: method do |f| %>
+  <div class="box">
+
+    <!-- Error messages -->
+    <% if @post.errors.any? %>
+      <div class="box-header dker error-box">
+        <h2><%= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:" %>
+        <small>
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %>
+            <% end %>
+          </ul>
+        </small>
+      </div>
+    <% end %>
+
+    <!-- title header -->
+    <div class="box-header dker">
+      <% if action_name == 'new' %>
+        <%= f.text_field :title, class: "form-control", placeholder: "Заголовок записи" %>
+      <% else %>
+        <div class="form-group">
+          <%= f.text_field :title, class: "form-control", placeholder: "Заголовок записи" %>
+        </div>
+
+        <label class="md-switch">
+          <%= f.check_box :pinned %>
+          <i class="green"></i>
+          Пометить запись как обновленную (дополненную)
+        </label>
+      <% end %>
+    </div>
+
+    <div class="box-body">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <%= f.cktext_area :content, html: { rows: '10' }, class: "form-control", ckeditor: { toolbar: 'mini' } %>
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <div class="post-footer">
+        <div class="form-group">
+          <%= f.text_field :all_tags, class: "form-control", placeholder: "Теги" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { prompt: 'Без категории' }, class: "form-control c-select" %>
+        </div>
+
+        <div class="form-group">
+          <label class="md-switch">
+            <%= f.check_box :pinned %>
+            <i class="green"></i>
+            Закрепить запись
+          </label>
+        
+          <label class="md-switch">
+            <%= f.check_box :visible %>
+            <i class="green"></i>
+            Видимая запись
+          </label>
+
+          <label class="md-switch">
+            <%= f.check_box :commentable %>
+            <i class="green"></i>
+            Комментарии
+          </label>
+        </div>
+
+        <%= link_to 'Назад', :back, class: "btn btn-default" %>
+        <%= f.submit 'Сохранить', class: "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+<% end %>
