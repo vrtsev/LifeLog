@@ -61,6 +61,6 @@ class Publications::PostsController < PublicationsController
   def post_params
     params.require(:post).permit \
       :title, :content, :supplemented, :pinned, :visible, :commentable,
-      :supplement_date, :category_id, :all_tags
+      :category_id, :all_tags
   end
 end

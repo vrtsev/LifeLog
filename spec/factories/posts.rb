@@ -9,7 +9,7 @@
 #  pinned          :boolean          default("0")
 #  visible         :boolean          default("1")
 #  commentable     :boolean          default("1")
-#  supplement_date :datetime
+#  supplemented_at :datetime
 #  user_id         :integer          not null
 #  category_id     :integer
 #  type            :string(255)
@@ -25,7 +25,7 @@ FactoryGirl.define do
     pinned false
     visible true
     commentable true
-    supplement_date DateTime.current
+    supplemented_at DateTime.current
     all_tags 'first_tag, second_tag'
 
     user

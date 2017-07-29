@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(version: 20170725165510) do
     t.string   "title"
     t.text     "content",         limit: 65535
     t.boolean  "supplemented",                  default: true
+    t.datetime "supplemented_at"
     t.boolean  "pinned",                        default: false
     t.boolean  "visible",                       default: true
     t.boolean  "commentable",                   default: true
-    t.datetime "supplement_date"
     t.integer  "user_id",                                       null: false
     t.integer  "category_id"
     t.string   "type"
