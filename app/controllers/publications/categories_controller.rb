@@ -1,4 +1,4 @@
-class Publications::CategoriesController < ApplicationController
+class Publications::CategoriesController < PublicationsController
   before_action :set_category, only: %i[show edit update destroy]
 
   def show
