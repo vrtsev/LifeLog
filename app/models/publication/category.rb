@@ -15,4 +15,6 @@
 class Publication::Category < Category
   has_many :publication_posts, class_name: 'Publication::Post'
   # has_many :sub_categories, class_name: 'BlogCategory'
+
+  enum color: %i[grey red green yellow blue]
 end

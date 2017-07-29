@@ -1,0 +1,20 @@
+<div class="box">
+  <div class="box-header color-<%= @category.color %>"
+    <h3>Категория <%= @category.title %> <span class="label default"><%= @category.publication_posts.count %> записей</span></h3>
+    <small><%= @category.description %></small>
+  </div>
+  <div class="box-tool">
+    <ul class="nav">
+      <li class="nav-item inline dropdown">
+        <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
+        </a>
+        <div class="dropdown-menu pull-right">
+          <%= link_to 'Редактировать', edit_category_path(@category), class: 'dropdown-item' %>
+          <%= link_to 'Удалить', category_path(@category), method: :delete, class: 'dropdown-item', data: { confirm: 'Вы действительно хотите удалить категорию?' } %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<%= render template: 'publications/posts/index' %>
