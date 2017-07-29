@@ -29,6 +29,7 @@ class Publications::PostsController < PublicationsController
 
   def update
     if @post.update(post_params)
+      set_supplement_date if @post.supplemented
       redirect_to post_path(@post),
                   notice: 'Post was successfully updated.'
     else
@@ -53,8 +54,9 @@ class Publications::PostsController < PublicationsController
     @post = current_user.publication_posts.find(params[:id])
   end
 
-  def set_user_categories
-    @categories = current_user.publication_categories
+  def set_supplement_date
+    @post.supplemented_at = DateTime.now
+    @post.save
   end
 
   def post_params

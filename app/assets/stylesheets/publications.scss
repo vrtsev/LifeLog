@@ -20,3 +20,14 @@
 .comment-dropdown {
   float: right;
 };
+
+.post-hidden {
+  opacity: 0.4;
+  filter: blur(1px);
+  transition:.5s;
+}
+
+.post-hidden:hover {
+  opacity: 1;
+  filter: none;
+}
