@@ -6,12 +6,6 @@ CKEDITOR.editorConfig = function(config) {
 	// Toolbar section
 	config.removeButtons = 'Underline,Subscript,Superscript,Undo,Cut,Redo,Copy,Paste,PasteText,PasteFromWord,Scayt,Anchor,About';
   config.toolbarGroups = [
-		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-		{ name: 'clipboard', groups: [ 'undo', 'clipboard' ] },
-		{ name: 'paragraph', groups: [ 'list', 'blocks', 'align' ] },
-		{ name: 'insert', groups: [ 'insert' ] },
-    '/',
-		{ name: 'styles', groups: [ 'styles' ] },
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 		{ name: 'links', groups: [ 'links' ] },
 		{ name: 'tools', groups: [ 'tools' ] },
@@ -19,7 +13,7 @@ CKEDITOR.editorConfig = function(config) {
 		{ name: 'colors', groups: [ 'colors' ] },
 		{ name: 'about', groups: [ 'about' ] },
     { name: 'pbckcode'}
-	];
+  ];
 
 	// Image upload section
   config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
@@ -39,3 +33,21 @@ CKEDITOR.editorConfig = function(config) {
     tab_size: '2'
   };
 };
+
+// Full toolbar:
+
+// config.toolbarGroups = [
+// 	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+// 	{ name: 'clipboard', groups: [ 'undo', 'clipboard' ] },
+// 	{ name: 'paragraph', groups: [ 'list', 'blocks', 'align' ] },
+// 	{ name: 'insert', groups: [ 'insert' ] },
+//   '/',
+// 	{ name: 'styles', groups: [ 'styles' ] },
+// 	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+// 	{ name: 'links', groups: [ 'links' ] },
+// 	{ name: 'tools', groups: [ 'tools' ] },
+// 	{ name: 'others', groups: [ 'others' ] },
+// 	{ name: 'colors', groups: [ 'colors' ] },
+// 	{ name: 'about', groups: [ 'about' ] },
+//   { name: 'pbckcode'}
+// ];
