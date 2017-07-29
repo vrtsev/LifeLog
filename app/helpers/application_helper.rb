@@ -1,6 +1,8 @@
 module ApplicationHelper
-  def render_date_for(obj)
-    obj.created_at.strftime("%d.%m.%Y в %I:%M")
+  def format_datetime(datetime)
+    return '(неизвестно)' unless datetime
+
+    datetime.strftime("%d.%m.%Y в %I:%M")
   end
 
   def render_photo_of(user, html_class='img-circle')
