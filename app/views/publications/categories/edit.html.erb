@@ -1,0 +1,60 @@
+<div class="box">
+  <div class="box-header color-<%= @category.color %>">
+    <h2>Редактирование категории '<%= @category.title %>'</h2>
+  </div>
+
+  <div class="box-divider m-a-0"></div>
+
+  <div class="box-body">
+    <%= form_for :category, url: category_path(@category), method: :patch do |f| %>
+      <div class="form-group">
+        <%= f.text_field :title, class: 'form-control', placeholder: 'Название категории' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_area :description, class: 'form-control', placeholder: 'Краткое описание', rows: '4' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.select :color, Publication::Category.colors.keys.map { |c| [c.humanize, c] }, { prompt: 'Выберите цвет' }, class: "form-control c-select" %>
+      </div>
+
+      <%= link_to 'Назад', :back, class: 'btn green m-b' %>
+      <%= f.submit 'Сохранить', class: 'btn green m-b' %>
+    <% end %>
+  </div>
+</div>
+
+
+<%# %h1 Editing category
+
+= form_for :category, url: category_path(@category), method: :patch do |f|
+  - if @category.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@category.errors.count, "error")} prohibited this category from being saved:"
+      %ul
+        - @category.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :color
+    = f.number_field :color
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :type
+    = f.text_field :type
+  .actions
+    = f.submit 'Save'
+
+
+= link_to 'Show', category_path(@category)
+\|
+= link_to 'Back', posts_path %>

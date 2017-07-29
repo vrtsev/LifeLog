@@ -67,16 +67,71 @@
 
               <!-- Right sidebar (categories) -->
               <div class="col-sm-6 col-md-3">
+
+                <div class="list-group m-b">
+                  <%= link_to new_post_path, class: 'list-group-item' do %>
+                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-pencil-square-o"></i></span>
+                    Новая публикация
+                  <% end %>
+                  <%= link_to new_category_path, class: 'list-group-item', id: 'new-category-btn' do %>
+                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-list-ul"></i></span>
+                    Добавить категорию
+                  <% end %>
+                </div>
+                
                 <div class="box">
-                  <div class="list-group m-b">
+                  <div id='category-list' class="list-group m-b">
                     <% @categories.each do |category| %>
-                      <%= link_to category_path(category), class: 'list-group-item b-l-primary' do %>
+                      <%= link_to category_path(category), class: "list-group-item b-l-primary" do %>
                         <span class="pull-right text-primary"><i class="fa fa-circle text-xs"></i></span>
                         <%= category.title %>
                       <% end %>
                     <% end %>
                   </div>
                 </div>
+
+                <div class="box">
+                  <div class="box-body">
+                    <div class="box-header">Фильтр публикаций</div>
+                    <ul class="list-unstyled m-t-n-sm">
+                      <li class="checkbox">
+                        <label class="ui-check">
+                          <input type="checkbox" checked><i></i> Закрепленные
+                        </label>
+                      </li>
+                      <li class="checkbox">
+                        <label class="ui-check">
+                          <input type="checkbox" checked><i></i> Обновленные
+                        </label>
+                      </li>
+                      <li class="checkbox">
+                        <label class="ui-check">
+                          <input type="checkbox"><i></i> Скрытые
+                        </label>
+                      </li>
+                      <li class="checkbox">
+                        <label class="ui-check">
+                          <input type="checkbox"><i></i> Комментируемые
+                        </label>
+                      </li>
+                    </ul>
+                    <div class="line line-dashed b-b"></div>
+                    <div class="box-header">Фильтр комментариев</div>
+                    <ul class="list-unstyled">
+                      <li class="radio">
+                        <label class="ui-check">
+                          <input type="radio" name="filter" checked><i></i> Начало даты
+                        </label>
+                      </li>
+                      <li class="radio">
+                        <label class="ui-check">
+                          <input type="radio" name="filter"><i></i> Конец даты
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
               </div>
             </div>
         	</div>
