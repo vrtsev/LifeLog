@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration[5.0]
     create_table :posts do |t|
       t.string :title
       t.text :content
-      t.boolean :supplemented, default: true
+      t.boolean :supplemented, default: false
       t.datetime :supplemented_at
       t.boolean :pinned, default: false
       t.boolean :visible, default: true

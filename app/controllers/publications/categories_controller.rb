@@ -5,9 +5,7 @@ class Publications::CategoriesController < PublicationsController
     @posts = @category.publication_posts
   end
 
-  def new
-    @category = current_user.publication_categories.new
-  end
+  def new; end
 
   def edit; end
 

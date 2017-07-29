@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170725165510) do
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.text     "content",         limit: 65535
-    t.boolean  "supplemented",                  default: true
+    t.boolean  "supplemented",                  default: false
     t.datetime "supplemented_at"
     t.boolean  "pinned",                        default: false
     t.boolean  "visible",                       default: true
