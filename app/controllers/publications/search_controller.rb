@@ -1,4 +1,4 @@
-class Publications::SearchController < ApplicationController
+class Publications::SearchController < PublicationsController
   def index
     @tags     = find_tags
     @posts    = find_posts

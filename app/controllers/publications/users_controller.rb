@@ -1,4 +1,4 @@
-class Publications::UsersController < ApplicationController
+class Publications::UsersController < PublicationsController
   def index
     @users = User.all
   end

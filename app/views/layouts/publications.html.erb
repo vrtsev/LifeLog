@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Публикации | LifeLog</title>
+    <%= stylesheet_link_tag "publications" %>
+    <%= javascript_include_tag "publications" %>
+    <%= csrf_meta_tags %>
+
+    <!-- vendor style -->
+    <link rel="stylesheet" href="../assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="../assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/styles/font.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="app" id="app">
+      <div id="content" class="app-content box-shadow-z0" role="main">
+
+        <!-- Navbar -->
+        <div class="app-header navbar-md white box-shadow">
+          <%= render partial: 'layouts/shared/navbar'%>
+        </div>
+
+        <!-- Page content -->
+        <div ui-view class="app-body container" id="view">
+          <div class="padding">
+            <div class="row">
+              <div class="col-sm-12 push-md-3 col-md-6">
+                <%= yield %>
+        	    </div>
+            
+              <!-- Left sidebar -->
+              <div class="col-sm-6 pull-md-6 col-md-3">
+                <div class="box">
+                  <div class="p-a-md text-center">
+                    <p><%= render_photo_of(current_user, 'img-circle w-xs') %></p>
+                    <a href class="text-md block"><%= current_user.name %></a>
+                    <p><small><%= current_user.status %></small></p>
+                    <div class="text-center m-t">
+                      <a href class="btn btn-sm rounded primary w-sm m-y-xs">Подписаться</a>
+                      <a href class="btn btn-sm rounded btn-outline b-primary w-sm">Профиль</a>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutter b-t b-b">
+                    <div class="col-xs-6 b-r">
+                      <%= link_to posts_path, class: 'p-a block text-center' do %>
+                        <span class="block _600"><%= current_user.publication_posts.count %></span>
+                        <span>Публикаций</span>
+                      <% end %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= link_to '#', class: 'p-a block text-center' do %>
+                        <span class="block _600"><%= current_user.followers.count %></span>
+                        <span>Подписчиков</span>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right sidebar (categories) -->
+              <div class="col-sm-6 col-md-3">
+                <div class="box">
+                  <div class="list-group m-b">
+                    <% @categories.each do |category| %>
+                      <%= link_to category_path(category), class: 'list-group-item b-l-primary' do %>
+                        <span class="pull-right text-primary"><i class="fa fa-circle text-xs"></i></span>
+                        <%= category.title %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        	</div>
+        </div>
+
+      <%= render partial: 'layouts/shared/theme_switcher' %>
+    </div>
+  </body>
+</html>

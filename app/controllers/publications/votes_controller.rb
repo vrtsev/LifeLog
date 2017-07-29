@@ -1,4 +1,4 @@
-class Publications::VotesController < ApplicationController
+class Publications::VotesController < PublicationsController
   before_action :set_post, :set_comment
 
   def create

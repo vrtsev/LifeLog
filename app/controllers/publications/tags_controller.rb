@@ -1,4 +1,4 @@
-class Publications::TagsController < ApplicationController
+class Publications::TagsController < PublicationsController
   def show
     @tag = Tag.find_by(name: params[:name])
     @posts = Publication::Post.joins(:tags)
