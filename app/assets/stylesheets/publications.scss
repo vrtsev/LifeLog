@@ -32,6 +32,28 @@
   filter: none;
 }
 
+.new-comment-input, .new-comment-input:focus {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.comment-box-header {
+  display: flex;
+  padding: 5px !important;
+  padding-left: 1rem !important;
+}
+
+.avatar {
+  font-weight: normal !important;
+}
+
+.sl-content {
+  padding-bottom: 0 !important;
+}
+
 
 // Colors
 

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # own resources
   resources :categories, except: :index, module: 'publications'
   resources :posts, module: 'publications' do
-    resources :comments, except: %i[index show] do
+    resources :comments, except: %i[new index show] do
       resources :votes, only: %i[create destroy]
     end
   end

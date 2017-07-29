@@ -23,4 +23,11 @@ $(document).on('turbolinks:load', function() {
   $('pre').each(function(i, block) {
     hljs.highlightBlock(block);
   });
+
+  $('#new-comment-area', '#new-comment-box', '#comment-cancel-btn').click(function(e) {
+    e.preventDefault();
+    $('#new-comment-box').toggleClass('hidden');
+    $('#new-comment-form').toggleClass('hidden');
+    $('.new-comment-input').focus();
+  });
 });
