@@ -42,9 +42,12 @@
                     <p><%= render_photo_of(@user, 'img-circle w-xs') %></p>
                     <a href class="text-md block"><%= @user.name %></a>
                     <p><small><%= @user.status %></small></p>
-                    <div class="text-center m-t">
-                      <a href class="btn btn-sm rounded primary w-sm m-y-xs">Подписаться</a>
-                      <a href class="btn btn-sm rounded btn-outline b-primary w-sm">Профиль</a>
+                    <div id="follow_form" class="text-center m-t">
+                      <% if current_user.following?(@user) %>
+                        <%= render partial: 'layouts/user_publications/unfollow' %>
+                      <% else %>
+                        <%= render partial: 'layouts/user_publications/follow' %>
+                      <% end %>
                     </div>
                   </div>
 
@@ -57,7 +60,7 @@
                     </div>
                     <div class="col-xs-6">
                       <%= link_to '#', class: 'p-a block text-center' do %>
-                        <span class="block _600"><%= @user.followers.count %></span>
+                        <span id='followers-count' class="block _600"><%= @user.followers.count %></span>
                         <span>Подписчиков</span>
                       <% end %>
                     </div>
