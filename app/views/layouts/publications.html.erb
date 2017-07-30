@@ -8,14 +8,14 @@
     <%= csrf_meta_tags %>
 
     <!-- vendor style -->
-    <link rel="stylesheet" href="../assets/animate.css/animate.min.css" type="text/css" />
-    <link rel="stylesheet" href="../assets/glyphicons/glyphicons.css" type="text/css" />
-    <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="../assets/material-design-icons/material-design-icons.css" type="text/css" />
-    <link rel="stylesheet" href="../assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
 
-    <link rel="stylesheet" href="../assets/styles/app.css" type="text/css" />
-    <link rel="stylesheet" href="../assets/styles/font.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/font.css" type="text/css" />
   </head>
 
   <body>
@@ -68,6 +68,7 @@
               <!-- Right sidebar (categories) -->
               <div class="col-sm-6 col-md-3">
 
+                <%= link_to 'Юзер', user_posts_path(User.last) %>
                 <!-- action buttons -->
                 <div class="list-group m-b">
                   <%= link_to new_post_path, class: 'list-group-item' do %>
