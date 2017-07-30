@@ -43,15 +43,9 @@
       </p>
 
       <% if post.tags.present? %>
-        <div class="dropdown-divider"></div>
-        <div class="post-footer">
-          <small>
-            Теги: 
-            <% post.tags.each do |tag| %>
-              <%= link_to "##{tag.name}", tag_path(tag.name) %>
-            <% end %>
-          </small>
-        </div>
+        <% post.tags.each do |tag| %>
+          <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -99,15 +93,9 @@
       </p>
 
       <% if post.tags.present? %>
-        <div class="dropdown-divider"></div>
-        <div class="post-footer">
-          <small>
-            Теги: 
-            <% post.tags.each do |tag| %>
-              <%= link_to "##{tag.name}", tag_path(tag.name) %>
-            <% end %>
-          </small>
-        </div>
+        <% post.tags.each do |tag| %>
+          <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+        <% end %>
       <% end %>
     </div>
   </div>

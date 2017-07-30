@@ -30,4 +30,9 @@ $(document).on('turbolinks:load', function() {
     $('#new-comment-form').toggleClass('hidden');
     $('.new-comment-input').focus();
   });
+
+  $('#filter-btn').click(function(e) {
+    e.preventDefault();
+    $('#filter-block').toggleClass('hidden')
+  });
 });

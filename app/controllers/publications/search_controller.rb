@@ -1,4 +1,6 @@
 class Publications::SearchController < PublicationsController
+  before_action :set_search_values
+
   def index
     @tags     = find_tags
     @posts    = find_posts
@@ -27,5 +29,14 @@ class Publications::SearchController < PublicationsController
     CommentsSearchQuery.new(
       current_user.publication_comments, params[:query], params[:comment]
     ).results
+  end
+
+  def set_search_values
+    return unless params[:post].present?
+
+    @filter_pinned       = params[:post][:pinned]
+    @filter_supplemented = params[:post][:supplemented]
+    @filter_visible      = params[:post][:visible]
+    @filter_commentable  = params[:post][:commentable]
   end
 end
