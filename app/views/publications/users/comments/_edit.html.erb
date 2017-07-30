@@ -1,4 +1,4 @@
-<%= form_for :comment, url: post_comment_path(@post, comment), method: :patch do |f| %>
+<%= form_for :comment, url: user_post_comment_path(@user, @post, comment), method: :patch do |f| %>
   <%= f.text_area :content, rows: 2, class: 'form-control' %>
   <br>
   <%= f.submit 'Отправить', class: 'pull-right btn btn-sm btn-primary' %>&nbsp;

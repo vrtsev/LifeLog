@@ -1,4 +1,4 @@
-class Publications::Users::CommentsController < ApplicationController
+class Publications::Users::CommentsController < Publications::UsersController
   before_action :authenticate_user!, :set_user, :set_post, :check_commentable
   before_action :set_comment, :check_author, only: %i[edit update destroy]
 
@@ -19,7 +19,9 @@ class Publications::Users::CommentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    respond_to { |format| format.js }
+  end
 
   def update
     if @comment.update(comment_params)
