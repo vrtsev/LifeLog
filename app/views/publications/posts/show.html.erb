@@ -5,7 +5,7 @@
       <% if @post.pinned %>
         <i class="fa fa-thumb-tack"></i>
       <% end %>
-      <%= link_to @post.title, post_path(@post) %>
+      <%= @post.title %>
 
       <% if @post.supplemented %>
         <span class="label success">Обновлено</span>
@@ -108,19 +108,11 @@
                 </li>
               </ul>
 
-              <div class="sl-author"><b><%= comment.user.name %></b></div>
+              <div class="sl-author"><b><%= link_to comment.user.name, user_posts_path(comment.user) %></b></div>
               <div class="sl-date text-muted"><%= format_datetime(comment.created_at) %></div>
               <div id='comment-<%= comment.id %>'>
                 <p><%= comment.content %></p>
               </div>
-
-              <!-- comment likes -->
-              <!-- <div class="sl-footer">
-                <a href data-toggle="collapse" data-target="#reply-1">
-                  <i class="fa fa-fw fa-mail-reply text-muted"></i> Ответить
-                </a>
-                <span class="label success">1 | голосовать</span>
-              </div> -->
 
               <!-- comment reply form -->
               <!-- <div class="box collapse m-a-0 b-a" id="reply-1">
