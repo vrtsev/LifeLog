@@ -1,0 +1,98 @@
+<div class="box">
+  <!-- post header -->
+  <div class="box-header dker">
+    <h3>
+      <% if @post.pinned %>
+        <i class="fa fa-thumb-tack"></i>
+      <% end %>
+      <%= @post.title %>
+
+      <% if @post.supplemented %>
+        <span class="label success">Обновлено</span>
+      <% end %>
+    </h3>
+    <small>
+      <%= format_datetime(@post.created_at) %>
+      <%= "(Обновлено #{format_datetime(@post.supplemented_at)})" if @post.supplemented %>  
+    </small>
+  </div>
+
+  <!-- post content -->
+  <div class="box-body">
+    <p class="m-a-0">
+      <%= raw @post.content %>
+    </p>
+
+    <% if @post.tags.present? %>
+      <div class="dropdown-divider"></div>
+      <div class="post-footer">
+        <small>
+          Теги: 
+          <% @post.tags.each do |tag| %>
+            <%= link_to "##{tag.name}", tag_path(tag.name) %>
+          <% end %>
+        </small>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%#= render partial: 'publications/comments/form' %>
+
+<% if @post.comments.present? %>
+  <div class="box">
+    <div class="box-header">
+      <h3>Комментарии <span class="label default"><%= @post.comments.count %></span></h3>
+    </div>
+
+    <div class="box-body">
+      <div class="streamline b-l m-l-md">
+
+        <% @post.comments.each do |comment| %>
+          <div class="sl-item">
+            <div class="sl-left"><%= render_photo_of(comment.user) %></div>
+            <div class="sl-content">
+
+              <% if comment.user == current_user %>
+                <ul class="nav comment-dropdown">
+                  <li class="nav-item inline dropdown">
+                    <a class="nav-link" data-toggle="dropdown">
+                      <i class="material-icons md-18">&#xe5d4;</i>
+                    </a>
+
+                    <div class="dropdown-menu pull-right">
+                      <%= link_to 'Редактировать', edit_post_comment_path(@post, comment), class: 'dropdown-item edit-comment-btn', remote: true %>
+                      <%= link_to 'Удалить', post_comment_path(@post, comment), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+                    </div>
+                  </li>
+                </ul>
+              <% end %>
+                  
+              <ul class="nav comment-likes">
+                <li>
+                  <% if user_vote_on(comment).present? %>
+                    <%= link_to user_post_comment_vote_path(@user, @post, comment, user_vote_on(comment)), method: :delete, class: 'nav-link' do %>
+                      <%= comment.votes.count %>
+                      <i class="fa fa-heart liked-icon"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to user_post_comment_votes_path(@user, @post, comment), method: :post, class: 'nav-link' do %>
+                      <%= comment.votes.count %>
+                      <i class="fa fa-heart-o"></i>
+                    <% end %>
+                  <% end %>
+                </li>
+              </ul>
+
+              <div class="sl-author"><b><%= link_to comment.user.name, user_posts_path(comment.user) %></b></div>
+              <div class="sl-date text-muted"><%= format_datetime(comment.created_at) %></div>
+              <div id='comment-<%= comment.id %>'>
+                <p><%= comment.content %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

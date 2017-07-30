@@ -1,4 +1,6 @@
 class Publications::UsersController < PublicationsController
+  layout 'user_publications'
+
   def index
     @users = User.all
   end

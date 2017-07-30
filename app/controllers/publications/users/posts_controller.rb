@@ -1,4 +1,4 @@
-class Publications::Users::PostsController < ApplicationController
+class Publications::Users::PostsController < Publications::UsersController
   before_action :set_user
 
   def index

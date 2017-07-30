@@ -39,25 +39,25 @@
               <div class="col-sm-6 pull-md-6 col-md-3">
                 <div class="box">
                   <div class="p-a-md text-center">
-                    <p><%= render_photo_of(current_user, 'img-circle w-xs') %></p>
-                    <a href class="text-md block"><%= current_user.name %></a>
-                    <p><small><%= current_user.status %></small></p>
+                    <p><%= render_photo_of(@user, 'img-circle w-xs') %></p>
+                    <a href class="text-md block"><%= @user.name %></a>
+                    <p><small><%= @user.status %></small></p>
                     <div class="text-center m-t">
-                      <a href class="btn btn-sm rounded primary w-sm m-y-xs">Профиль</a>
-                      <a href class="btn btn-sm rounded btn-outline b-primary w-sm">Статистика</a>
+                      <a href class="btn btn-sm rounded primary w-sm m-y-xs">Подписаться</a>
+                      <a href class="btn btn-sm rounded btn-outline b-primary w-sm">Профиль</a>
                     </div>
                   </div>
 
                   <div class="row no-gutter b-t b-b">
                     <div class="col-xs-6 b-r">
-                      <%= link_to posts_path, class: 'p-a block text-center' do %>
-                        <span class="block _600"><%= current_user.publication_posts.count %></span>
+                      <%= link_to user_posts_path(@user), class: 'p-a block text-center' do %>
+                        <span class="block _600"><%= @user.publication_posts.count %></span>
                         <span>Публикаций</span>
                       <% end %>
                     </div>
                     <div class="col-xs-6">
                       <%= link_to '#', class: 'p-a block text-center' do %>
-                        <span class="block _600"><%= current_user.followers.count %></span>
+                        <span class="block _600"><%= @user.followers.count %></span>
                         <span>Подписчиков</span>
                       <% end %>
                     </div>
@@ -68,21 +68,8 @@
               <!-- Right sidebar (categories) -->
               <div class="col-sm-6 col-md-3">
 
-                <%= link_to 'Юзер', user_posts_path(User.last) %>
-                <!-- action buttons -->
-                <div class="list-group m-b">
-                  <%= link_to new_post_path, class: 'list-group-item' do %>
-                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-pencil-square-o"></i></span>
-                    Новая публикация
-                  <% end %>
-                  <%= link_to new_category_path, class: 'list-group-item', id: 'new-category-btn' do %>
-                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-list-ul"></i></span>
-                    Добавить категорию
-                  <% end %>
-                </div>
-                
                 <!-- search block -->
-                <%= form_tag search_index_path, method: :get do %>
+                <%= form_tag user_search_index_path, method: :get do %>
                   <div class="box">
                     <div class="box-body">
                       <div class="input-group input-group">
