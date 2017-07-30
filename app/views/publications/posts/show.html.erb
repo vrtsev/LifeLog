@@ -91,6 +91,22 @@
                   </div>
                 </li>
               </ul>
+                  
+              <ul class="nav comment-likes">
+                <li>
+                  <% if user_vote_on(comment).present? %>
+                    <%= link_to post_comment_vote_path(@post, comment, user_vote_on(comment)), method: :delete, class: 'nav-link' do %>
+                      <%= comment.votes.count %>
+                      <i class="fa fa-heart liked-icon"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to post_comment_votes_path(@post, comment), method: :post, class: 'nav-link' do %>
+                      <%= comment.votes.count %>
+                      <i class="fa fa-heart-o"></i>
+                    <% end %>
+                  <% end %>
+                </li>
+              </ul>
 
               <div class="sl-author"><b><%= comment.user.name %></b></div>
               <div class="sl-date text-muted"><%= format_datetime(comment.created_at) %></div>
