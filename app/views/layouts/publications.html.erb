@@ -68,6 +68,7 @@
               <!-- Right sidebar (categories) -->
               <div class="col-sm-6 col-md-3">
 
+                <!-- action buttons -->
                 <div class="list-group m-b">
                   <%= link_to new_post_path, class: 'list-group-item' do %>
                     <span class="pull-right text-muted m-l-xs"><i class="fa fa-pencil-square-o"></i></span>
@@ -79,6 +80,53 @@
                   <% end %>
                 </div>
                 
+                <!-- search block -->
+                <%= form_tag search_index_path, method: :get do %>
+                  <div class="box">
+                    <div class="box-body">
+                      <div class="input-group input-group">
+                        <%= text_field_tag 'query', params[:query], class: 'form-control form-control-sm', placeholder: 'Поиск по странице' %>
+                        <span class="input-group-btn">
+                          <%= button_tag(type: 'submit', class: "btn b-a no-shadow white btn-sm") do %>
+                            <i class="fa fa-search"></i> 
+                          <% end %>
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <%= link_to '#', id: 'filter-btn', class: "list-group-item" do %>
+                      <span class="pull-right text-default"><i class="fa fa-filter"></i></span>
+                      Параметры поиска
+                    <% end %>
+                    
+                    <div id='filter-block' class='box-body dker hidden'> 
+                      <ul class="list-unstyled m-t-n-sm">
+                        <li class="checkbox">
+                          <label class="ui-check">
+                            <%= check_box_tag 'post[pinned]', nil, @filter_pinned %><i></i> Закрепленные
+                          </label>
+                        </li>
+                        <li class="checkbox">
+                          <label class="ui-check">
+                            <%= check_box_tag 'post[supplemented]', nil, @filter_supplemented %><i></i> Обновленные
+                          </label>
+                        </li>
+                        <li class="checkbox">
+                          <label class="ui-check">
+                            <%= check_box_tag 'post[visible]', nil, @filter_visible %><i></i> Скрытые
+                          </label>
+                        </li>
+                        <li class="checkbox">
+                          <label class="ui-check">
+                            <%= check_box_tag 'post[commentable]', nil, @filter_commentable %><i></i> Комментируемые
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                <% end %>
+
+                <!-- categories block -->
                 <div class="box">
                   <div id='category-list' class="list-group m-b">
                     <% @categories.each do |category| %>
@@ -90,47 +138,6 @@
                   </div>
                 </div>
 
-                <div class="box">
-                  <div class="box-body">
-                    <div class="box-header">Фильтр публикаций</div>
-                    <ul class="list-unstyled m-t-n-sm">
-                      <li class="checkbox">
-                        <label class="ui-check">
-                          <input type="checkbox" checked><i></i> Закрепленные
-                        </label>
-                      </li>
-                      <li class="checkbox">
-                        <label class="ui-check">
-                          <input type="checkbox" checked><i></i> Обновленные
-                        </label>
-                      </li>
-                      <li class="checkbox">
-                        <label class="ui-check">
-                          <input type="checkbox"><i></i> Скрытые
-                        </label>
-                      </li>
-                      <li class="checkbox">
-                        <label class="ui-check">
-                          <input type="checkbox"><i></i> Комментируемые
-                        </label>
-                      </li>
-                    </ul>
-                    <div class="line line-dashed b-b"></div>
-                    <div class="box-header">Фильтр комментариев</div>
-                    <ul class="list-unstyled">
-                      <li class="radio">
-                        <label class="ui-check">
-                          <input type="radio" name="filter" checked><i></i> Начало даты
-                        </label>
-                      </li>
-                      <li class="radio">
-                        <label class="ui-check">
-                          <input type="radio" name="filter"><i></i> Конец даты
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
 
               </div>
             </div>

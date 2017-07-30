@@ -54,7 +54,7 @@
   padding-bottom: 0 !important;
 }
 
-.comment-likes {
+.comment-likes, .comment-post-link {
   float: right;
   margin-right: 10px;
 }
@@ -62,6 +62,23 @@
 .liked-icon {
   color: #2ABBA8;
 }
+
+.p-x, .no-content {
+  text-align: center;
+}
+
+.search-comment-item {
+  margin-left: 1rem;
+}
+
+.search-comment-post {
+  padding: 10px;
+}
+
+.search-tag-item {
+  margin: 5px;
+}
+
 
 
 // Colors

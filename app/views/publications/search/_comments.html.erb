@@ -1,0 +1,44 @@
+<% if comments.present? %>
+  <% comments.each do |comment| %>
+    <div class="box m-t p-a-sm">
+      <div class="box-body">
+        <div class="sl-item search-comment-item">
+          <div class="sl-left"><%= render_photo_of(comment.user) %></div>
+          <div class="sl-content">
+
+            <ul class="nav comment-likes">
+              <li>
+                <%= comment.votes.count %>
+
+                <% if user_vote_on(comment).present? %>
+                  <i class="fa fa-heart liked-icon"></i>
+                <% else %>
+                  <i class="fa fa-heart-o"></i>
+                <% end %>
+              </li>
+            </ul>
+
+            <div class="sl-author"><b><%= link_to comment.user.name, user_posts_path(comment.user) %></b></div>
+            <div class="sl-date text-muted"><%= format_datetime(comment.created_at) %></div>
+
+            <%= comment.content %>
+          </div>
+        </div>
+      </div>
+      
+      <%= link_to post_path(comment.post), class: 'search-comment-box' do %>
+        <div class="box-header search-comment-post dker">
+          <small class='comment-post-link'>
+            <i class="fa fa-arrow-circle-o-right text-muted"></i> Перейти
+          </small>
+
+          <small>
+            Комментарий к записи '<%= comment.post.title %>' 
+          </small>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <%= render partial: 'no_content' %>
+<% end %>

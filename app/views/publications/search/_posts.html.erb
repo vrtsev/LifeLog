@@ -1,0 +1,34 @@
+<% if posts.present? %>
+  <div class="box m-t p-a-sm">
+    <% posts.each do |post| %>
+      <ul class="list">
+        <li class="list-item">
+          <div class="clear">
+            <h5 class="m-a-0 m-b-sm"><%= link_to post.title, post_path(post) %></h5>
+            <p class="text-muted"><%= truncate_html post.content, :length => 400 %></p>
+            
+            <% if post.tags.present? %>
+              <% post.tags.each do |tag| %>
+                <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
+        <div class="dropdown-divider"></div>
+      </ul>
+    <% end %>
+    <div class="p-x">
+      <ul class="pagination">
+        <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+        <li class="active"><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">4</a></li>
+        <li><a href="">5</a></li>
+        <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+      </ul>
+    </div>
+  </div>
+<% else %>
+  <%= render partial: 'no_content' %>
+<% end %>
