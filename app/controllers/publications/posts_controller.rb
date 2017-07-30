@@ -6,7 +6,7 @@ class Publications::PostsController < PublicationsController
   end
 
   def show
-    @comments = @post.comments.all
+    @comments = @post.comments.all.order(created_at: :desc)
   end
 
   def new

@@ -10,7 +10,7 @@ class Publications::Users::PostsController < Publications::UsersController
     @post = @user.publication_posts.find(params[:id])
 
     redirect_to user_posts_path(@user) unless @post.visible
-    @comments = @post.comments.all
+    @comments = @post.comments.order(created_at: :desc)
   end
 
   private

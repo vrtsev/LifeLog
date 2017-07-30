@@ -63,9 +63,9 @@
   </div>
 </div>
 
-<%= render partial: 'publications/comments/form' %>
+<%= render partial: 'publications/comments/new' %>
 
-<% if @post.comments.present? %>
+<% if @comments.present? %>
   <div class="box">
     <div class="box-header">
       <h3>Комментарии <span class="label default"><%= @post.comments.count %></span></h3>
@@ -74,7 +74,7 @@
     <div class="box-body">
       <div class="streamline b-l m-l-md">
 
-        <% @post.comments.each do |comment| %>
+        <% @comments.each do |comment| %>
           <div class="sl-item">
             <div class="sl-left"><%= render_photo_of(comment.user) %></div>
             <div class="sl-content">

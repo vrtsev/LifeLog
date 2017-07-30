@@ -37,9 +37,9 @@
   </div>
 </div>
 
-<%#= render partial: 'publications/comments/form' %>
+<%= render partial: 'publications/users/comments/new' %>
 
-<% if @post.comments.present? %>
+<% if @comments.present? %>
   <div class="box">
     <div class="box-header">
       <h3>Комментарии <span class="label default"><%= @post.comments.count %></span></h3>
@@ -48,7 +48,7 @@
     <div class="box-body">
       <div class="streamline b-l m-l-md">
 
-        <% @post.comments.each do |comment| %>
+        <% @comments.each do |comment| %>
           <div class="sl-item">
             <div class="sl-left"><%= render_photo_of(comment.user) %></div>
             <div class="sl-content">
@@ -61,8 +61,8 @@
                     </a>
 
                     <div class="dropdown-menu pull-right">
-                      <%= link_to 'Редактировать', edit_post_comment_path(@post, comment), class: 'dropdown-item edit-comment-btn', remote: true %>
-                      <%= link_to 'Удалить', post_comment_path(@post, comment), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+                      <%= link_to 'Редактировать', edit_user_post_comment_path(@user, @post, comment), class: 'dropdown-item edit-comment-btn', remote: true %>
+                      <%= link_to 'Удалить', user_post_comment_path(@user, @post, comment), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
                     </div>
                   </li>
                 </ul>

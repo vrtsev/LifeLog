@@ -1,0 +1,30 @@
+<div id='new-comment-box' class="box">
+  <div class="box-header comment-box-header">
+    <span class="avatar w-32">
+      <img class="img-circle" src="/images/user_avatar_placeholder.jpg" alt="User avatar placeholder">
+      <i class="on b-white bottom"></i>
+    </span>
+
+    <textarea rows='1' id='new-comment-area' class="form-control new-comment-input" placeholder='Ваш комментарий'></textarea>
+  </div>
+</div>
+
+
+<div id='new-comment-form' class="box hidden">
+  <%= form_for :comment, url: user_post_comments_path(@user, @post), method: :post do |f| %>
+    <div class="box-header">
+        <%= f.text_area :content, rows: 1, class: 'form-control new-comment-input', placeholder: 'Ваш комментарий' %>
+    </div>
+
+    <div class="box-body dker">
+      <span class="avatar w-32">
+        <img class="img-circle" src="/images/user_avatar_placeholder.jpg" alt="User avatar placeholder">
+        <i class="on b-white bottom"></i>
+        &nbsp;<%= current_user.name %>
+      </span>
+
+      <%= f.submit 'Отправить', class: 'pull-right btn btn-sm btn-primary' %>
+      <%= link_to 'Отмена', '#', id: 'comment-cancel-btn', class: "pull-right btn btn-sm btn-default" %>
+    </div>
+  <% end %>
+</div>
