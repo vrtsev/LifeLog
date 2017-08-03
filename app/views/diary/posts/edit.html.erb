@@ -1,0 +1,10 @@
+<%= 
+  render partial: 'form', locals: {
+    obj:      :post,
+    url:      diary_post_path(@post),
+    method:   :patch,
+    new_post: false
+  } 
+%>
+
+<%= render template: 'diary/posts/index' %>

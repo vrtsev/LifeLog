@@ -20,4 +20,7 @@ Rails.application.config.assets.precompile += %w(
    
   publications.css 
   publications.js
+
+  diary.css 
+  diary.js
 )

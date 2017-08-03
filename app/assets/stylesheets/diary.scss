@@ -1,0 +1,38 @@
+@import 'shared';
+
+span.tl-date {
+  text-align: center;
+  font-size: 1.2em;
+  margin-left: -6em;
+}
+
+span.tl-back-btn {
+  top: 50px;
+  span.label {
+    font-size: 1.1em;
+  }
+}
+
+div.tl-wrap {
+  padding: 15px 0 0px 20px;
+}
+
+.sidebar {
+  margin-top: 15px;
+}
+
+.post-borderline {
+  min-height: 100%;
+}
+
+ul.nav.nav-pills.nav-sm {
+  border: none;
+
+  li.nav-item a.nav-link {
+    font-size: large;
+  }
+}
+
+.active-btn {
+  color: #00489d
+}

@@ -28,10 +28,4 @@ class Publication::Post < Post
   has_many :comments, class_name: 'Publication::Comment', dependent: :destroy
 
   validates :title, presence: true
-
-  scope :supplemented, (-> { where supplemented: true })
-  scope :pinned, (-> { where pinned: true })
-  scope :unpinned, (-> { where pinned: false })
-  scope :visible, (-> { where visible: true })
-  scope :commentable, (-> { where commentable: true })
 end
