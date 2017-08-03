@@ -1,0 +1,74 @@
+<%= form_for obj, url: url, method: method do |f| %>
+  <li class="tl-item tl-left">
+    <div class="tl-wrap <%= new_post ? 'b-success' : 'b-warn' %>">
+
+      <%# Add button %>
+      <span class="tl-date">
+        <%= button_tag(type: 'submit', class: "btn btn-lg btn-icon btn-social rounded btn-social-colored #{ new_post ? 'light-green-500' : 'orange' }") do %>
+          <i class="fa fa-check"></i>
+          <i class="fa fa-check"></i>
+        <% end %>
+      </span>
+
+      <div class="tl-content box-color white block">
+        <span class="arrow b-white left pull-top hidden-left"></span>
+        <span class="arrow b-white right pull-top visible-left"></span>
+
+        <%# Title section %>
+        <div class="text-lt p-x m-b-sm">
+          <div class="form-group">
+            <%= f.text_field :title, placeholder: 'Заголовок', class: 'form-control' %>
+          </div>
+        </div>
+
+        <%# Content section %>
+        <div class="p-a b-t b-light">
+          <div class="form-group">
+            <%= f.cktext_area :content, placeholder: 'Введите ваш текст', class: 'ckeditor' %>
+          </div>
+
+          <div id="diary-category" class="form-group hidden" >
+            <%= f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { prompt: 'Без категории' }, class: "form-control c-select" %>
+          </div>
+          
+          <div id="diary-tags" class="form-group hidden" >
+            <%= f.text_field :all_tags, class: 'form-control', placeholder: 'Введите теги' %>
+          </div>
+
+          <div id="diary-date" class="form-group hidden" >
+            <%= f.date_select :created_at, {}, { class: 'form_control c-select' } %>
+          </div>
+
+          <div id="diary-pin" class="form-group hidden" >
+            <label class="md-switch">
+              <%= f.check_box :pinned, id: 'diary-pin', class: 'checkbox' %>
+              <i class="green"></i>
+              Закрепить запись
+            </label>
+          </div>
+
+          <div id="diary-supplement" class="form-group hidden" >
+            <label class="md-switch">
+              <%= f.check_box :supplemented, id: 'diary-supplement', class: 'checkbox' %>
+              <i class="green"></i>
+              Пометить запись, как обновленную
+            </label>
+          </div>
+
+          <%# Footer buttons %>
+          <%= link_to 'Отмена', diary_posts_path, class: "btn btn-default pull-right" %>
+          <ul class="nav nav-pills nav-sm form-buttons">
+            <li id="diary-category"   class="field-block nav-item"><a class="nav-link" href=""><i class="fa fa-list-ul text-muted"></i></a></li>
+            <li id="diary-pin"        class="checkbox nav-item"><a class="nav-link" href=""><i class="fa fa-thumb-tack text-muted"></i></a></li>
+            <li id="diary-tags"       class="field-block nav-item"><a class="nav-link" href=""><i class="fa fa-tags text-muted"></i></a></li>
+            <% unless new_post %>
+              <li id="diary-supplement" class="checkbox nav-item"><a class="nav-link" href=""><i class="fa fa-refresh  text-muted"></i></a></li>
+            <% end %>
+            <li id="diary-date"       class="field-block nav-item"><a class="nav-link" href=""><i class="fa fa-clock-o text-muted"></i></a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </li>
+<% end %>

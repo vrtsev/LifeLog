@@ -1,0 +1,11 @@
+<% @posts.pinned.each do |post| %>
+  <%= link_to diary_post_path(post) do %>
+    <%= render partial: 'post', locals: { post: post } %>
+  <% end %>
+<% end %>
+
+<% @posts.unpinned.each do |post| %>
+  <%= link_to diary_post_path(post) do %>
+    <%= render partial: 'post', locals: { post: post } %>
+  <% end %>
+<% end %>

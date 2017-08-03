@@ -1,39 +1,37 @@
-class Diary::PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+class Diary::PostsController < DiaryController
+  before_action :set_post,            only: %i[show edit update destroy]
+  before_action :collect_posts,       only: %i[index new edit]
   before_action :set_user_categories, except: %i[show destroy]
 
-  def index
-    @posts = current_user.diary_posts
-  end
+  def index; end
 
   def show
+    @categories = current_user.diary_categories
     @comments = @post.comments.all
   end
 
-  def new
-    @post = current_user.diary_posts.new
-  end
+  def new; end
 
   def create
     @post = current_user.diary_posts.new(post_params)
 
     if @post.save
-      redirect_to diary_post_path(@post),
-                  notice: 'Post was successfully created.'
+      flash[:notice] = 'Post was successfully created.'
     else
-      render :new
+      flash[:error] = 'Произошла ошибка при создании.'
     end
+    redirect_to diary_posts_path
   end
 
   def edit; end
 
   def update
     if @post.update(post_params)
-      redirect_to diary_post_path(@post),
-                  notice: 'Post was successfully updated.'
+      flash[:notice] = 'Post was successfully updated.'
     else
-      render :edit
+      flash[:error] = 'Произошла ошибка при редактировании.'
     end
+    redirect_to diary_posts_path
   end
 
   def destroy
@@ -51,9 +49,13 @@ class Diary::PostsController < ApplicationController
     @categories = current_user.diary_categories
   end
 
+  def collect_posts
+    @posts = current_user.diary_posts.order(created_at: :desc)
+  end
+
   def post_params
     params.require(:post).permit \
-      :content, :supplemented, :supplemented_at, :pinned, :category_id,
-      :all_tags
+      :title, :content, :supplemented, :supplemented_at, :pinned, :category_id,
+      :all_tags, :created_at
   end
 end

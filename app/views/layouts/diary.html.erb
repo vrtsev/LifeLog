@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Публикации | LifeLog</title>
+    <%= stylesheet_link_tag "diary" %>
+    <%= javascript_include_tag "diary" %>
+    <%= csrf_meta_tags %>
+
+    <!-- vendor style -->
+    <link rel="stylesheet" href="/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/font.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="app" id="app">
+      <div id="content" class="app-content box-shadow-z0" role="main">
+
+        <!-- Navbar -->
+        <div class="app-header navbar-md white box-shadow">
+          <%= render partial: 'layouts/shared/navbar'%>
+        </div>
+
+        <!-- Page -->
+        <div ui-view class="app-body container" id="view">
+          <div class="row">
+
+            <%# Left empty column %>
+            <div class="col-md-2">
+            </div>
+
+            <!-- Content -->
+            <div class="content col-md-6">
+              <ul class="timeline">
+                <%= yield %>
+              </ul>
+            </div>
+
+            <%# Right sidebar %>
+            <div class="sidebar col-md-3">
+              <div class="box">
+                <div class="list-group m-b">
+                  <%= link_to new_diary_post_path, class: 'list-group-item' do %>
+                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-pencil-square-o"></i></span>
+                    Новая публикация
+                  <% end %>
+
+                  <%= link_to new_diary_category_path, class: 'list-group-item', id: 'new-category-btn' do %>
+                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-list-ul"></i></span>
+                    Добавить категорию
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="box">
+                <div class="list-group m-b">
+                  <% @categories.each do |category| %>
+                    <%= link_to diary_category_path(category), class: 'list-group-item b-l-primary' do %>
+                      <span class="pull-right text-primary"><i class="fa fa-circle text-xs"></i></span>
+                      <%= category.title %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <%= render partial: 'layouts/shared/theme_switcher' %>
+    </div>
+  </body>
+</html>

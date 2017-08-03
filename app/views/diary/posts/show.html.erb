@@ -1,0 +1,173 @@
+<li class="tl-item tl-left">
+  <div class="tl-wrap <%= @post.pinned ? 'b-danger' : 'b-default' %>">
+    <%# POST %>
+    <span class="tl-date text-muted">
+      <span class="label <%= @post.pinned ? 'danger' : 'default' %> pos-rlt m-r-xs">
+        <%= @post.created_at.strftime("%d/%m") %>
+        <br>
+        <small><%= @post.created_at.strftime("%A") %></small>
+      </span>
+    </span>
+
+    <div class="tl-content box-color white block">
+      <%# Dropdown menu + category label %>
+      <div class="box-tool">
+        <ul class="nav">
+          <li class="nav-item inline dropdown">
+            <a class="nav-link" data-toggle="dropdown">
+              <%# Category label %>
+              <% if @post.category.present? %>
+                <span class="label default pos-rlt m-r-xs">
+                  <%= @post.category.title %>
+                </span>
+              <% end %>
+
+              <i class="material-icons md-18">&#xe5d4;</i>
+            </a>
+            <div class="dropdown-menu pull-right">
+              <%= link_to 'Редактировать', edit_diary_post_path(@post), class: 'dropdown-item' %>
+              <%= link_to 'Удалить', diary_post_path(@post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+
+              <% if @post.pinned %>
+                <div class="dropdown-divider"></div>
+                <%= link_to 'Открепить', '#', class: 'dropdown-item' %>
+              <% end %>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <span class="arrow b-white left pull-top hidden-left"></span>
+      <span class="arrow b-white right pull-top visible-left"></span>
+
+      <%# Post header  %>
+      <div class="text-lt p-x m-b-sm">
+        <% if @post.pinned %>
+          <span class="text-danger"><i class="fa fa-thumb-tack"></i></span>
+        <% end %>
+
+        <% if @post.supplemented %>
+          <span class="text-primary"><i class="fa fa-refresh"></i></span>
+        <% end %>
+
+        <b><%= link_to @post.title, diary_post_path(@post) %></b>
+
+        <% if @post.tags.present? %>
+          <small class="text-muted"><br>
+            <% @post.tags.each do |tag| %>
+              <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+            <% end %>
+          </small>
+        <% end %>
+      </div>
+
+      <%# Post content + tags %>
+      <div class="p-a b-t b-light">
+        <%= @post.content.html_safe %>
+      </div>
+    </div>
+
+    <%# COMMENTS %>
+    <div class="box">
+      <div class="box-header">
+        <h3>Комментарии к записи</h3>
+        <small>Всего 5 комментариев</small>
+      </div>
+
+      <div class="box-tool">
+        <a href="" class="btn success pull-right">Создать</a>
+      </div>
+
+      <div class="box-body">
+        <div class="streamline b-l m-l">
+          <div class="sl-item b-primary">
+            <div class="sl-content">
+              <div class="sl-date text-muted">8:30</div>
+              <div>Call to customer <a href="" class="text-info">Jacob</a> and discuss the detail about the AP project.</div>
+            </div>
+          </div>
+          <div class="sl-item b-primary">
+            <div class="sl-content">
+              <div class="sl-date text-muted">Sat, 5 Mar</div>
+              <div>Prepare for presentation</div>
+            </div>
+          </div>
+          <div class="sl-item b-primary">
+            <div class="sl-content">
+              <div class="sl-date text-muted">Sun, 11 Feb</div>
+              <div><a href="" class="text-info">Jessi</a> assign you a task <a href="" class="text-info">Mockup Design</a>.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</li>
+
+
+
+
+<%# %p#notice= notice
+
+%h1 DIARY POST:
+
+%p
+  %b Content:
+  = @post.content.html_safe
+%p
+  %b Supplemented:
+  = @post.supplemented
+%p
+  %b Pinned:
+  = @post.pinned
+%p
+  %b Supplement date:
+  = @post.supplemented_at
+%p
+  %b User:
+  = @post.user_id
+%p
+  %b Category:
+  = @post.category_id
+%p
+  %b Type:
+  = @post.type
+%p
+  %b Tags:
+  - @post.tags.each do |tag|
+    = link_to tag.name, diary_tag_path(tag.name)
+
+= link_to 'Edit', edit_diary_post_path(@post)
+\|
+= link_to 'Back', diary_posts_path
+
+%br
+
+%h1 Listing DIARY post comments
+
+%table
+  %thead
+    %tr
+      %th Content
+      %th Post
+      %th User
+      %th Type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @comments.each do |comment|
+      %tr
+        %td= comment.content
+        %td= comment.post_id
+        %td= comment.user_id
+        %td= comment.type
+        %td
+          = link_to 'Edit comment', edit_diary_post_comment_path(@post, comment)
+          = link_to 'Destroy comment', diary_post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Comment', new_diary_post_comment_path(@post) %>
