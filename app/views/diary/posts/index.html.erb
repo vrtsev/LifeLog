@@ -1,11 +1,21 @@
-<% @posts.pinned.each do |post| %>
-  <%= link_to diary_post_path(post) do %>
-    <%= render partial: 'post', locals: { post: post } %>
+<% if @posts.present? %>
+  <% @posts.pinned.each do |post| %>
+    <%= link_to diary_post_path(post) do %>
+      <%= render partial: 'diary/posts/post', locals: { post: post } %>
+    <% end %>
   <% end %>
-<% end %>
 
-<% @posts.unpinned.each do |post| %>
-  <%= link_to diary_post_path(post) do %>
-    <%= render partial: 'post', locals: { post: post } %>
+  <% @posts.unpinned.each do |post| %>
+    <%= link_to diary_post_path(post) do %>
+      <%= render partial: 'diary/posts/post', locals: { post: post } %>
+    <% end %>
   <% end %>
+<% else %>
+  <div class="box m-t p-a-sm no-content">
+    <div class="box-body">
+      <h3 class="text-muted">
+        <span class="w-32 m-r rounded default">:(</span> Ничего не найдено
+      </h3>
+    </div>
+  </div>
 <% end %>

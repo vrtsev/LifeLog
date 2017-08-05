@@ -1,0 +1,1 @@
+$('#categories-list').prepend("<%= escape_javascript(render partial: 'form', locals: { object: :category, url: diary_categories_path, method: :post }) %>");

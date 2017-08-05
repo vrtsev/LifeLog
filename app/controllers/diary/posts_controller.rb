@@ -1,7 +1,6 @@
 class Diary::PostsController < DiaryController
   before_action :set_post,            only: %i[show edit update destroy]
   before_action :collect_posts,       only: %i[index new edit]
-  before_action :set_user_categories, except: %i[show destroy]
 
   def index; end
 
@@ -43,10 +42,6 @@ class Diary::PostsController < DiaryController
 
   def set_post
     @post = current_user.diary_posts.find(params[:id])
-  end
-
-  def set_user_categories
-    @categories = current_user.diary_categories
   end
 
   def collect_posts

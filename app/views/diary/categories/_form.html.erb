@@ -1,0 +1,8 @@
+<%= form_for :category, url: url, method: method do |f| %>
+  <li class="category-item list-item">
+    <div class="category-fields list-body">
+      <%= f.text_field :title, placeholder: 'Название категории', class: 'form-control form-control-sm' %>
+      <%= f.submit 'Ок', class: 'pull-right btn btn-sm btn-primary' %>
+    </div>
+  </li>
+<% end %>

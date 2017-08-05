@@ -1,4 +1,4 @@
-class Diary::CategoriesController < ApplicationController
+class Diary::CategoriesController < DiaryController
   before_action :set_category, only: %i[show edit update destroy]
 
   def show
@@ -6,29 +6,34 @@ class Diary::CategoriesController < ApplicationController
   end
 
   def new
-    @category = current_user.publication_categories.new
+    respond_to { |format| format.js }
   end
 
-  def edit; end
+  def edit
+    respond_to { |format| format.js }
+  end
 
   def create
     @category = current_user.diary_categories.new(category_params)
+    @category.color = rand(0..6)
 
     if @category.save
-      redirect_to diary_category_path(@category),
-                  notice: 'Category was successfully created.'
+      flash[:notice] = 'Category was successfully created.'
     else
-      render :new
+      flash[:error] = 'Something went wrong.'
     end
+
+    redirect_to diary_posts_path
   end
 
   def update
     if @category.update(category_params)
-      redirect_to diary_category_path(@category),
-                  notice: 'Category was successfully updated.'
+      flash[:notice] = 'Category was successfully updated.'
     else
-      render :edit
+      flash[:error] = 'Something went wrong.'
     end
+
+    redirect_to diary_posts_path
   end
 
   def destroy
