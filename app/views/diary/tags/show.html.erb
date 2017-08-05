@@ -1,0 +1,49 @@
+<div class="p-t">
+
+  <div class="box">
+
+
+    <div class="box-header primary">
+      <h3>
+        <i class="fa fa-tags"></i>
+        Поиск всех записей по тегу <b>'<%= @tag.name %>'</b>
+      </h3>
+      <small>Найдено <b><%= @posts.count %></b> результатов</small>
+
+      <div class="box-tool">
+        <%= link_to diary_posts_path do %>
+          Отмена
+          <i class="fa fa-close"></i>
+        <% end %>
+      </div>      
+    </div>
+
+
+
+    <div class="box-body dker">
+
+      <% if @posts.present? %>
+        <% @posts.pinned.each do |post| %>
+          <%= link_to diary_post_path(post) do %>
+            <%= render partial: 'diary/posts/post', locals: { post: post } %>
+          <% end %>
+        <% end %>
+
+        <% @posts.unpinned.each do |post| %>
+          <%= link_to diary_post_path(post) do %>
+            <%= render partial: 'diary/posts/post', locals: { post: post } %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div class="box m-t p-a-sm no-content">
+          <div class="box-body">
+            <h3 class="text-muted">
+              <span class="w-32 m-r rounded default">:(</span> Ничего не найдено
+            </h3>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

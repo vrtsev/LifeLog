@@ -1,4 +1,4 @@
-class Diary::TagsController < ApplicationController
+class Diary::TagsController < DiaryController
   def show
     @tag = Tag.find_by(name: params[:name])
     @posts = current_user.diary_posts.joins(:tags)

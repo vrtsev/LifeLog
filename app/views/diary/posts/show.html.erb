@@ -55,7 +55,7 @@
         <% if @post.tags.present? %>
           <small class="text-muted"><br>
             <% @post.tags.each do |tag| %>
-              <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+              <%= link_to "##{tag.name}", diary_tag_path(tag.name), class: "label" %>
             <% end %>
           </small>
         <% end %>
