@@ -7,7 +7,7 @@ class Diary::PostsController < DiaryController
 
   def show
     @categories = current_user.diary_categories
-    @comments = @post.comments.all
+    @comments   = @post.comments.order(created_at: :desc)
   end
 
   def new; end

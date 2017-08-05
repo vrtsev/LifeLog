@@ -1,1 +1,1 @@
-$('#comment-<%= @comment.id %>').html("<%= escape_javascript(render partial: 'edit', locals: { comment: @comment }) %>");
+$('#comment-<%= @comment.id %>').html("<%= escape_javascript(render partial: 'shared/edit_comment_form', locals: { comment: @comment, url: post_comment_path(@post, @comment) }) %>");
