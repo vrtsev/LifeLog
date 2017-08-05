@@ -1,0 +1,1 @@
+$('#category-<%= @category.id %>').html("<%= escape_javascript(render partial: 'form', locals: { object: @category, url: diary_category_path(@category), method: :patch }) %>");

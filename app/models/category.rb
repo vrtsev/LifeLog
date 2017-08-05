@@ -16,5 +16,7 @@ class Category < ApplicationRecord
   belongs_to :user
 
   validates :title, :user_id, presence: true
-  validates :description, length: { minimum: 2 }
+  # validates :description, length: { minimum: 2 }
+
+  enum color: %i[teal purple orange blue green rose red]
 end
