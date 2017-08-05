@@ -1,0 +1,53 @@
+<div class="search">
+  <div class="b-b b-primary nav-active-primary diary-search-tabs">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="" data-toggle="tab" data-target="#search-posts-tab">
+          Записи
+          <span class="label primary m-l-xs"><%= @posts.count %></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" data-toggle="tab" data-target="#search-comments-tab">
+          Комментарии
+          <span class="label primary m-l-xs"><%= @comments.count %></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" data-toggle="tab" data-target="#search-tags-tab">
+          Хэш-теги
+          <span class="label primary m-l-xs"><%= @tags.count %></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <div class="box-header dker">
+      <%= form_tag diary_search_index_path, method: :get do %>
+        <div class="input-group">
+          <%= text_field_tag 'query', params[:query], class: 'form-control', placeholder: 'Поиск по странице' %>
+          <span class="input-group-btn">
+            <%= button_tag(type: 'submit', class: "btn b-a no-shadow white") do %>
+              Поиск <i class="fa fa-search"></i> 
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+  
+
+<div class="tab-content">
+  <div class="tab-pane animated fadeIn text-muted active" id="search-posts-tab" aria-expanded="true">
+    <%= render partial: 'posts', locals: { posts: @posts } %>
+  </div>
+  <div class="tab-pane animated fadeIn text-muted" id="search-comments-tab" aria-expanded="false">
+    <%= render partial: 'comments', locals: { comments: @comments } %>
+  </div>
+  <div class="tab-pane animated fadeIn text-muted" id="search-tags-tab" aria-expanded="false">
+    <%= render partial: 'tags', locals: { tags: @tags }%>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-class Diary::SearchController < ApplicationController
+class Diary::SearchController < DiaryController
   def index
     @tags     = find_tags
     @posts    = find_posts

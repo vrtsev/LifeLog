@@ -65,4 +65,39 @@ $(document).on('turbolinks:load', function() {
     $('.category-item').hover(function() {
       $(this).find('div.box-tool').toggleClass('hidden');
     })
+
+    
+
+  // Search and filters
+    var filtersBlockState    = localStorage.getItem('diaryFiltersBlock')
+    var filtersBlock         = $('#filters-block')
+    var filtersTriggerButton = $('#hide-post-filters-btn')
+
+    function hideFiltersBlock() {
+      filtersBlock.addClass('hidden')
+      filtersTriggerButton.html('<i class="fa fa-chevron-down">')
+      localStorage.setItem('diaryFiltersBlock', 'hidden')
+    }
+
+    function showFiltersBlock() {
+      filtersBlock.removeClass('hidden')
+      filtersTriggerButton.html('<i class="fa fa-chevron-up">')
+      localStorage.removeItem('diaryFiltersBlock')
+    }
+
+    // Autohide filters block
+    if (filtersBlockState == 'hidden') {
+      hideFiltersBlock();
+    } else {
+      showFiltersBlock();
+    };
+
+    // click events
+    filtersTriggerButton.on('click', function() {
+      if (filtersBlock.is(':visible')) {
+        hideFiltersBlock();
+      } else {
+        showFiltersBlock();
+      }
+    })
  });

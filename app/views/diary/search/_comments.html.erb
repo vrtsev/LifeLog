@@ -1,0 +1,24 @@
+<% if comments.present? %>
+  <div class="box">
+    <div class="box-body">
+      <div class="streamline b-l m-b m-l">
+
+        <% comments.each do |comment| %>
+          <div class="sl-item b-success">
+            <div class="sl-left">
+            </div>
+            <div class="sl-content">
+              <b><%= link_to comment.post.title, diary_post_path(comment.post), class: 'text-info' %></b>
+              <span class="m-l-sm sl-date"><%= format_datetime(comment.created_at) %></span>
+
+              <div><%= comment.content %></div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render partial: 'no_content' %>
+<% end %>
