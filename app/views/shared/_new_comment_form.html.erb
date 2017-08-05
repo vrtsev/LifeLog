@@ -11,7 +11,7 @@
 
 
 <div id='new-comment-form' class="box hidden">
-  <%= form_for :comment, url: post_comments_path(@post), method: :post do |f| %>
+  <%= form_for :comment, url: url, method: :post do |f| %>
     <div class="box-header">
         <%= f.text_area :content, rows: 1, class: 'form-control new-comment-input', placeholder: 'Ваш комментарий' %>
     </div>

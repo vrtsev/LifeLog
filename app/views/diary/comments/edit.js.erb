@@ -1,0 +1,1 @@
+$('#comment-<%= @comment.id %>').html("<%= escape_javascript(render partial: 'shared/edit_comment_form', locals: { comment: @comment, url: diary_post_comment_path(@post, @comment) }) %>");

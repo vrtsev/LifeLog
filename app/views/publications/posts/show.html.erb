@@ -63,7 +63,7 @@
   </div>
 </div>
 
-<%= render partial: 'publications/comments/new' %>
+<%= render partial: 'shared/new_comment_form', locals: { url: post_comments_path(@post) } %>
 
 <% if @comments.present? %>
   <div class="box">

@@ -16,3 +16,18 @@
 .hidden {
   display: none;
 }
+
+// New comment form
+.new-comment-input, .new-comment-input:focus {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.comment-box-header {
+  display: flex;
+  padding: 5px !important;
+  padding-left: 1rem !important;
+}
+
+.avatar {
+  font-weight: normal !important;
+}

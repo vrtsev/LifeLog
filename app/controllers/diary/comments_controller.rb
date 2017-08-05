@@ -6,7 +6,9 @@ class Diary::CommentsController < ApplicationController
     @comment = @post.comments.new
   end
 
-  def edit; end
+  def edit
+    respond_to { |format| format.js }
+  end
 
   def create
     @comment = @post.comments.new(comment_params)

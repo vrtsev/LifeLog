@@ -1,21 +1,4 @@
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require semantic-ui
-//= require ckeditor/init
-
-$(document).ready(function() {
-  $('.ckeditor').each(function() {
-    CKEDITOR.replace $(this).attr('id')
-  })
-})
-
-$(document).on('page:load', function() {
-  $('.ckeditor').each(function() {
-    CKEDITOR.replace $(this).attr('id')
-  })
-})
-
+//= require shared
 
 $(document).on('turbolinks:load', function() {
   $('pre').each(function(i, block) {
