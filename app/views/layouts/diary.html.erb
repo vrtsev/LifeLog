@@ -67,38 +67,41 @@
 
               <%# Search section %>
               <div class="box">
-                <div class="box-header">
-                  <a id="hide-post-filters-btn" class="pull-right text-muted"><i class="fa fa-chevron-up"></i></a>
-                  <h3>
-                    <i class="fa fa-search"></i>
-                    Поиск по записям
-                  </h3>
-                </div>
+                <%= form_tag diary_search_index_path, method: :get do %>
+                  <div class="box-header">
+                    <div class="input-group">
+                      <%= text_field_tag 'query', params[:query], class: 'form-control form-control-sm', placeholder: 'Поиск по странице' %>
+                      <span class="input-group-btn">
+                        <%= button_tag(type: 'submit', class: "btn b-a no-shadow white btn-sm") do %>
+                          <i class="fa fa-search"></i> 
+                        <% end %>
+                      </span>
+                    </div>
+                  </div>
 
-                <div id="filter-block" class="box-body dker hidden"> 
-                  <ul class="list-unstyled m-t-n-sm">
-                    <li class="checkbox">
-                      <label class="ui-check">
-                        <input type="checkbox" name="post[pinned]" id="post_pinned"><i></i> Закрепленные
-                      </label>
-                    </li>
-                    <li class="checkbox">
-                      <label class="ui-check">
-                        <input type="checkbox" name="post[supplemented]" id="post_supplemented"><i></i> Обновленные
-                      </label>
-                    </li>
-                    <li class="checkbox">
-                      <label class="ui-check">
-                        <input type="checkbox" name="post[visible]" id="post_visible"><i></i> Скрытые
-                      </label>
-                    </li>
-                    <li class="checkbox">
-                      <label class="ui-check">
-                        <input type="checkbox" name="post[commentable]" id="post_commentable"><i></i> Комментируемые
-                      </label>
-                    </li>
-                  </ul>
-                </div>
+                  <div class="box-header">
+                    <a id="hide-post-filters-btn" class="pull-right text-muted"><i class="fa fa-chevron-up"></i></a>
+                    <h3>
+                      <i class="fa fa-filter"></i>
+                      Параметры поиска
+                    </h3>
+                  </div>
+
+                  <div id="filters-block" class="box-body dker hidden"> 
+                    <ul class="list-unstyled m-t-n-sm">
+                      <li class="checkbox">
+                        <label class="ui-check">
+                          <input type="checkbox" name="post[pinned]" id="post_pinned"><i></i> Закрепленные
+                        </label>
+                      </li>
+                      <li class="checkbox">
+                        <label class="ui-check">
+                          <input type="checkbox" name="post[supplemented]" id="post_supplemented"><i></i> Обновленные
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                <% end %>
               </div>
 
               <%# Categories section  %>
