@@ -23,4 +23,7 @@ Rails.application.config.assets.precompile += %w(
 
   diary.css 
   diary.js
+
+  objectives.css 
+  objectives.js
 )

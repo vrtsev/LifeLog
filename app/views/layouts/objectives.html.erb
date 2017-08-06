@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Цели | LifeLog</title>
+    <%= stylesheet_link_tag "objectives" %>
+    <%= javascript_include_tag "objectives" %>
+    <%= csrf_meta_tags %>
+
+    <!-- vendor style -->
+    <link rel="stylesheet" href="/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/font.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="app" id="app">
+      <div id="content" class="app-content box-shadow-z0" role="main">
+
+        <!-- Navbar -->
+        <div class="app-header navbar-md white box-shadow">
+          <%= render partial: 'layouts/shared/navbar'%>
+        </div>
+
+        <!-- Page -->
+          <div class="app-body-inner">
+            <div class="row-col row-col-xs b-b">
+
+              <div class="col-md-3 light bg b-r">
+                <div class="row-col">
+                  <div class="p-a-xs b-b">
+                    <div class="input-group">
+                      <span class="input-group-addon no-border no-bg"><i class="fa fa-search"></i></span>
+                      <input type="text" class="form-control no-border no-bg" placeholder="Поиск целей">
+                    </div>
+                  </div>
+                  <div class="row-row">
+                    <div class="row-body scrollable hover">
+                      <div class="row-inner">
+                        <div class="list inset">
+
+                          <% @goals.each do |goal| %>
+                            <div class="list-item pointer">
+                              <div class="list-body">
+
+                                <% if goal.completed? %>
+                                  <i class="fa fa-check-circle-o icon-green"></i>
+                                  <strong class="text-muted">
+                                    <s><%= link_to goal.title, objectives_goal_path(goal) %></s>
+                                  </strong>
+                                <% else %>
+                                  <strong><%= link_to goal.title, objectives_goal_path(goal) %></strong>
+                                <% end %>
+
+                                <div class="text-sm">
+                                  <span class="text-muted">
+                                    <strong><%= format_datetime(goal.end_date) %>|</strong>
+                                    <strong><%= goal.tasks.count %></strong> задач
+                                  </span> 
+                                </div>
+
+                                <% if goal.tags.present? %>
+                                  <div class="text-sm">
+                                    <% goal.tags.each do |tag| %>
+                                      <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag) %></span>
+                                    <% end %>
+                                  </div>
+                                <% end %>
+
+                              </div>
+                            </div>
+                          <% end %>
+                          
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-a b-t text-center">
+                    <%= link_to new_objectives_goal_path, class: "btn btn-sm success btn-addon" do %>
+                      <i class="fa fa-plus fa-fw m-r-xs"></i> Создать цель
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-7">
+                <div class="row-col">
+                  <div class="row-row">
+                    <div class="row-body scrollable">
+                      <div class="row-inner">
+                        <%= yield %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="row-col">
+
+                  <div class="col-sm w w-auto-xs light lt bg-auto">
+                    <div class="padding pos-rlt">
+                      <div class="hidden-xs-down m-t" id="inbox-menu">
+
+
+                        <h5 class="m-y">
+                          Категории
+                          <%= link_to 'Добавить', new_objectives_category_path, class: "btn btn-sm primary pull-right" %>
+                        </h5>
+
+                        <div class="nav-active-white">
+                          <ul class="nav nav-pills nav-stacked nav-sm">
+                            <li class="nav-item">
+
+                              <% @categories.each do |category| %>
+                                <a class="nav-link">
+                                  <i class="fa m-r-sm fa-circle category-<%= category.color %>"></i>
+                                  <%= category.title %>
+                                </a>
+                              <% end %>
+
+                            </li>
+                          </ul>
+                        </div>
+
+
+                        <h5 class="m-y">Параметры поиска</h5>
+                        <div class="p-y">
+                          <form name="label">
+                            <div class="input-group">
+                              <input type="text" class="form-control form-control-sm" placeholder="Поиск по целям" required="">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-sm no-shadow" type="button">Поиск</button>
+                              </span>
+                            </div>
+                          </form>
+                        </div>
+                        
+                        <div class="nav-active-primary">
+                          <div class="nav nav-pills nav-sm">
+                              <a class="nav-link active">
+                                Inbox
+                              </a>
+                              <a class="nav-link">
+                                Starred
+                              </a>
+                              <a class="nav-link">
+                                Sent
+                              </a>
+                              <a class="nav-link">
+                                Important
+                              </a>
+                              <a class="nav-link">
+                                Draft
+                              </a>
+                              <a class="nav-link">
+                                Trash
+                              </a>
+                          </div>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <%= render partial: 'layouts/shared/theme_switcher' %>
+    </div>
+  </body>
+</html>
