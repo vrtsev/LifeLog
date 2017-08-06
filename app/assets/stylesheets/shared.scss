@@ -19,6 +19,10 @@
   display: none;
 }
 
+.error-box {
+  background-color: #F09A9A;
+};
+
 // New comment form
 .new-comment-input, .new-comment-input:focus {
   border-color: rgba(255, 255, 255, 0.3) !important;
