@@ -1,4 +1,4 @@
-class Objectives::GoalsController < ApplicationController
+class Objectives::GoalsController < ObjectivesController
   before_action :find_goal, only: %i[edit update destroy]
   before_action :set_user_categories, except: %i[show destroy]
 
