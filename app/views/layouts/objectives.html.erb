@@ -46,7 +46,7 @@
 
                           <% @goals.each do |goal| %>
                             <div class="list-item pointer">
-                              <div class="list-body">
+                              <div id="goals-list" class="list-body">
 
                                 <% if goal.completed? %>
                                   <i class="fa fa-check-circle-o icon-green"></i>
@@ -111,18 +111,18 @@
 
                         <h5 class="m-y">
                           Категории
-                          <%= link_to 'Добавить', new_objectives_category_path, class: "btn btn-sm primary pull-right" %>
+                          <%= link_to 'Добавить', new_objectives_category_path, class: "btn btn-sm primary pull-right", remote: true %>
                         </h5>
 
                         <div class="nav-active-white">
                           <ul class="nav nav-pills nav-stacked nav-sm">
-                            <li class="nav-item">
+                            <li id="goal-category-list" class="nav-item">
 
                               <% @categories.each do |category| %>
-                                <a class="nav-link">
+                                <%= link_to objectives_category_path(category), class: 'nav-link', remote: true do %>
                                   <i class="fa m-r-sm fa-circle category-<%= category.color %>"></i>
                                   <%= category.title %>
-                                </a>
+                                <% end %>
                               <% end %>
 
                             </li>

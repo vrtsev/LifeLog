@@ -1,10 +1,8 @@
 class Objectives::GoalsController < ObjectivesController
   before_action :find_goal, only: %i[edit update destroy]
-  before_action :set_user_categories, except: %i[show destroy]
 
   def index
     @goals = current_user.goals.all
-    @categories = current_user.goal_categories.all
   end
 
   def show
@@ -48,10 +46,6 @@ class Objectives::GoalsController < ObjectivesController
 
   def find_goal
     @goal = current_user.goals.find(params[:id])
-  end
-
-  def set_user_categories
-    @categories = current_user.goal_categories.all
   end
 
   def goal_params
