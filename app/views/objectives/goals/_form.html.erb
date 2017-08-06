@@ -1,0 +1,58 @@
+<%= form_for object, url: url, method: method do |f| %>
+  <div class="padding">
+    <div class="box">
+      
+      <!-- goal errors -->
+      <% if @goal.errors.any? %>
+        <div class="box-header error-box">
+          <h2><%= "#{pluralize(@goal.errors.count, "error")} prohibited this goal from being saved:" %>
+          <small>
+            <ul>
+              <% @goal.errors.full_messages.each do |message| %>
+                <li><%= message %>
+              <% end %>
+            </ul>
+          </small>
+        </div>
+      <% end %>
+      
+      <!-- goal header -->
+      <div class="box-header dker">
+        <h3><b><%= f.text_field :title, placeholder: 'Название цели', class: 'form-control' %></b></h3>
+      </div>
+
+      <!-- goal content -->
+      <div class="box-body">
+        <p class="m-a-0"><%= f.cktext_area :description %></p>
+
+        <div class="row m-b m-t text-center">
+          <div class="col-sm-5">
+            <%= f.label :start_date, 'Дата начала цели' %>
+            <%= f.date_select :start_date %>   
+          </div>
+          <div class="col-sm-5">
+            <%= f.label :start_date, 'Срок выполнения' %>
+            <%= f.date_select :end_date %>   
+          </div>   
+        </div>
+
+        <div class="form-group">
+          <%= f.select :status, Objective::Goal.statuses.keys.map { |s| [s.humanize, s] }, {}, class: 'form-control c-select' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { prompt: 'Без категории' }, class: "form-control c-select" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_field :all_tags, class: "form-control", placeholder: "Теги" %>
+        </div>
+      </div>
+
+      <div class="dker p-a text-right">
+        <%= link_to 'Отмена', objectives_goals_path, class: 'btn white' %>
+        <%= f.submit 'Сохранить', class: 'btn success' %>
+      </div>
+    </div>
+  </div>
+<% end %>

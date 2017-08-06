@@ -50,15 +50,15 @@ ActiveRecord::Schema.define(version: 20170725165510) do
   end
 
   create_table "goals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title"
-    t.text     "description", limit: 65535
-    t.integer  "status",                    default: 0
-    t.integer  "progress",                  default: 0
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.integer  "parent_id"
-    t.integer  "category_id"
-    t.integer  "user_id",                               null: false
+    t.string  "title"
+    t.text    "description", limit: 65535
+    t.integer "status",                    default: 0
+    t.integer "progress",                  default: 0
+    t.date    "start_date"
+    t.date    "end_date"
+    t.integer "parent_id"
+    t.integer "category_id"
+    t.integer "user_id",                               null: false
     t.index ["user_id"], name: "index_goals_on_user_id", using: :btree
   end
 

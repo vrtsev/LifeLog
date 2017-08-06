@@ -13,6 +13,6 @@ class ObjectivesController < ApplicationController
   end
 
   def set_goals
-   @goals = set_user.goals.order(created_at: :desc)
+   @goals = set_user.goals.order(end_date: :desc)
   end
 end

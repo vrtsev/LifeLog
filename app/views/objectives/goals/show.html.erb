@@ -1,0 +1,132 @@
+<div class="padding">
+  <div class="box">
+    <!-- goal header -->
+    <div class="box-header dker">
+      <h3><b><%= @goal.title %></b></h3>
+      <small><%= format_datetime(@goal.end_date) %></small>
+    </div>
+
+    <!-- goal dropdown menu & expand button -->
+    <div class="box-tool">
+      <ul class="nav">
+        <li class="nav-item inline dropdown">
+          <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18"></i>
+          </a>
+          <div class="dropdown-menu pull-right">
+            <%= link_to 'Редактировать', edit_objectives_goal_path(@goal), class: 'dropdown-item' %>
+            <%= link_to 'Удалить', objectives_goal_path(@goal), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'dropdown-item' %>
+          </div>
+        </li>
+      </ul>
+      
+      <div id="goal-hide-btn" class="text-muted">
+        <a><i id="hide-btn-icon" class="fa fa-chevron-down text-primary"></i></a>
+      </div>
+    </div>
+
+    <!-- goal content -->
+    <div id="goal-description" class="box-body hidden">
+      <p class="m-a-0"><%= @goal.description.html_safe %></p>
+
+      <% if @goal.tags.present? %>
+        <% @goal.tags.each do |tag| %>
+          <%= link_to "##{tag.name}", objectives_tag_path(tag), class: 'label' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="padding">
+  <%# Tabs %>
+  <div class="b-b b-primary nav-active-primary">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="" data-toggle="tab" data-target="#actions-tab">Лента действий</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" data-toggle="tab" data-target="#tasks-tab">Задачи</a>
+      </li>
+    </ul>
+  </div>
+  
+  <%# Tab content %>
+  <div class="tab-content">
+    <div class="tab-pane animated fadeIn text-muted active" id="actions-tab" aria-expanded="true">
+      <%= render partial: 'actions' %>
+    </div>
+    <div class="tab-pane animated fadeIn text-muted" id="tasks-tab" aria-expanded="false">
+      <%= render partial: 'tasks' %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<%# %p#notice= notice
+
+%h1 GOAL SHOW:
+
+%p
+  %b Title:
+  = @goal.title
+%p
+  %b Description:
+  = @goal.description.html_safe
+%p
+  %b Status:
+  = @goal.status
+%p
+  %b Progress:
+  = @goal.progress
+%p
+  %b Start date:
+  = @goal.start_date
+%p
+  %b End date:
+  = @goal.end_date
+%p
+  %b Category:
+  = @goal.category_id
+%p
+  %b Parent id:
+  = @goal.parent_id
+%p
+  %b User id:
+  = @goal.user_id
+%p
+  %b Tags:
+  - @goal.tags.each do |tag|
+    = link_to tag.name, objectives_tag_path(tag.name)
+
+= link_to 'Edit', edit_objectives_goal_path(@goal)
+\|
+= link_to 'Back', objectives_goals_path
+
+
+%h3 Subgoals:
+
+- @goal.subgoals.each do |goal|
+  %b= goal.title
+
+
+%h3 Tasks:
+
+- @tasks.each do |task|
+  %p
+    %b= task.title
+    =link_to 'Edit', edit_objectives_goal_task_path(@goal, task)
+    =link_to 'Destroy', objectives_goal_task_path(@goal, task), method: :delete, data: { confirmation: 'Are you sure?' }
+
+    -if task.subtasks.present?
+      - task.subtasks.each do |subtask|
+        %p
+          = subtask.title
+          =link_to 'Edit', edit_objectives_goal_task_path(@goal, subtask)
+          =link_to 'Destroy', objectives_goal_task_path(@goal, subtask), method: :delete, data: { confirmation: 'Are you sure?' }
+      %hr
+
+
+= link_to 'New task for this goal', new_objectives_goal_task_path(@goal) %>
