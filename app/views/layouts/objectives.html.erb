@@ -54,6 +54,24 @@
                     <div class="row-body scrollable hover">
                       <div class="row-inner">
                         <div class="list inset">
+                        
+                          <% if params[:controller] == 'objectives/tags' %>
+                            <div class="box primary dk">
+                              <div id="current-category-box" class="box-body">
+                                <div class="box-tool">
+                                  <ul class="nav">
+                                    <li class="nav-item inline dropdown">
+                                      <%= link_to objectives_goals_path, class: 'text-muted' do %>
+                                        Отмена <i class="fa fa-times"></i>
+                                      <% end %>
+                                    </li>
+                                  </ul>
+                                </div>
+                                
+                                <div class="clear">Поиск целей по тегу <b>'<%= @tag.name %>'</b> <span class="label info"><%= @goals.count %></span></div>
+                              </div>
+                            </div>
+                          <% end %>
 
                           <% if @goals.present? %>
                             <% @goals.each do |goal| %>
@@ -79,7 +97,7 @@
                                   <% if goal.tags.present? %>
                                     <div class="text-sm">
                                       <% goal.tags.each do |tag| %>
-                                        <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag) %></span>
+                                        <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag.name) %></span>
                                       <% end %>
                                     </div>
                                   <% end %>
