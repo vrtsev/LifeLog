@@ -17,20 +17,41 @@ $(document).on('turbolinks:before-cache', clearCalendar)
 
 $(document).on('turbolinks:load', function() {
   // Hide/Show goal block
-  $('#goal-hide-btn').on('click', function(e) {
-    var buttonIcon = $('#hide-btn-icon')
-    var iconUp     = buttonIcon.hasClass('fa-chevron-up')
-    var iconDown   = buttonIcon.hasClass('fa-chevron-down')
+  var goalVisibilityState = localStorage.getItem('goalContentVisibility')
+  var goalContentBlock    = $('#goal-description')
+  var buttonIcon          = $('#hide-btn-icon')
 
+  goalContentVisibility();
+
+  function changeGoalBlockIcon(icon_class) {
+    buttonIcon.removeClass();
+    buttonIcon.addClass(icon_class);
+  }
+
+  function goalContentVisibility() {
+    if (goalVisibilityState == 'hidden') {
+      goalContentBlock.addClass('hidden');
+      changeGoalBlockIcon('fa fa-chevron-down text-primary');
+
+    } else if (goalVisibilityState == 'visible') {
+      goalContentBlock.removeClass('hidden');
+      changeGoalBlockIcon('fa fa-chevron-up');
+    };
+  };
+
+  $('#goal-hide-btn').on('click', function(e) {
     e.preventDefault();
     $('#goal-description').slideToggle('fast');
     
-    if (iconUp) {
-      buttonIcon.removeClass();
-      buttonIcon.addClass('fa fa-chevron-down text-primary');
-    } else if (iconDown) { 
-      buttonIcon.removeClass();
-      buttonIcon.addClass('fa fa-chevron-up');
+    if (goalContentBlock.hasClass('hidden')) {
+      changeGoalBlockIcon('fa fa-chevron-up');
+      goalContentBlock.removeClass('hidden');
+      localStorage.setItem('goalContentVisibility', 'visible')
+
+    } else { 
+      changeGoalBlockIcon('fa fa-chevron-down text-primary');
+      goalContentBlock.addClass('hidden');
+      localStorage.setItem('goalContentVisibility', 'hidden')
     }
   });
 
