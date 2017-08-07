@@ -1,7 +1,9 @@
-class Objectives::SearchController < ApplicationController
+class Objectives::SearchController < ObjectivesController
   def index
-    @tags  = find_tags
     @goals = find_goals
+
+    return unless params[:query].present?
+    @tags  = find_tags
     @tasks = find_tasks
   end
 

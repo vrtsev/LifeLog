@@ -1,5 +1,5 @@
 class ObjectivesController < ApplicationController
-  before_action :set_user, :set_categories, :set_goals
+  before_action :set_user, :set_categories, :set_goals, :set_filters
   layout 'objectives'
 
   # private
@@ -14,5 +14,15 @@ class ObjectivesController < ApplicationController
 
   def set_goals
    @goals = set_user.goals.order(end_date: :desc)
+  end
+
+  def set_filters
+    @filters = {
+      'Новые':        :new_goal,
+      'В процессе':   :in_progress,
+      'Завершенные':  :completed,
+      'Отмененные':   :canceled,
+      'Просроченные': :overdue
+    }
   end
 end

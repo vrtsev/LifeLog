@@ -34,44 +34,63 @@
               <div class="col-md-3 light bg b-r">
                 <div class="row-col">
                   <div class="p-a-xs b-b">
-                    <div class="input-group">
-                      <span class="input-group-addon no-border no-bg"><i class="fa fa-search"></i></span>
-                      <input type="text" class="form-control no-border no-bg" placeholder="Поиск целей">
-                    </div>
+                    <%= form_tag objectives_search_index_path, method: :get do %>
+                      <div class="input-group">
+                        <span class="input-group-addon no-border no-bg"><i class="fa fa-search"></i></span>
+                        <%= text_field_tag 'query', params[:query], class: "form-control no-border no-bg", placeholder: "Поиск целей" %>
+
+                        <% if current_page?(objectives_search_index_path) %>
+                          <span class="input-group-addon no-border no-bg text-muted">
+                            <%= link_to objectives_goals_path do %>
+                              <small>Отмена </small><i class="fa fa-times"></i>
+                            <% end %>
+                          </span>
+                        <% end %>
+
+                      </div>
+                    <% end %>
                   </div>
                   <div class="row-row">
                     <div class="row-body scrollable hover">
                       <div class="row-inner">
                         <div class="list inset">
 
-                          <% @goals.each do |goal| %>
-                            <div class="list-item pointer">
-                              <div id="goals-list" class="list-body">
+                          <% if @goals.present? %>
+                            <% @goals.each do |goal| %>
+                              <div class="list-item pointer">
+                                <div id="goals-list" class="list-body">
 
-                                <% if goal.completed? %>
-                                  <i class="fa fa-check-circle-o icon-green"></i>
-                                  <strong class="text-muted">
-                                    <s><%= link_to goal.title, objectives_goal_path(goal) %></s>
-                                  </strong>
-                                <% else %>
-                                  <strong><%= link_to goal.title, objectives_goal_path(goal) %></strong>
-                                <% end %>
+                                  <% if goal.completed? %>
+                                    <i class="fa fa-check-circle-o icon-green"></i>
+                                    <strong class="text-muted">
+                                      <s><%= link_to goal.title, objectives_goal_path(goal) %></s>
+                                    </strong>
+                                  <% else %>
+                                    <strong><%= link_to goal.title, objectives_goal_path(goal) %></strong>
+                                  <% end %>
 
-                                <div class="text-sm">
-                                  <span class="text-muted">
-                                    <strong><%= format_datetime(goal.end_date) %>|</strong>
-                                    <strong><%= goal.tasks.count %></strong> задач
-                                  </span> 
-                                </div>
-
-                                <% if goal.tags.present? %>
                                   <div class="text-sm">
-                                    <% goal.tags.each do |tag| %>
-                                      <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag) %></span>
-                                    <% end %>
+                                    <span class="text-muted">
+                                      <strong><%= format_datetime(goal.end_date) %>|</strong>
+                                      <strong><%= goal.tasks.count %></strong> задач
+                                    </span> 
                                   </div>
-                                <% end %>
 
+                                  <% if goal.tags.present? %>
+                                    <div class="text-sm">
+                                      <% goal.tags.each do |tag| %>
+                                        <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag) %></span>
+                                      <% end %>
+                                    </div>
+                                  <% end %>
+
+                                </div>
+                              </div>
+                            <% end %>
+                          <% else %>
+                            <div class="p-y-lg clearfix">
+                              <div class="text-center text-muted">
+                                <h3 class="_700 m-b">Нет целей</h3>
                               </div>
                             </div>
                           <% end %>
@@ -130,42 +149,14 @@
                         </div>
 
 
-                        <h5 class="m-y">Параметры поиска</h5>
-                        <div class="p-y">
-                          <form name="label">
-                            <div class="input-group">
-                              <input type="text" class="form-control form-control-sm" placeholder="Поиск по целям" required="">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default btn-sm no-shadow" type="button">Поиск</button>
-                              </span>
-                            </div>
-                          </form>
-                        </div>
-                        
+                        <h5 class="m-y">Фильтры</h5>
                         <div class="nav-active-primary">
                           <div class="nav nav-pills nav-sm">
-                              <a class="nav-link active">
-                                Inbox
-                              </a>
-                              <a class="nav-link">
-                                Starred
-                              </a>
-                              <a class="nav-link">
-                                Sent
-                              </a>
-                              <a class="nav-link">
-                                Important
-                              </a>
-                              <a class="nav-link">
-                                Draft
-                              </a>
-                              <a class="nav-link">
-                                Trash
-                              </a>
+                              <%= link_to 'Все цели', objectives_goals_path, class: "nav-link #{ 'active' unless current_page?(objectives_search_index_path) }" %>
+
+                              <%= build_filters_menu(@filters) %>
                           </div>
                         </div>
-
-
 
                       </div>
                     </div>
