@@ -1,4 +1,4 @@
-class Objectives::TagsController < ApplicationController
+class Objectives::TagsController < ObjectivesController
   def show
     @tag = Tag.find_by(name: params[:name])
     @goals = current_user.goals.joins(:tags)
