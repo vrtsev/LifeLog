@@ -1,0 +1,1 @@
+$('div#task-<%= @task.id %>').html('<%= j(render partial: 'form', locals: { object: :task, url: objectives_goal_task_path(@goal, @task), method: :patch }) %>')

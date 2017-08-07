@@ -43,7 +43,12 @@ Rails.application.routes.draw do
   namespace :objectives do
     resources :categories, except: :index
     resources :goals do
-      resources :tasks, except: %i[index show]
+      resources :tasks, except: %i[index show] do
+        member do
+          patch 'done'
+          patch 'undone'
+        end
+      end
     end
     resources :tags, param: :name, only: :show
     resources :search, only: :index
