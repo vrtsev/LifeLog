@@ -42,20 +42,20 @@
   <div class="b-b b-primary nav-active-primary">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" href="" data-toggle="tab" data-target="#actions-tab">Лента действий</a>
+        <a id="goal-actions-tab" class="goal-content-tab nav-link active" href="" data-toggle="tab" data-target="#actions-partial">Лента действий</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="" data-toggle="tab" data-target="#tasks-tab">Задачи</a>
+        <a id="goal-tasks-tab" class="goal-content-tab nav-link" href="" data-toggle="tab" data-target="#tasks-partial">Задачи</a>
       </li>
     </ul>
   </div>
   
   <%# Tab content %>
   <div class="tab-content">
-    <div class="tab-pane animated fadeIn text-muted active" id="actions-tab" aria-expanded="true">
+    <div class="tab-pane animated fadeIn text-muted active" id="actions-partial" aria-expanded="true">
       <%= render partial: 'actions' %>
     </div>
-    <div class="tab-pane animated fadeIn text-muted" id="tasks-tab" aria-expanded="false">
+    <div class="tab-pane animated fadeIn text-muted" id="tasks-partial" aria-expanded="false">
       <%= render partial: 'tasks' %>
     </div>
   </div>

@@ -33,4 +33,23 @@ $(document).on('turbolinks:load', function() {
       buttonIcon.addClass('fa fa-chevron-up');
     }
   });
+
+  // Tasks block
+  setActiveTab();
+
+  function setActiveTab() {
+    var goalActionsTab  = $('#goal-actions-tab')
+    var goalTasksTab    = $('#goal-tasks-tab')
+    var storageTabState = localStorage.getItem('goalActiveTab')
+
+    if (storageTabState == 'goal-actions-tab') {
+      goalActionsTab.click();
+    } else if (storageTabState == 'goal-tasks-tab') {
+      goalTasksTab.click();
+    };
+  };
+
+  $('.goal-content-tab').on('click', function() {
+    localStorage.setItem('goalActiveTab', this.id)
+  });
 });

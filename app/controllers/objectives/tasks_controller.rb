@@ -1,6 +1,6 @@
 class Objectives::TasksController < ApplicationController
   before_action :find_goal
-  before_action :find_task, only: %i[edit update destroy]
+  before_action :find_task, only: %i[edit update destroy done undone]
 
   def new
     @task = @goal.tasks.new
@@ -33,6 +33,18 @@ class Objectives::TasksController < ApplicationController
     @task.destroy
     redirect_to objectives_goal_path(@goal),
                 notice: 'Task was successfully destroyed.'
+  end
+
+  def done
+    @task.completed!
+    redirect_to objectives_goal_path(@goal),
+                notice: 'Task has been completed'
+  end
+
+  def undone
+    @task.actual!
+    redirect_to objectives_goal_path(@goal),
+                notice: 'Task is actual now'
   end
 
   private
