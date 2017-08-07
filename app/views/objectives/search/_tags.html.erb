@@ -1,0 +1,9 @@
+<% if tags.present? %>
+  <div class="padding text-center">
+    <div class="m-t p-a-sm">
+      <% tags.each do |tag| %>
+        <%= link_to "##{tag.name}", objectives_tag_path(tag.name), class: "btn btn-outline rounded b-success text-success search-tag-item" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
