@@ -11,6 +11,7 @@ class Objectives::TasksController < ApplicationController
     @task.user = current_user
 
     if @task.save
+      create_logger_action(:addition, task: @task.title)
       redirect_to objectives_goal_path(@goal),
                   notice: 'Task was successfully created.'
     else
@@ -22,6 +23,7 @@ class Objectives::TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
+      create_logger_action(:editing, task: @task.title)
       redirect_to objectives_goal_path(@goal),
                   notice: 'Task was successfully updated.'
     else
@@ -30,13 +32,17 @@ class Objectives::TasksController < ApplicationController
   end
 
   def destroy
+    title = @task.title
+
     @task.destroy
+    create_logger_action(:deletion, task: title)
     redirect_to objectives_goal_path(@goal),
                 notice: 'Task was successfully destroyed.'
   end
 
   def done
     @task.completed!
+    create_logger_action(:completion, task: @task.title)
     redirect_to objectives_goal_path(@goal),
                 notice: 'Task has been completed'
   end
@@ -48,6 +54,10 @@ class Objectives::TasksController < ApplicationController
   end
 
   private
+
+  def create_logger_action(kind, **options)
+    TaskLoggerOperation.new(@goal, kind, options).call
+  end
 
   def find_goal
     @goal = current_user.goals.find(params[:goal_id])

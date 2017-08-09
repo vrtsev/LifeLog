@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   namespace :objectives do
     resources :categories, except: :index
     resources :goals do
+      resources :actions
       resources :tasks, except: %i[index show] do
         member do
           patch 'done'

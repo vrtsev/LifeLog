@@ -5,11 +5,11 @@
 #  id              :integer          not null, primary key
 #  title           :string(255)
 #  content         :text(65535)
-#  supplemented    :boolean          default("1")
+#  supplemented    :boolean          default("0")
+#  supplemented_at :datetime
 #  pinned          :boolean          default("0")
 #  visible         :boolean          default("1")
 #  commentable     :boolean          default("1")
-#  supplemented_at :datetime
 #  user_id         :integer          not null
 #  category_id     :integer
 #  type            :string(255)
