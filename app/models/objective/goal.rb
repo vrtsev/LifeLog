@@ -7,8 +7,8 @@
 #  description :text(65535)
 #  status      :integer          default("0")
 #  progress    :integer          default("0")
-#  start_date  :datetime
-#  end_date    :datetime
+#  start_date  :date
+#  end_date    :date
 #  parent_id   :integer
 #  category_id :integer
 #  user_id     :integer          not null
@@ -21,6 +21,7 @@ class Objective::Goal < ApplicationRecord
   has_many :subgoals, class_name: 'Objective::Goal',
                       foreign_key: 'parent_id', dependent: :destroy
   has_many :tasks, class_name: 'Objective::Task'
+  has_many :actions, class_name: 'Objective::Action'
 
   belongs_to :user
   belongs_to :parent, optional: true, class_name: 'Objective::Goal'

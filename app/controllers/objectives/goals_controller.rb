@@ -6,8 +6,9 @@ class Objectives::GoalsController < ObjectivesController
   end
 
   def show
-    @goal = current_user.goals.find(params[:id])
-    @tasks = @goal.tasks.base
+    @goal    = current_user.goals.find(params[:id])
+    @actions = @goal.actions.order(created_at: :desc)
+    @tasks   = @goal.tasks.base.order(created_at: :desc)
   end
 
   def new
@@ -28,7 +29,12 @@ class Objectives::GoalsController < ObjectivesController
   def edit; end
 
   def update
-    if @goal.update(goal_params)
+    @goal.assign_attributes(goal_params)
+    changes = @goal.changes
+    status  = @goal.status_change.last if @goal.status_changed?
+    
+    if @goal.save
+      create_logger_action(changes: changes, status: status)
       redirect_to objectives_goal_path(@goal),
                   notice: 'Goal was successfully updated.'
     else
@@ -43,6 +49,17 @@ class Objectives::GoalsController < ObjectivesController
   end
 
   private
+
+  def create_logger_action(**options)
+    kind = case options[:status]
+    when 'completed' then :completion
+    when 'canceled'  then :deletion
+    when 'overdue'   then :deletion
+    else :editing
+    end
+
+    GoalLoggerOperation.new(@goal, kind, options).call
+  end
 
   def find_goal
     @goal = current_user.goals.find(params[:id])

@@ -14,6 +14,16 @@ module ObjectivesHelper
     return menu.html_safe
   end
 
+  def action_style(action)
+    case action.kind
+    when 'user_action' then { color: 'primary', icon: nil }
+    when 'addition'    then { color: 'info',    icon: 'plus' }
+    when 'editing'     then { color: 'warn', icon: 'pencil' }
+    when 'deletion'    then { color: 'danger',  icon: 'times' }
+    when 'completion'  then { color: 'success', icon: 'check' }
+    end
+  end
+
   private
 
   def set_active_link(key)
