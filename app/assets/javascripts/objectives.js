@@ -55,6 +55,14 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
+  // Actions block
+  $('#new-action-area', '#new-action-box', '#action-cancel-btn').click(function(e) {
+    e.preventDefault();
+    $('#new-action-box').toggleClass('hidden');
+    $('#new-action-form').toggleClass('hidden');
+    $('.new-action-input').focus();
+  });
+
   // Tasks block
   setActiveTab();
 

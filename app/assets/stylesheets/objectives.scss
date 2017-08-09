@@ -9,3 +9,13 @@ div.app-body-inner {
 div.task-actions {
   // margin-left: 10px;
 }
+
+.new-action-input, .new-action-input:focus {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.action-box-header {
+  display: flex;
+  padding: 5px !important;
+  padding-left: 1rem !important;
+}
