@@ -1,0 +1,25 @@
+<div id='new-action-box' class="box">
+  <div class="box-header action-box-header">
+    <textarea rows='1' id='new-action-area' class="form-control new-action-input" placeholder='Ваши действия по достижению цели...'></textarea>
+  </div>
+</div>
+
+
+<div id='new-action-form' class="box hidden">
+  <%= form_for object, url: url, method: method do |f| %>
+    <div class="box-header">
+        <%= f.text_area :content, rows: 1, class: 'form-control new-action-input', placeholder: 'Ваши действия по достижению цели...' %>
+    </div>
+
+    <div class="box-body dker">
+      <span class="avatar w-32">
+        <img class="img-circle" src="/images/user_avatar_placeholder.jpg" alt="User avatar placeholder">
+        <i class="on b-white bottom"></i>
+        &nbsp;<%= current_user.name %>
+      </span>
+
+      <%= f.submit 'Отправить', class: 'pull-right btn btn-sm btn-primary' %>
+      <%= link_to 'Отмена', '#', id: 'action-cancel-btn', class: "pull-right btn btn-sm btn-default" %>
+    </div>
+  <% end %>
+</div>
