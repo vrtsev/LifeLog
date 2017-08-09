@@ -12,27 +12,30 @@
 
 ActiveRecord::Schema.define(version: 20170807202031) do
 
-  create_table "actions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",    limit: 65535
-    t.integer  "kind",                     default: 0
-    t.integer  "goal_id",                              null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "actions", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "kind",       default: 0
+    t.integer  "goal_id",                null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["goal_id"], name: "index_actions_on_goal_id", using: :btree
   end
 
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "title"
-    t.text     "description", limit: 65535
-    t.integer  "color",                     default: 0
-    t.integer  "user_id",                               null: false
+    t.text     "description"
+    t.integer  "color",       default: 0
+    t.integer  "user_id",                 null: false
     t.string   "type"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["user_id"], name: "index_categories_on_user_id", using: :btree
   end
 
-  create_table "ckeditor_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
     t.string   "data_content_type"
     t.integer  "data_file_size"
@@ -47,48 +50,48 @@ ActiveRecord::Schema.define(version: 20170807202031) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
-  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",    limit: 65535
-    t.integer  "post_id",                  null: false
-    t.integer  "user_id",                  null: false
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "post_id",    null: false
+    t.integer  "user_id",    null: false
     t.string   "type"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
-  create_table "goals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "goals", force: :cascade do |t|
     t.string  "title"
-    t.text    "description", limit: 65535
-    t.integer "status",                    default: 0
-    t.integer "progress",                  default: 0
+    t.text    "description"
+    t.integer "status",      default: 0
+    t.integer "progress",    default: 0
     t.date    "start_date"
     t.date    "end_date"
     t.integer "parent_id"
     t.integer "category_id"
-    t.integer "user_id",                               null: false
+    t.integer "user_id",                 null: false
     t.index ["user_id"], name: "index_goals_on_user_id", using: :btree
   end
 
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "posts", force: :cascade do |t|
     t.string   "title"
-    t.text     "content",         limit: 65535
-    t.boolean  "supplemented",                  default: false
+    t.text     "content"
+    t.boolean  "supplemented",    default: false
     t.datetime "supplemented_at"
-    t.boolean  "pinned",                        default: false
-    t.boolean  "visible",                       default: true
-    t.boolean  "commentable",                   default: true
-    t.integer  "user_id",                                       null: false
+    t.boolean  "pinned",          default: false
+    t.boolean  "visible",         default: true
+    t.boolean  "commentable",     default: true
+    t.integer  "user_id",                         null: false
     t.integer  "category_id"
     t.string   "type"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["category_id"], name: "index_posts_on_category_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
-  create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
     t.datetime "created_at",  null: false
@@ -98,7 +101,7 @@ ActiveRecord::Schema.define(version: 20170807202031) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
   end
 
-  create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "post_id"
     t.integer  "goal_id"
@@ -109,13 +112,13 @@ ActiveRecord::Schema.define(version: 20170807202031) do
     t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   end
 
-  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.integer  "status",     default: 0
     t.integer  "user_id",                null: false
@@ -127,7 +130,7 @@ ActiveRecord::Schema.define(version: 20170807202031) do
     t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name",                                  null: false
     t.string   "status"
     t.string   "photo"
@@ -149,7 +152,7 @@ ActiveRecord::Schema.define(version: 20170807202031) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "votes", force: :cascade do |t|
     t.integer "user_id",    null: false
     t.integer "comment_id", null: false
     t.index ["comment_id"], name: "index_votes_on_comment_id", using: :btree

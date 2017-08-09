@@ -3,14 +3,14 @@ ruby '2.3.1'
 
 # Standart gems
 gem 'coffee-rails', '~> 4.2'
+gem 'jbuilder'
 gem 'jquery-rails'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem 'jbuilder'
 
 # View gems
 gem 'ckeditor'
