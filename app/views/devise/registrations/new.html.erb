@@ -1,0 +1,44 @@
+<%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { class: 'ui large form' } do |f| %>
+  <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
+    <div class="m-b text-sm text-center">
+      Регистрация нового аккаунта
+    </div>
+    <form name="form">
+      <div class="md-form-group">
+        <%= f.text_field :name, class: 'md-input', autofocus: true %>
+        <label>Имя и фамилия</label>
+      </div>
+
+      <div class="md-form-group">
+        <%= f.email_field :email, class: 'md-input' %>
+        <label>Email</label>
+      </div>
+
+      <div class="md-form-group">
+        <%= f.password_field :password, class: 'md-input' %>
+        <label>Пароль</label>
+      </div>
+
+      <div class="md-form-group">
+        <%= f.password_field :password_confirmation, class: 'md-input' %>
+        <label>Подтверждение пароля</label>
+      </div>
+
+
+      <div class="text-center">
+        <%= f.submit "Зарегистрироваться", class: 'btn primary btn-block p-x-md' %>
+        <%= link_to "Отмена", root_path, class: 'btn default btn-block p-x-md' %>
+        <hr>
+        <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-block btn-danger' do %>
+          <i class="fa fa-google-plus m-r"></i> Войти через Google
+        <% end %>
+      </div>
+
+
+    </form>
+  </div>
+<% end %>
+
+<div class="p-v-lg text-center">
+  <div>Уже зарегистрированы? <%= link_to 'Вход', new_session_path(resource_name), class: 'text-primary _600' %></div>
+</div>

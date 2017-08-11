@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LifeLog</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'devise', 'data-turbolinks-track': 'reload' %>
+
+    <!-- vendor style -->
+    <link rel="stylesheet" href="/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/font.css" type="text/css" />
+    
+    <script src="/assets/scripts/ui-form.js"></script>
+  </head>
+
+  <body>
+
+    <div class="center-block w-xxl w-auto-xs p-y-md">
+      <div class="navbar m-y">
+        <div class="text-center">
+          <h3><b>Life</b>Log</h3>
+          <span class="text-muted">Приветствует Вас</span>
+        </div>
+      </div>
+
+      <% if devise_error_messages!.present? || flash[:alert].present? %>
+        <div class="p-a-md box-color error-box r box-shadow-z1 text-color text-center m-a">
+          <%= (flash[:alert] || devise_error_messages!.html_safe) %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>
+
+

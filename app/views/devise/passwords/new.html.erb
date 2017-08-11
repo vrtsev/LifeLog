@@ -1,0 +1,25 @@
+<%= form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'ui large form' } do |f| %>
+  <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
+    <div class="m-b text-sm text-center">
+      Восстановление пароля
+    </div>
+
+    <form name="form">
+      <div class="md-form-group float-label">
+        <%= f.email_field :email, class: 'md-input', autofocus: true %>
+        <label>Email</label>
+      </div>
+      
+      <small class="text-muted text-center">Вы получите письмо на почту с инструкцией по восстановлению пароля</small>
+
+      <div class="text-center m-t">
+        <%= f.submit "Восстановить", class: 'btn primary btn-block p-x-md' %>
+        <%= link_to "Отмена", root_path, class: 'btn default btn-block p-x-md' %>
+      </div>
+    </form>
+  </div>
+<% end %>
+
+<div class="p-v-lg text-center">
+  <div class="m-b"><%= link_to 'Вход в аккаунт', new_session_path(resource_name), class: 'text-primary _600' %></div>
+</div>
