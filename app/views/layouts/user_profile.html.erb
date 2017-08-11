@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="p-a-md text-center">
-                  <p><%= image_tag(current_user.photo_url, class: 'img-circle w-xs') %></p>
+                  <p><%= image_tag(current_user.photo_url, class: 'img-circle w-150') %></p>
              
                   <%= link_to 'Изменить фото', '#', id: 'change-photo-btn', class: "m-b btn btn-sm rounded btn-outline b-primary" %>
 
@@ -48,42 +48,28 @@
              
                   <a href class="text-md block"><%= current_user.name %></a>
                   <small><%= current_user.status %></small>
-                </div>
-
-                <div class="row no-gutter b-t b-b">
-                  <div class="col-xs-6 b-r">
-                    <%= link_to posts_path, class: 'p-a block text-center' do %>
-                      <span class="block _600"><%= current_user.publication_posts.count %></span>
-                      <span>Публикаций</span>
-                    <% end %>
-                  </div>
-                  <div class="col-xs-6">
-                    <%= link_to '#', class: 'p-a block text-center' do %>
-                      <span class="block _600"><%= current_user.followers.count %></span>
-                      <span>Подписчиков</span>
-                    <% end %>
-                  </div>
-                </div>
-
-                <div class="box-body">
-                  <label class="p-b md-switch">
-                    <%= f.check_box :allow_subscriptions %>
-                    <i class="green"></i>
-                    Разрешить подписки на Вас
-                  </label>
-
-                  <br>
                 
-                  <label class=" md-switch">
-                    <%= f.check_box :visible %>
-                    <i class="green"></i>
-                    Не скрывать Вашу страницу
-                  </label>
-                
-                  <div class="text-center m-t">
-                    <%= f.submit 'Обновить', class: "btn rounded primary" %>
+                  <div class="m-t-md text-center">
+                    <label class="p-b md-switch">
+                      <%= f.check_box :allow_subscriptions %>
+                      <i class="green"></i>
+                      Разрешить подписки на Вас
+                    </label>
+
+                    <br>
+                  
+                    <label class=" md-switch">
+                      <%= f.check_box :visible %>
+                      <i class="green"></i>
+                      Не скрывать Вашу страницу
+                    </label>
+                  
+                    <div class="m-t">
+                      <%= f.submit 'Обновить', class: "btn rounded primary" %>
+                    </div>
                   </div>
                 </div>
+
               </div>
 
               <div class="box" style="width: 100%;">
@@ -129,7 +115,7 @@
                   <div class="form-group row">
                     <%= f.label :status, 'Статус', class: 'col-sm-3 form-control-label' %>
                     <div class="col-sm-9">
-                      <%= f.text_area :status, class: 'form-control', rows: 6 %>
+                      <%= f.text_area :status, class: 'form-control', rows: 2 %>
                     </div>
                   </div> 
                 </div>
