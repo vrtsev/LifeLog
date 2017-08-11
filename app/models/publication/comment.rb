@@ -3,10 +3,10 @@
 # Table name: comments
 #
 #  id         :integer          not null, primary key
-#  content    :text(65535)
+#  content    :text
 #  post_id    :integer          not null
 #  user_id    :integer          not null
-#  type       :string(255)
+#  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

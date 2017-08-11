@@ -3,11 +3,11 @@
 # Table name: categories
 #
 #  id          :integer          not null, primary key
-#  title       :string(255)
-#  description :text(65535)
+#  title       :string
+#  description :text
 #  color       :integer          default("0")
 #  user_id     :integer          not null
-#  type        :string(255)
+#  type        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

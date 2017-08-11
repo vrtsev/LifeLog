@@ -3,21 +3,21 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  name                   :string(255)      not null
-#  status                 :string(255)
-#  photo                  :string(255)
-#  allow_subscriptions    :boolean          default("1")
-#  visible                :boolean          default("1")
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
+#  name                   :string           not null
+#  status                 :string
+#  photo                  :string
+#  allow_subscriptions    :boolean          default("true")
+#  visible                :boolean          default("true")
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  sign_in_count          :integer          default("0"), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -25,9 +25,12 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :photo, PhotoUploader
+
+  has_many :credentials, dependent: :destroy
+  accepts_nested_attributes_for :credentials
 
   # Publication relations
   has_many :publication_posts, class_name: 'Publication::Post'
@@ -61,5 +64,12 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def self.create_for_oauth(auth)
+    create \
+      name: auth.info.name,
+      email: auth.info.email,
+      password: Devise.friendly_token[0, 10]
   end
 end

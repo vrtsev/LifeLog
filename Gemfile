@@ -22,6 +22,7 @@ gem 'truncate_html'
 
 # Authentication
 gem 'devise'
+gem "omniauth-google-oauth2"
 
 # Other
 gem 'carrierwave', '~> 1.0'

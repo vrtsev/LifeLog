@@ -3,16 +3,16 @@
 # Table name: posts
 #
 #  id              :integer          not null, primary key
-#  title           :string(255)
-#  content         :text(65535)
-#  supplemented    :boolean          default("0")
+#  title           :string
+#  content         :text
+#  supplemented    :boolean          default("false")
 #  supplemented_at :datetime
-#  pinned          :boolean          default("0")
-#  visible         :boolean          default("1")
-#  commentable     :boolean          default("1")
+#  pinned          :boolean          default("false")
+#  visible         :boolean          default("true")
+#  commentable     :boolean          default("true")
 #  user_id         :integer          not null
 #  category_id     :integer
-#  type            :string(255)
+#  type            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

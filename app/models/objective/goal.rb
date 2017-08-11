@@ -3,8 +3,8 @@
 # Table name: goals
 #
 #  id          :integer          not null, primary key
-#  title       :string(255)
-#  description :text(65535)
+#  title       :string
+#  description :text
 #  status      :integer          default("0")
 #  progress    :integer          default("0")
 #  start_date  :date

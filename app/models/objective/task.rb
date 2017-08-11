@@ -3,7 +3,7 @@
 # Table name: tasks
 #
 #  id         :integer          not null, primary key
-#  title      :string(255)
+#  title      :string
 #  status     :integer          default("0")
 #  user_id    :integer          not null
 #  goal_id    :integer          not null

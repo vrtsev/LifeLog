@@ -18,4 +18,6 @@
 
 /config/database.yml
 /coverage
+/public/images
+/public/uploads
 env_variables

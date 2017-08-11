@@ -3,7 +3,7 @@
 # Table name: actions
 #
 #  id         :integer          not null, primary key
-#  content    :text(65535)
+#  content    :text
 #  kind       :integer          default("0")
 #  goal_id    :integer          not null
 #  created_at :datetime         not null
