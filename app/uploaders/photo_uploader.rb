@@ -1,4 +1,4 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class PhotoUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -12,6 +12,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  def default_url(*args)
+    '/images/user_photo_placeholder.jpg'
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

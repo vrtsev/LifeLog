@@ -3,7 +3,7 @@
     <div class="box m-t p-a-sm">
       <div class="box-body">
         <div class="sl-item search-comment-item">
-          <div class="sl-left"><%= render_photo_of(comment.user) %></div>
+          <div class="sl-left"><%= image_tag(current_user.photo_url, class: 'img-circle') %></div>
           <div class="sl-content">
 
             <ul class="nav comment-likes">

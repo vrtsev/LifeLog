@@ -39,7 +39,7 @@
               <div class="col-sm-6 pull-md-6 col-md-3">
                 <div class="box">
                   <div class="p-a-md text-center">
-                    <p><%= render_photo_of(@user, 'img-circle w-xs') %></p>
+                    <p><%= image_tag(current_user.photo_url, class: 'img-circle w-xs') %></p>
                     <a href class="text-md block"><%= @user.name %></a>
                     <p><small><%= @user.status %></small></p>
                     <div id="follow_form" class="text-center m-t">

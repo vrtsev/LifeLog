@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Публикации | LifeLog</title>
+    <%= stylesheet_link_tag "user_profile" %>
+    <%= javascript_include_tag "user_profile" %>
+    <%= csrf_meta_tags %>
+
+    <!-- vendor style -->
+    <link rel="stylesheet" href="/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/font.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="app" id="app">
+      <div id="content" class="app-content box-shadow-z0" role="main">
+
+        <!-- Navbar -->
+        <div class="app-header navbar-md white box-shadow">
+          <%= render partial: 'layouts/shared/navbar'%>
+        </div>
+
+        <!-- Page -->
+        <div ui-view class="app-body container" id="view">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class="padding center-block w-auto-xs p-y-md" style="display: flex;">
+
+              <div class="box" style="width: 40%;">
+                <div class="box-header text-muted text-center b-b">
+                  <h2>Ваш профиль</h2>
+                </div>
+
+                <div class="p-a-md text-center">
+                  <p><%= image_tag(current_user.photo_url, class: 'img-circle w-xs') %></p>
+             
+                  <%= link_to 'Изменить фото', '#', id: 'change-photo-btn', class: "m-b btn btn-sm rounded btn-outline b-primary" %>
+
+                  <div id="photo-upload-field" class="form-group hidden">
+                    <%= f.file_field :photo, class: 'form-control form-control-sm photo-field' %>
+                  </div> 
+             
+                  <a href class="text-md block"><%= current_user.name %></a>
+                  <small><%= current_user.status %></small>
+                </div>
+
+                <div class="row no-gutter b-t b-b">
+                  <div class="col-xs-6 b-r">
+                    <%= link_to posts_path, class: 'p-a block text-center' do %>
+                      <span class="block _600"><%= current_user.publication_posts.count %></span>
+                      <span>Публикаций</span>
+                    <% end %>
+                  </div>
+                  <div class="col-xs-6">
+                    <%= link_to '#', class: 'p-a block text-center' do %>
+                      <span class="block _600"><%= current_user.followers.count %></span>
+                      <span>Подписчиков</span>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="box-body">
+                  <label class="p-b md-switch">
+                    <%= f.check_box :allow_subscriptions %>
+                    <i class="green"></i>
+                    Разрешить подписки на Вас
+                  </label>
+
+                  <br>
+                
+                  <label class=" md-switch">
+                    <%= f.check_box :visible %>
+                    <i class="green"></i>
+                    Не скрывать Вашу страницу
+                  </label>
+                
+                  <div class="text-center m-t">
+                    <%= f.submit 'Обновить', class: "btn rounded primary" %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="box" style="width: 100%;">
+                <div class="box-header text-muted text-center b-b">
+                  <h2>Персональные данные</h2>
+                </div>
+
+                <div class="box-body p-a-md">
+                  <div class="form-group row">
+                    <%= f.label :name, 'Имя', class: 'col-sm-3 form-control-label' %>
+                    <div class="col-sm-9">
+                      <%= f.text_field :name, class: 'form-control' %>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <%= f.label :email, class: 'col-sm-3 form-control-label' %>
+                    <div class="col-sm-9">
+                      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+                      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                        <p class="help-block text-muted">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <%= f.label :password, 'Пароль', class: 'col-sm-3 form-control-label' %>
+                    <div class="col-sm-9">
+                      <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
+                      <% if @minimum_password_length.present? %>
+                        <p class="help-block text-sm text-muted">Минимум <%= @minimum_password_length %> символов</p>
+                      <% end %>
+                    </div>
+                  </div> 
+
+                  <div class="form-group row">
+                    <%= f.label :password_confirmation, 'Подтверждение пароля', class: 'col-sm-3 form-control-label' %>
+                    <div class="col-sm-9">
+                      <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
+                    </div>
+                  </div> 
+
+                  <div class="form-group row">
+                    <%= f.label :status, 'Статус', class: 'col-sm-3 form-control-label' %>
+                    <div class="col-sm-9">
+                      <%= f.text_area :status, class: 'form-control', rows: 6 %>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+
+            </div>
+          <% end %>
+        </div>
+
+      <%= render partial: 'layouts/shared/theme_switcher' %>
+    </div>
+  </body>
+</html>

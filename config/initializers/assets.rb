@@ -26,4 +26,7 @@ Rails.application.config.assets.precompile += %w(
 
   objectives.css 
   objectives.js
+
+  user_profile.css 
+  user_profile.js
 )

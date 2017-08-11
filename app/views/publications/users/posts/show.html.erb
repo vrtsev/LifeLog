@@ -50,7 +50,7 @@
 
         <% @comments.each do |comment| %>
           <div class="sl-item">
-            <div class="sl-left"><%= render_photo_of(comment.user) %></div>
+            <div class="sl-left"><%= image_tag(current_user.photo_url, class: 'img-circle') %></div>
             <div class="sl-content">
 
               <% if comment.user == current_user %>
