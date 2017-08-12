@@ -52,7 +52,55 @@
 <% end %>
 
 <div id="posts">
-  <%= render partial: 'post', locals: { posts: @posts.unpinned } %>
+  <% @posts.unpinned.each do |post| %>
+    <div class="box <%= 'post-hidden' unless post.visible %>">
+      <!-- post header -->
+      <div class="box-header dker">
+        <h3>
+          <%= link_to post.title, post_path(post) %>
+
+          <% if post.supplemented %>
+            <span class="label success">Обновлено</span>
+          <% end %>
+
+          <% unless post.visible %>
+            <span class="label blue-grey">Скрыт</span>
+          <% end %>
+        </h3>
+        <small>
+          <%= format_datetime(post.created_at) %> 
+          <%= "(Обновлено #{format_datetime(post.supplemented_at)})" if post.supplemented %>
+        </small>
+      </div>
+
+      <!-- post dropdown menu -->
+      <div class="box-tool">
+        <ul class="nav">
+          <li class="nav-item inline dropdown">
+            <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
+            </a>
+            <div class="dropdown-menu pull-right">
+              <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
+              <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- post content -->
+      <div class="box-body">
+        <p class="m-a-0">
+          <%= truncate_html post.content, :length => 400 %>
+        </p>
+
+        <% if post.tags.present? %>
+          <% post.tags.each do |tag| %>
+            <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <div class="text-center">

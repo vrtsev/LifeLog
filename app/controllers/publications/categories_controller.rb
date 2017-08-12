@@ -2,7 +2,7 @@ class Publications::CategoriesController < PublicationsController
   before_action :set_category, only: %i[show edit update destroy]
 
   def show
-    @posts = @category.publication_posts
+    @posts = @category.publication_posts.paginate(page: params[:page], per_page: 10)
   end
 
   def new; end

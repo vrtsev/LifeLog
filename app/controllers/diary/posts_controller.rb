@@ -46,6 +46,7 @@ class Diary::PostsController < DiaryController
 
   def collect_posts
     @posts = current_user.diary_posts.order(created_at: :desc)
+                         .paginate(page: params[:page], per_page: 10)
   end
 
   def post_params

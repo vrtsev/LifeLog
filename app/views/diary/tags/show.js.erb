@@ -1,0 +1,7 @@
+$('#posts').append("<%= j( render partial: 'posts', locals: { posts: @posts.unpinned }) %>");
+
+<% if @posts.next_page %>
+  $('.pagination').replaceWith("<%= j will_paginate @posts %>");
+<% else %>
+  $('.pagination').remove();
+<% end %>

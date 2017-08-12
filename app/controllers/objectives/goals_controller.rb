@@ -7,8 +7,9 @@ class Objectives::GoalsController < ObjectivesController
 
   def show
     @goal    = current_user.goals.find(params[:id])
-    @actions = @goal.actions.order(created_at: :desc)
     @tasks   = @goal.tasks.base.order(created_at: :desc)
+    @actions = @goal.actions.order(created_at: :desc)
+                    .paginate(page: params[:page], per_page: 10)
   end
 
   def new

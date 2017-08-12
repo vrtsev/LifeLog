@@ -3,6 +3,7 @@ class Diary::CategoriesController < DiaryController
 
   def show
     @posts = @category.diary_posts
+                      .paginate(page: params[:page], per_page: 10)
   end
 
   def new

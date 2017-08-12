@@ -29,11 +29,17 @@
           <% end %>
         <% end %>
 
-        <% @posts.unpinned.each do |post| %>
-          <%= link_to diary_post_path(post) do %>
-            <%= render partial: 'diary/posts/post', locals: { post: post } %>
+        <div id="posts">
+          <% @posts.unpinned.each do |post| %>
+            <%= link_to diary_post_path(post) do %>
+              <%= render partial: 'diary/posts/post', locals: { post: post } %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+
+        <div class="text-center">
+          <%= will_paginate @posts, renderer: ::PaginateHelper::LinkRenderer %>
+        </div>
       <% else %>
         <div class="box m-t p-a-sm no-content">
           <div class="box-body">

@@ -5,36 +5,41 @@
     <div class="box-body">
       <div class="streamline b-l m-l">
 
-        <% @actions.each do |action| %>
-          <div id="action-<%= action.id %>" class="sl-item b-<%= action_style(action)[:color] %>">
+        <div id="actions">
+          <% @actions.each do |action| %>
+            <div id="action-<%= action.id %>" class="sl-item b-<%= action_style(action)[:color] %>">
 
-            <%# Action options %>
-            <div class="box-tool">
-              <ul class="nav">
-                <li class="nav-item inline dropdown">
-                  <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i></a>
-                  <div class="dropdown-menu pull-right">
-                    <%= link_to 'Редактировать', edit_objectives_goal_action_path(@goal, action), class: 'dropdown-item', remote: true %>
-                    <%= link_to 'Удалить', objectives_goal_action_path(@goal, action), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <% if action_style(action)[:icon].present? %>
-              <div class="sl-icon">
-                <i class="fa fa-<%= action_style(action)[:icon] %>"></i>
+              <%# Action options %>
+              <div class="box-tool">
+                <ul class="nav">
+                  <li class="nav-item inline dropdown">
+                    <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i></a>
+                    <div class="dropdown-menu pull-right">
+                      <%= link_to 'Редактировать', edit_objectives_goal_action_path(@goal, action), class: 'dropdown-item', remote: true %>
+                      <%= link_to 'Удалить', objectives_goal_action_path(@goal, action), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+                    </div>
+                  </li>
+                </ul>
               </div>
-            <% end %>
 
-            <div class="sl-content">
-              <div class="sl-date text-muted"><%= format_datetime(action.created_at) %></div>
-              <div><%= action.content %></div>
+              <% if action_style(action)[:icon].present? %>
+                <div class="sl-icon">
+                  <i class="fa fa-<%= action_style(action)[:icon] %>"></i>
+                </div>
+              <% end %>
+
+              <div class="sl-content">
+                <div class="sl-date text-muted"><%= format_datetime(action.created_at) %></div>
+                <div><%= action.content %></div>
+              </div>
             </div>
-          </div>
-      <% end %> 
-
+          <% end %> 
+        </div>
       </div>
     </div>
+  </div>
+  
+  <div class="text-center">
+    <%= will_paginate @actions, renderer: ::PaginateHelper::LinkRenderer %>
   </div>
 <% end %>

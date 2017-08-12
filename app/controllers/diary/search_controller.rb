@@ -1,8 +1,8 @@
 class Diary::SearchController < DiaryController
   def index
     @tags     = find_tags
-    @posts    = find_posts
-    @comments = find_comments
+    @posts    = find_posts.paginate(page: params[:posts_page], per_page: 10)
+    @comments = find_comments.paginate(page: params[:comments_page], per_page: 10)
   end
 
   private

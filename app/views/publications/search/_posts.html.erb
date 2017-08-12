@@ -17,17 +17,10 @@
         <div class="dropdown-divider"></div>
       </ul>
     <% end %>
-    <div class="p-x">
-      <ul class="pagination">
-        <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-        <li class="active"><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
-        <li><a href="">5</a></li>
-        <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-      </ul>
-    </div>
+  </div>
+
+  <div class="text-center">
+    <%= will_paginate @posts, param_name: 'posts_page', renderer: ::PaginateHelper::LinkRenderer %>
   </div>
 <% else %>
   <%= render partial: 'no_content' %>

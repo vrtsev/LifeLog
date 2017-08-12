@@ -1,0 +1,7 @@
+$('#posts').append("<%= j( render partial: 'diary/posts/pagination_posts', locals: { posts: @posts }) %>");
+
+<% if @posts.next_page %>
+  $('.pagination').replaceWith("<%= j will_paginate @posts %>");
+<% else %>
+  $('.pagination').remove();
+<% end %>

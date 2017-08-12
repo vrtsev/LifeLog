@@ -3,8 +3,8 @@ class Publications::SearchController < PublicationsController
 
   def index
     @tags     = find_tags
-    @posts    = find_posts
-    @comments = find_comments
+    @posts    = find_posts.paginate(page: params[:posts_page], per_page: 10)
+    @comments = find_comments.paginate(page: params[:comments_page], per_page: 10)
   end
 
   private
@@ -26,8 +26,11 @@ class Publications::SearchController < PublicationsController
   end
 
   def find_comments
+    scope = current_user.publication_comments.joins(:post)
+                        .where(posts: {user: current_user})
+
     CommentsSearchQuery.new(
-      current_user.publication_comments, params[:query], params[:comment]
+      scope, params[:query], params[:comment]
     ).results
   end
 

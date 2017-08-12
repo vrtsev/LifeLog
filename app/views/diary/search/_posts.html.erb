@@ -13,6 +13,10 @@
           <%= render partial: 'diary/posts/post', locals: { post: post } %>
         <% end %>
       <% end %>
+
+      <div class="text-center">
+        <%= will_paginate @posts, param_name: 'posts_page', renderer: ::PaginateHelper::LinkRenderer %>
+      </div>
     <% else %>
       <div class="box m-t p-a-sm no-content">
         <div class="box-body">

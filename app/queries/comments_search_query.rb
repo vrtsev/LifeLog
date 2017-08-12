@@ -9,7 +9,7 @@ class CommentsSearchQuery < BaseSearchQuery
   def find_records
     return nil if @query.blank?
     @scope = @scope.where(
-      'content LIKE ?', "%#{@query}%"
+      'comments.content LIKE ?', "%#{@query}%"
     )
   end
 
