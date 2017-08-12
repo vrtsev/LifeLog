@@ -3,6 +3,7 @@ class Publications::PostsController < PublicationsController
 
   def index
     @posts = current_user.publication_posts.order(created_at: :desc)
+                         .paginate(page: params[:page], per_page: 10)
   end
 
   def show

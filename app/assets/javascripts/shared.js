@@ -18,6 +18,7 @@
 //= require highlight.pack
 
 //= require publications/bootstrap
+//= require pagination
 
 $(document).on('turbolinks:load', function() {
 

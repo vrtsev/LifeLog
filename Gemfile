@@ -19,6 +19,7 @@ gem 'haml-rails'
 gem 'momentjs-rails'
 gem 'semantic-ui-sass'
 gem 'truncate_html'
+gem 'will_paginate', '~> 3.1.0'
 
 # Authentication
 gem 'devise'
