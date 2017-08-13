@@ -37,12 +37,21 @@
   </div>
 </div>
 
-<%= render partial: 'publications/users/comments/new' %>
+<% if @post.commentable %>
+  <%= render partial: 'publications/users/comments/new' %>
+<% end %>
 
 <% if @comments.present? %>
   <div class="box">
     <div class="box-header">
-      <h3>Комментарии <span class="label default"><%= @post.comments.count %></span></h3>
+      <h3>
+        Комментарии 
+        <span class="label default"><%= @post.comments.count %></span>
+
+        <% unless @post.commentable %>
+        <small class="pull-right text-muted">Автор записи отключил комментарии</small>
+        <% end %>
+      </h3>
     </div>
 
     <div class="box-body">
