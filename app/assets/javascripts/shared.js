@@ -21,6 +21,9 @@
 //= require pagination
 
 $(document).on('turbolinks:load', function() {
+  $('pre').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
 
   // Comment form
   $('#new-comment-area', '#new-comment-box', '#comment-cancel-btn').click(function(e) {

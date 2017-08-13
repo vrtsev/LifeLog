@@ -90,7 +90,7 @@
       <!-- post content -->
       <div class="box-body">
         <p class="m-a-0">
-          <%= truncate_html post.content, :length => 400 %>
+          <%= truncate_html post.content, length: 400 %>
         </p>
 
         <% if post.tags.present? %>
