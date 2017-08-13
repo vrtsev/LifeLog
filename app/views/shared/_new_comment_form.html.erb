@@ -1,7 +1,7 @@
 <div id='new-comment-box' class="box">
   <div class="box-header comment-box-header">
     <span class="avatar w-32">
-      <img class="img-circle" src="/images/user_avatar_placeholder.jpg" alt="User avatar placeholder">
+      <%= image_tag(current_user.photo_url, class: 'img-circle') %>
       <i class="on b-white bottom"></i>
     </span>
 

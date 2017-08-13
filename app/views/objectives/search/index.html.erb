@@ -1,11 +1,11 @@
 <%= render partial: 'tags', locals: { tags: @tags } %>
 
 <div class="padding">
-  <% if ''.present? || @tasks.present? %>
+  <% if @actions.present? || @tasks.present? %>
     <%# Tabs %>
     <div class="b-b b-primary nav-active-primary">
       <ul class="nav nav-tabs">
-        <% if ''.present? %>
+        <% if @actions.present? %>
           <li class="nav-item">
             <a id="goal-actions-tab" class="goal-content-tab nav-link active" href="" data-toggle="tab" data-target="#actions-partial">Действия</a>
           </li>
@@ -21,7 +21,7 @@
     
     <%# Tab content %>
     <div class="tab-content">
-      <% if 'actions'.present? %>
+      <% if @actions.present? %>
         <div class="tab-pane animated fadeIn text-muted active" id="actions-partial" aria-expanded="true">
           <%= render partial: 'actions' %>
         </div>

@@ -11,6 +11,7 @@ class Diary::SearchController < DiaryController
     scope = Tag.joins(:taggings).joins(:posts)
                .where(posts: { user: current_user, type: 'Diary::Post' })
                .distinct
+    return scope.none unless params[:query].present?
 
     TagsSearchQuery.new(
       scope, params[:query], params[:tag]
@@ -18,14 +19,20 @@ class Diary::SearchController < DiaryController
   end
 
   def find_posts
+    scope = current_user.diary_posts
+    return scope.none unless params[:post].present?
+    
     PostsSearchQuery.new(
       current_user.diary_posts, params[:query], params[:post]
     ).results
   end
 
   def find_comments
+    scope = current_user.diary_comments
+    return scope.none unless params[:query].present?
+
     CommentsSearchQuery.new(
-      current_user.diary_comments, params[:query], params[:comment]
+      scope, params[:query], params[:comment]
     ).results
   end
 end

@@ -13,6 +13,8 @@ class Publications::Users::SearchController < Publications::UsersController
     scope = Tag.joins(:taggings).joins(:posts)
                .where(posts: { user: @user, type: 'Publication::Post' })
                .distinct
+    
+    return scope.none unless params[:query].present?
 
     TagsSearchQuery.new(
       scope, params[:query], params[:tag]
@@ -20,14 +22,20 @@ class Publications::Users::SearchController < Publications::UsersController
   end
 
   def find_posts
+    scope = @user.publication_posts
+    return scope.none unless params[:post].present?
+
     PostsSearchQuery.new(
-      @user.publication_posts, params[:query], params[:post]
+      scope, params[:query], params[:post]
     ).results
   end
 
   def find_comments
+    scope = @user.publication_comments
+    return scope.none unless params[:query].present?
+
     CommentsSearchQuery.new(
-      @user.publication_comments, params[:query], params[:comment]
+      scope, params[:query], params[:comment]
     ).results
   end
 

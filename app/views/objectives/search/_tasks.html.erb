@@ -32,3 +32,6 @@
   <% end %>
 </div>
 
+<div class="text-center">
+  <%= will_paginate @tasks, param_name: 'tasks_page', renderer: ::PaginateHelper::LinkRenderer %>
+</div>
