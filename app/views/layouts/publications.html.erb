@@ -130,8 +130,8 @@
                 <div class="box">
                   <div id='category-list' class="list-group m-b">
                     <% @categories.each do |category| %>
-                      <%= link_to category_path(category), class: "list-group-item b-l-primary" do %>
-                        <span class="pull-right text-primary"><i class="fa fa-circle text-xs"></i></span>
+                      <%= link_to category_path(category), class: "list-group-item category-border-#{category.color}" do %>
+                        <span class="pull-right category-<%= category.color %>"><i class="fa fa-circle text-xs"></i></span>
                         <%= category.title %>
                       <% end %>
                     <% end %>
