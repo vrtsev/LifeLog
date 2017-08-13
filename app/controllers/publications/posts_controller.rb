@@ -1,5 +1,5 @@
 class Publications::PostsController < PublicationsController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy pin unpin]
 
   def index
     @posts = current_user.publication_posts.order(created_at: :desc)

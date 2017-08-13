@@ -32,7 +32,16 @@
           <%= link_to 'Удалить', post_path(@post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
           <% if @post.pinned %>
             <div class="dropdown-divider"></div>
-            <%= link_to 'Открепить', post_path(@post), class: 'dropdown-item' %>
+            <%= form_for @post, as: 'post', url: post_path(@post), method: :patch do |f| %>
+              <%= f.hidden_field :pinned, value: false %>
+              <%= f.submit 'Открепить', class: 'dropdown-item' %>
+            <% end %>
+          <% else %>
+            <div class="dropdown-divider"></div>
+            <%= form_for @post, as: 'post', url: post_path(@post), method: :patch do |f| %>
+              <%= f.hidden_field :pinned, value: true %>
+              <%= f.submit 'Закрепить', class: 'dropdown-item' %>
+            <% end %>
           <% end %>
         </div>
       </li>

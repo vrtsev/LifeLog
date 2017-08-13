@@ -1,7 +1,7 @@
 <% @posts.pinned.each do |post| %>
   <div class="box <%= 'post-hidden' unless post.visible %>">
     <!-- post header -->
-    <div class="box-header dker">
+    <div class="box-header pinned-post-header">
       <h3>
         <i class="fa fa-thumb-tack"></i>
         <%= link_to post.title, post_path(post) %>
@@ -30,7 +30,10 @@
             <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
             <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
             <div class="dropdown-divider"></div>
-            <%= link_to 'Открепить', post_path(post), class: 'dropdown-item' %>
+            <%= form_for post, as: 'post', url: post_path(post), method: :patch do |f| %>
+              <%= f.hidden_field :pinned, value: false %>
+              <%= f.submit 'Открепить', class: 'dropdown-item' %>
+            <% end %>
           </div>
         </li>
       </ul>
@@ -82,6 +85,11 @@
             <div class="dropdown-menu pull-right">
               <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
               <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+              <div class="dropdown-divider"></div>
+              <%= form_for post, as: 'post', url: post_path(post), method: :patch do |f| %>
+                <%= f.hidden_field :pinned, value: true %>
+                <%= f.submit 'Закрепить', class: 'dropdown-item' %>
+              <% end %>
             </div>
           </li>
         </ul>
