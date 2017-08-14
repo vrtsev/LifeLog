@@ -20,7 +20,7 @@ class Diary::SearchController < DiaryController
 
   def find_posts
     scope = current_user.diary_posts
-    return scope.none unless params[:post].present?
+    return scope.none if params[:query].blank? && params[:post].blank?
     
     PostsSearchQuery.new(
       current_user.diary_posts, params[:query], params[:post]

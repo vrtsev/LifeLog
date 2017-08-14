@@ -23,7 +23,7 @@ class Publications::Users::SearchController < Publications::UsersController
 
   def find_posts
     scope = @user.publication_posts
-    return scope.none unless params[:post].present?
+    return scope.none if params[:query].blank? && params[:post].blank?
 
     PostsSearchQuery.new(
       scope, params[:query], params[:post]
