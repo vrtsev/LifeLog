@@ -92,7 +92,7 @@
     </div>
 
     <div class="box-body">
-      <div class="streamline b-l m-l-md">
+      <div id="comments" class="streamline b-l m-l-md">
 
         <% @comments.each do |comment| %>
           <div class="sl-item">
@@ -152,5 +152,8 @@
         <% end %>
       </div>
     </div>
+  </div>
+  <div class="text-center">
+    <%= will_paginate @comments, renderer: ::PaginateHelper::LinkRenderer %>
   </div>
 <% end %>

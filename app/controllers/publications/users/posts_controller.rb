@@ -11,6 +11,7 @@ class Publications::Users::PostsController < Publications::UsersController
 
     redirect_to user_posts_path(@user) unless @post.visible
     @comments = @post.comments.order(created_at: :desc)
+                     .paginate(page: params[:page], per_page: 10)
   end
 
   private

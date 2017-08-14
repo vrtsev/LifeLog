@@ -8,6 +8,7 @@ class Publications::PostsController < PublicationsController
 
   def show
     @comments = @post.comments.all.order(created_at: :desc)
+                     .paginate(page: params[:page], per_page: 10)
   end
 
   def new

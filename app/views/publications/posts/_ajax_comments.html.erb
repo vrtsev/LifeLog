@@ -1,0 +1,42 @@
+<% comments.each do |comment| %>
+  <div class="sl-item">
+    <div class="sl-left"><%= image_tag(current_user.photo_url, class: 'img-circle') %></div>
+    <div id='comment-<%= comment.id %>' class="sl-content">
+
+      <ul class="nav comment-dropdown">
+        <li class="nav-item inline dropdown">
+          <a class="nav-link" data-toggle="dropdown">
+            <i class="material-icons md-18">&#xe5d4;</i>
+          </a>
+
+          <div class="dropdown-menu pull-right">
+            <%= link_to 'Редактировать', edit_post_comment_path(@post, comment), class: 'dropdown-item edit-comment-btn', remote: true %>
+            <%= link_to 'Удалить', post_comment_path(@post, comment), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+          </div>
+        </li>
+      </ul>
+          
+      <ul class="nav comment-likes">
+        <li>
+          <% if user_vote_on(comment).present? %>
+            <%= link_to post_comment_vote_path(@post, comment, user_vote_on(comment)), method: :delete, class: 'nav-link' do %>
+              <%= comment.votes.count %>
+              <i class="fa fa-heart liked-icon"></i>
+            <% end %>
+          <% else %>
+            <%= link_to post_comment_votes_path(@post, comment), method: :post, class: 'nav-link' do %>
+              <%= comment.votes.count %>
+              <i class="fa fa-heart-o"></i>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+
+      <div class="sl-author"><b><%= link_to comment.user.name, user_posts_path(comment.user) %></b></div>
+      <div class="sl-date text-muted"><%= format_datetime(comment.created_at) %></div>
+      <div>
+        <p><%= comment.content %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
