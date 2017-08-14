@@ -1,12 +1,12 @@
-<div class="box">
-  <div class="box-header dker">
-    <h2>Создание новой категории</h2>
-  </div>
+<%= form_for :category, url: categories_path, method: :post do |f| %>
+  <div class="box">
+    <div class="box-header dker">
+      <h2>Создание новой категории</h2>
+    </div>
 
-  <div class="box-divider m-a-0"></div>
+    <div class="box-divider m-a-0"></div>
 
-  <div class="box-body">
-    <%= form_for :category, url: categories_path, method: :post do |f| %>
+    <div class="box-body">
       <div class="form-group">
         <%= f.text_field :title, class: 'form-control', placeholder: 'Название категории' %>
       </div>
@@ -18,9 +18,13 @@
       <div class="form-group">
         <%= f.select :color, Publication::Category.colors.keys.map { |c| [c.humanize, c] }, { prompt: 'Выберите цвет' }, class: "form-control c-select" %>
       </div>
-
-      <%= link_to 'Назад', :back, class: 'btn green m-b' %>
-      <%= f.submit 'Сохранить', class: 'btn green m-b' %>
-    <% end %>
+    </div>
+    
+    <div class="box-body dker clearfix">
+      <div class="form-action-buttons pull-right">
+        <%= link_to 'Назад', :back, class: 'btn btn-default' %>
+        <%= f.submit 'Сохранить', class: 'btn green' %>
+      </div>
+    </div>
   </div>
-</div>
+<% end %>

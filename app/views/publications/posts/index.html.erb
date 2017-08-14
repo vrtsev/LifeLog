@@ -4,7 +4,7 @@
     <div class="box-header pinned-post-header">
       <h3>
         <i class="fa fa-thumb-tack"></i>
-        <%= link_to post.title, post_path(post) %>
+        <b><%= link_to post.title, post_path(post) %></b>
 
         <% if post.supplemented %>
           <span class="label success">Обновлено</span>

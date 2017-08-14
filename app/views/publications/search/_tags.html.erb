@@ -1,7 +1,7 @@
 <% if tags.present? %>
   <div class="m-t p-a-sm">
     <% tags.each do |tag| %>
-      <%= link_to tag.name, tag_path(tag.name), class: "btn btn-lg btn-outline rounded b-success text-success search-tag-item" %>
+      <%= link_to tag.name, tag_path(tag.name), class: "btn btn-lg btn-outline rounded b-primary text-primary search-tag-item" %>
     <% end %>
   </div>
 <% else %>

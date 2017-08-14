@@ -39,27 +39,27 @@
               <div class="col-sm-6 pull-md-6 col-md-3">
                 <div class="box">
                   <div class="p-a-md text-center">
-                    <p><%= image_tag(current_user.photo_url, class: 'img-circle w-150') %></p>
-                    <a href class="text-md block"><%= current_user.name %></a>
+                    <p><%= image_tag(current_user.photo_url, class: 'img-circle w-160') %></p>
+                    <%= link_to current_user.name, posts_path, class: "text-md block" %>
                     <p><small><%= current_user.status %></small></p>
                     <div class="text-center m-t">
-                      <%= link_to 'Профиль', edit_user_registration_path, class: "btn btn-sm rounded primary w-sm m-y-xs" %>
-                      <%= link_to 'Создать запись', new_post_path, class: 'btn btn-sm rounded btn-outline b-primary' %>
+                      <%= link_to 'Создать запись', new_post_path, class: 'btn btn-sm rounded primary m-y-xs' %>
+                      <%= link_to 'Профиль', edit_user_registration_path, class: "btn btn-sm rounded btn-outline b-primary " %>
                     </div>
                   </div>
 
                   <div class="row no-gutter b-t b-b">
                     <div class="col-xs-6 b-r">
-                      <%= link_to posts_path, class: 'p-a block text-center' do %>
+                      <div class='p-a block text-center'>
                         <span class="block _600"><%= current_user.publication_posts.count %></span>
                         <span>Публикаций</span>
-                      <% end %>
+                      </div>
                     </div>
                     <div class="col-xs-6">
-                      <%= link_to '#', class: 'p-a block text-center' do %>
+                      <div class='p-a block text-center'>
                         <span class="block _600"><%= current_user.followers.count %></span>
                         <span>Подписчиков</span>
-                      <% end %>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -68,18 +68,6 @@
               <!-- Right sidebar (categories) -->
               <div class="col-sm-6 col-md-3">
 
-                <!-- action buttons -->
-                <div class="list-group m-b">
-                  <%= link_to new_post_path, class: 'list-group-item' do %>
-                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-pencil-square-o"></i></span>
-                    Новая публикация
-                  <% end %>
-                  <%= link_to new_category_path, class: 'list-group-item', id: 'new-category-btn' do %>
-                    <span class="pull-right text-muted m-l-xs"><i class="fa fa-list-ul"></i></span>
-                    Добавить категорию
-                  <% end %>
-                </div>
-                
                 <!-- search block -->
                 <%= form_tag search_index_path, method: :get do %>
                   <div class="box">
@@ -94,8 +82,9 @@
                       </div>
                     </div>
                     
-                    <%= link_to '#', id: 'filter-btn', class: "list-group-item" do %>
-                      <span class="pull-right text-default"><i class="fa fa-filter"></i></span>
+                    <%= link_to '#', id: 'hide-filter-btn', class: "list-group-item" do %>
+                      <span class="text-default"><i class="fa fa-filter"></i></span>
+                      <span class="pull-right text-default"><i id='hide-filter-icon' class="fa fa-chevron-down"></i></span>
                       Параметры поиска
                     <% end %>
                     
@@ -128,17 +117,29 @@
 
                 <!-- categories block -->
                 <div class="box">
+                  <div class="box-header">
+                    <%= link_to new_category_path, class: 'btn btn-xs btn-icon white pull-right',id: 'new-category-btn' do %>
+                      <i class="fa fa-plus"></i>
+                    <% end %>
+
+                    <h2 class="v-m">Категории</h2>
+                  </div>
+
                   <div id='category-list' class="list-group m-b">
+
+                    <%= link_to posts_path, class: "list-group-item category-border-grey #{item_selected?(posts_path)}" do %>
+                      <span class="pull-right"><i class="fa fa-list-ul"></i></span>
+                      Все записи
+                    <% end %>
+
                     <% @categories.each do |category| %>
-                      <%= link_to category_path(category), class: "list-group-item category-border-#{category.color}" do %>
+                      <%= link_to category_path(category), class: "list-group-item category-border-#{category.color} #{item_selected?(category_path(category))}" do %>
                         <span class="pull-right category-<%= category.color %>"><i class="fa fa-circle text-xs"></i></span>
                         <%= category.title %>
                       <% end %>
                     <% end %>
                   </div>
                 </div>
-
-
               </div>
             </div>
         	</div>

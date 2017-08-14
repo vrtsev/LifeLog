@@ -1,27 +1,16 @@
-<%= form_tag user_search_index_path(@user), method: :get do %>
-  <div class="input-group">
-    <%= text_field_tag 'query', params[:query], class: 'form-control', placeholder: 'Поиск по странице' %>
-    <span class="input-group-btn">
-      <%= button_tag(type: 'submit', class: "btn b-a no-shadow white") do %>
-        Поиск <i class="fa fa-search"></i> 
-      <% end %>
-    </span>
-  </div>
-<% end %>
-
-<br>
-
-<ul class="nav nav-sm nav-pills nav-active-primary clearfix">
-  <li class="nav-item">
-    <a class="nav-link active" href="" data-toggle="tab" data-target="#search-posts-tab">Записи <span class="label label-sm primary m-l-xs"><%= @posts.count %></span></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="" data-toggle="tab" data-target="#search-comments-tab">Комментарии <span class="label label-sm primary m-l-xs"><%= @comments.count %></span></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="" data-toggle="tab" data-target="#search-tags-tab">Хэш-теги <span class="label label-sm primary m-l-xs"><%= @tags.count %></span></a>
-  </li>
-</ul>
+<div class="b-b b-primary nav-active-primary diary-search-tabs"> 
+  <ul class="nav nav-tabs"> 
+    <li class="nav-item"> 
+      <a class="nav-link active" href="" data-toggle="tab" data-target="#search-posts-tab">Записи <span class="label label-sm primary m-l-xs"><%= @posts.count %></span></a> 
+    </li> 
+    <li class="nav-item"> 
+      <a class="nav-link" href="" data-toggle="tab" data-target="#search-comments-tab">Комментарии <span class="label label-sm primary m-l-xs"><%= @comments.count %></span></a> 
+    </li> 
+    <li class="nav-item"> 
+      <a class="nav-link" href="" data-toggle="tab" data-target="#search-tags-tab">Хэш-теги <span class="label label-sm primary m-l-xs"><%= @tags.count %></span></a> 
+    </li> 
+  </ul> 
+</div> 
 
 <div class="tab-content">
   <div class="tab-pane animated fadeIn text-muted active" id="search-posts-tab" aria-expanded="true">

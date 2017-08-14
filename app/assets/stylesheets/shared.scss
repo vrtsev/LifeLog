@@ -16,8 +16,8 @@
 @import 'highlight_js';
 @import 'colors';
 
-.w-150 {
-  width: 150px;
+.w-160 {
+  width: 160px;
 }
 
 .hidden {
@@ -64,4 +64,19 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+a.list-group-item {
+  padding: 9px 15px;
+  border: 0;
+}
+
+a.list-group-item.selected {
+  border-left: 4px solid;
+  background-color: #F6F6F6;
+  font-weight: 600;
+}
+
+a.nav-link.selected span.nav-text {
+  font-weight: 600;
 }

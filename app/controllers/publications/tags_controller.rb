@@ -3,8 +3,10 @@ class Publications::TagsController < PublicationsController
     @tag = Tag.find_by(name: params[:name])
 
     return unless @tag.present?
-    @posts = Publication::Post.joins(:tags)
-                              .where(tags: { name: @tag.name })
-                              .paginate(page: params[:page], per_page: 10)
+    scope = Publication::Post.joins(:tags)
+                             .where(tags: { name: @tag.name })
+    
+    @posts    = scope.paginate(page: params[:posts_page], per_page: 10)
+    @my_posts = scope.where(posts: { user: current_user }).paginate(page: params[:my_posts_page], per_page: 10)
   end
 end

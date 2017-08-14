@@ -1,5 +1,9 @@
 <%= form_for :comment, url: url, method: :patch do |f| %>
-  <%= f.text_area :content, rows: 3, class: 'form-control' %>
-  <br>
-  <%= f.submit 'Отправить', class: 'pull-right btn btn-sm btn-primary' %>&nbsp;
+  <div class="sl-author">
+    <b><%= link_to comment.user.name, user_posts_path(comment.user) %></b>
+    <%= f.submit 'Отправить', class: 'pull-right btn btn-sm btn-primary' %>&nbsp;
+  </div>
+
+  <div class="sl-date text-muted"><%= format_datetime(comment.created_at) %></div>
+  <div><p><%= f.text_area :content, rows: 2, class: 'form-control' %></p></div>
 <% end %>

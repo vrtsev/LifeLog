@@ -50,17 +50,17 @@
           <%= f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { prompt: 'Без категории' }, class: "form-control c-select" %>
         </div>
 
-        <div class="form-group">
+        <div class="form-group text-center">
           <label class="md-switch">
             <%= f.check_box :pinned %>
             <i class="green"></i>
-            Закрепить запись
+            Закрепить
           </label>
         
           <label class="md-switch">
             <%= f.check_box :visible %>
             <i class="green"></i>
-            Видимая запись
+            Показывать всем
           </label>
 
           <label class="md-switch">
@@ -70,6 +70,11 @@
           </label>
         </div>
 
+      </div>
+    </div>
+
+    <div class="box-body dker clearfix">
+      <div class="form-action-buttons pull-right">
         <%= link_to 'Назад', :back, class: "btn btn-default" %>
         <%= f.submit 'Сохранить', class: "btn btn-success" %>
       </div>

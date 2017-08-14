@@ -30,23 +30,23 @@
     <div class="collapse navbar-toggleable-sm" id="navbar-1">
       <ul class="nav navbar-nav nav-active-border b-{{app.setting.theme.primary}}">
         <li class="nav-item">
-          <%= link_to posts_path, class: 'nav-link' do %>
+          <%= link_to '#', class: 'nav-link' do %>
+            <span class="nav-text">Лента новостей</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to posts_path, class: "nav-link #{nav_section_selected?('publications')}" do %>
             <span class="nav-text">Публикации</span>
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to diary_posts_path, class: 'nav-link' do %>
+          <%= link_to diary_posts_path, class: "nav-link #{nav_section_selected?('diary')}" do %>
             <span class="nav-text">Дневник</span>
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to objectives_goals_path, class: 'nav-link' do %>
+          <%= link_to objectives_goals_path, class: "nav-link #{nav_section_selected?('objectives')}" do %>
             <span class="nav-text">Цели и задачи</span>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to '#', class: 'nav-link' do %>
-            <span class="nav-text">Пользователи</span>
           <% end %>
         </li>
       </ul>

@@ -39,8 +39,8 @@
               <div class="col-sm-6 pull-md-6 col-md-3">
                 <div class="box">
                   <div class="p-a-md text-center">
-                    <p><%= image_tag(current_user.photo_url, class: 'img-circle w-xs') %></p>
-                    <a href class="text-md block"><%= @user.name %></a>
+                    <p><%= image_tag(@user.photo_url, class: 'img-circle w-160') %></p>
+                    <%= link_to @user.name, user_posts_path(@user), class: "text-md block" %>
                     <p><small><%= @user.status %></small></p>
                     <div id="follow_form" class="text-center m-t">
                       <% if current_user.following?(@user) %>
@@ -85,8 +85,9 @@
                       </div>
                     </div>
                     
-                    <%= link_to '#', id: 'filter-btn', class: "list-group-item" do %>
-                      <span class="pull-right text-default"><i class="fa fa-filter"></i></span>
+                    <%= link_to '#', id: 'hide-filter-btn', class: "list-group-item" do %>
+                      <span class="text-default"><i class="fa fa-filter"></i></span>
+                      <span class="pull-right text-default"><i id='hide-filter-icon' class="fa fa-chevron-down"></i></span>
                       Параметры поиска
                     <% end %>
                     
@@ -119,16 +120,24 @@
 
                 <!-- categories block -->
                 <div class="box">
+                  <div class="box-header">
+                    <h2 class="v-m">Категории</h2>
+                  </div>
+
                   <div id='category-list' class="list-group m-b">
+                    <%= link_to user_posts_path(@user), class: "list-group-item category-border-grey #{item_selected?(user_posts_path(@user))}" do %>
+                      <span class="pull-right"><i class="fa fa-list-ul"></i></span>
+                      Все записи
+                    <% end %>
+
                     <% @categories.each do |category| %>
-                      <%= link_to user_category_path(@user, category), class: "list-group-item b-l-primary" do %>
-                        <span class="pull-right text-primary"><i class="fa fa-circle text-xs"></i></span>
+                      <%= link_to user_category_path(@user, category), class: "list-group-item category-border-#{category.color} #{item_selected?(user_category_path(@user, category))}" do %>
+                        <span class="pull-right category-<%= category.color %>"><i class="fa fa-circle text-xs"></i></span>
                         <%= category.title %>
                       <% end %>
                     <% end %>
                   </div>
                 </div>
-
 
               </div>
             </div>

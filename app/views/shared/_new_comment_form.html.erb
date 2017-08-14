@@ -16,15 +16,17 @@
         <%= f.text_area :content, rows: 1, class: 'form-control new-comment-input', placeholder: 'Ваш комментарий' %>
     </div>
 
-    <div class="box-body dker">
+    <div class="box-footer dker clearfix">
       <span class="avatar w-32">
-        <img class="img-circle" src="/images/user_avatar_placeholder.jpg" alt="User avatar placeholder">
+        <%= image_tag(current_user.photo_url, class: 'img-circle') %>
         <i class="on b-white bottom"></i>
         &nbsp;<%= current_user.name %>
       </span>
 
-      <%= f.submit 'Отправить', class: 'pull-right btn btn-sm btn-primary' %>
-      <%= link_to 'Отмена', '#', id: 'comment-cancel-btn', class: "pull-right btn btn-sm btn-default" %>
+      <div class="form-action-buttons pull-right">
+        <%= link_to 'Отмена', '#', id: 'comment-cancel-btn', class: "btn btn-sm btn-default" %>
+        <%= f.submit 'Отправить', class: 'btn btn-sm btn-primary' %>
+      </div>
     </div>
   <% end %>
 </div>

@@ -1,6 +1,6 @@
 <div class="box">
   <!-- post header -->
-  <div class="box-header dker">
+  <div class="box-header <%= @post.pinned ? 'pinned-post-header' : 'dker' %>">
     <h3>
       <% if @post.pinned %>
         <i class="fa fa-thumb-tack"></i>
@@ -59,8 +59,8 @@
 
         <% @comments.each do |comment| %>
           <div class="sl-item">
-            <div class="sl-left"><%= image_tag(current_user.photo_url, class: 'img-circle') %></div>
-            <div class="sl-content">
+            <div class="sl-left"><%= image_tag(comment.user.photo_url, class: 'img-circle') %></div>
+            <div id='comment-<%= comment.id %>' class="sl-content"> 
 
               <% if comment.user == current_user %>
                 <ul class="nav comment-dropdown">
@@ -95,7 +95,7 @@
 
               <div class="sl-author"><b><%= link_to comment.user.name, user_posts_path(comment.user) %></b></div>
               <div class="sl-date text-muted"><%= format_datetime(comment.created_at) %></div>
-              <div id='comment-<%= comment.id %>'>
+              <div>
                 <p><%= comment.content %></p>
               </div>
             </div>
