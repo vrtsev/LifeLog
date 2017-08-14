@@ -18,6 +18,10 @@
       </ul>
     <% end %>
   </div>
+
+  <div class="text-center"> 
+    <%= will_paginate @posts, param_name: 'posts_page', renderer: ::PaginateHelper::LinkRenderer %> 
+  </div> 
 <% else %>
   <%= render partial: 'no_content' %>
 <% end %>

@@ -1,0 +1,31 @@
+<% posts.each do |post| %>
+    <div class="box">
+    <!-- post header -->
+    <div class="box-header dker">
+      <h3>
+        <%= link_to post.title, user_post_path(@user, post) %>
+
+        <% if post.supplemented %>
+          <span class="label success">Обновлено</span>
+        <% end %>
+      </h3>
+      <small>
+        <%= format_datetime(post.created_at) %> 
+        <%= "(Обновлено #{format_datetime(post.supplemented_at)})" if post.supplemented %>
+      </small>
+    </div>
+
+    <!-- post content -->
+    <div class="box-body">
+      <p class="m-a-0">
+        <%= truncate_html post.content, :length => 400 %>
+      </p>
+
+      <% if post.tags.present? %>
+        <% post.tags.each do |tag| %>
+          <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

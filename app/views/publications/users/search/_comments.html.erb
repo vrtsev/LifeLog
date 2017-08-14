@@ -39,6 +39,10 @@
       <% end %>
     </div>
   <% end %>
+
+  <div class="text-center"> 
+    <%= will_paginate @comments, param_name: 'comments_page', renderer: ::PaginateHelper::LinkRenderer %> 
+  </div> 
 <% else %>
   <%= render partial: 'no_content' %>
 <% end %>

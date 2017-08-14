@@ -2,7 +2,7 @@ class Publications::Users::PostsController < Publications::UsersController
   before_action :set_user
 
   def index
-    @posts = @user.publication_posts.visible
+    @posts = @user.publication_posts.visible.paginate(page: params[:page], per_page: 10)
     @categories = @user.publication_categories
   end
 
