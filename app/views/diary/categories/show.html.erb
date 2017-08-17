@@ -1,58 +1,32 @@
-<%= render template: 'diary/posts/index' %>
+<div class="box m-t">
+  <div class="box-header category-background-<%= @category.color %>">
+    <h3>
+      Категория <b>"<%= @category.title %>"</b>
+      <span class="label"><%= @category.diary_posts.count %> записей</span>
+    </h3>
+    <small><%= @category.description %></small>
 
-<%# %p#notice= notice
+    <div class="box-tool">
+      <ul class="nav">
+        <li class="nav-item inline">
+          <%= link_to diary_posts_path, class: 'nav-link m-r' do %>
+            Все записи
+          <% end %>
+        </li>
+        <li class="nav-item inline dropdown">
+          <a class="nav-link" data-toggle="dropdown">
+            <i class="material-icons md-18"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-scale pull-right">
+            <%= link_to 'Редактировать', edit_diary_category_path(@category), class: 'dropdown-item' %>
+            <%= link_to 'Удалить', diary_category_path(@category), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'dropdown-item' %>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-%p
-  %b Title:
-  = @category.title
-%p
-  %b Description:
-  = @category.description
-%p
-  %b Color:
-  = @category.color
-%p
-  %b User:
-  = @category.user_id
-%p
-  %b Type:
-  = @category.type
-
-= link_to 'Edit', edit_diary_category_path(@category)
-\|
-= link_to 'Back', diary_posts_path
-
-
-%h1 Listing posts
-
-%table
-  %thead
-    %tr
-      %th Content
-      %th Supplemented
-      %th Pinned
-      %th Supplement date
-      %th User
-      %th Category
-      %th Type
-      %th
-      %th
-      %th
-
-  %tbody
-    - @posts.each do |post|
-      %tr
-        %td= post.content
-        %td= post.supplemented
-        %td= post.pinned
-        %td= post.supplemented_at
-        %td= post.user_id
-        %td= post.category_id
-        %td= post.type
-        %td= link_to 'Show', diary_post_path(post)
-        %td= link_to 'Edit', edit_diary_post_path(post)
-        %td= link_to 'Destroy', diary_post_path(post), method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Post', new_diary_post_path %>
+<div class="p-x">
+  <%= render template: 'diary/posts/index' %>
+</div>

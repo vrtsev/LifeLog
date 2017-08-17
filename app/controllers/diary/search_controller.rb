@@ -1,4 +1,6 @@
 class Diary::SearchController < DiaryController
+  before_action :set_search_values
+
   def index
     @tags     = find_tags
     @posts    = find_posts.paginate(page: params[:posts_page], per_page: 10)
@@ -34,5 +36,12 @@ class Diary::SearchController < DiaryController
     CommentsSearchQuery.new(
       scope, params[:query], params[:comment]
     ).results
+  end
+
+  def set_search_values
+    return unless params[:post].present?
+
+    @filter_pinned       = params[:post][:pinned]
+    @filter_supplemented = params[:post][:supplemented]
   end
 end

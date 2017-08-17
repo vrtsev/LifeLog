@@ -5,14 +5,14 @@
       <i class="on b-white bottom"></i>
     </span>
 
-    <textarea rows='1' id='new-comment-area' class="form-control new-comment-input" placeholder='Ваш комментарий'></textarea>
+    <input rows='1' id='new-comment-area' class="form-control new-comment-input comment-action-btn" placeholder='Ваш комментарий' />
   </div>
 </div>
 
 
 <div id='new-comment-form' class="box hidden">
   <%= form_for :comment, url: url, method: :post do |f| %>
-    <div class="box-header">
+    <div class="box-header p-a-sm">
         <%= f.text_area :content, rows: 1, class: 'form-control new-comment-input', placeholder: 'Ваш комментарий' %>
     </div>
 
@@ -24,7 +24,7 @@
       </span>
 
       <div class="form-action-buttons pull-right">
-        <%= link_to 'Отмена', '#', id: 'comment-cancel-btn', class: "btn btn-sm btn-default" %>
+        <%= link_to 'Отмена', '#', id: 'comment-cancel-btn', class: "comment-action-btn btn btn-sm btn-default" %>
         <%= f.submit 'Отправить', class: 'btn btn-sm btn-primary' %>
       </div>
     </div>

@@ -89,7 +89,7 @@
                     <% end %>
                     
                     <div id='filter-block' class='box-body dker hidden'> 
-                      <ul class="list-unstyled m-t-n-sm">
+                      <ul class="list-unstyled filter-options">
                         <li class="checkbox">
                           <label class="ui-check">
                             <%= check_box_tag 'post[pinned]', nil, @filter_pinned %><i></i> Закрепленные
@@ -118,8 +118,8 @@
                 <!-- categories block -->
                 <div class="box">
                   <div class="box-header">
-                    <%= link_to new_category_path, class: 'btn btn-xs btn-icon white pull-right',id: 'new-category-btn' do %>
-                      <i class="fa fa-plus"></i>
+                    <%= link_to new_category_path, class: 'text-muted pull-right', id: 'new-category-btn' do %>
+                      Создать
                     <% end %>
 
                     <h2 class="v-m">Категории</h2>

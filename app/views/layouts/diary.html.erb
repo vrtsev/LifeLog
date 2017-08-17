@@ -51,25 +51,22 @@
                   <div class="item-bg">
                     <%= image_tag(current_user.photo_url, class: 'blur') %>
                   </div>
-                  <div class="p-a-lg pos-rlt text-center">
-                    <%= image_tag(current_user.photo_url, class: 'img-circle w-56 diary-avatar') %>
+                  <div class="p-a pos-rlt text-center">
+                    <%= image_tag(current_user.photo_url, class: 'img-circle w-96 diary-avatar') %>
                   </div>
                 </div>
                 <div class="p-a text-center">
                   <a href="" class="text-md m-t block"><%= current_user.name %></a>
                   <p><small><em>Всего записей: <strong><%= current_user.diary_posts.count %></strong></em></small></p>
-                  <p>
-                    <%= link_to 'Создать', new_diary_post_path, class: 'btn btn-sm primary' %>
-                    <%= link_to 'Все записи', diary_posts_path, class: 'btn btn-sm btn-outline b-primary' %>
-                  </p>
+                  <%= link_to 'Создать запись', new_diary_post_path, class: 'btn btn-sm primary' %>
                 </div>
               </div>
 
               <%# Search section %>
-              <div class="box">
-                <%= form_tag diary_search_index_path, method: :get do %>
-                  <div class="box-header">
-                    <div class="input-group">
+              <%= form_tag diary_search_index_path, method: :get do %>
+                <div class="box">
+                  <div class="box-body">
+                    <div class="input-group input-group">
                       <%= text_field_tag 'query', params[:query], class: 'form-control form-control-sm', placeholder: 'Поиск по странице' %>
                       <span class="input-group-btn">
                         <%= button_tag(type: 'submit', class: "btn b-a no-shadow white btn-sm") do %>
@@ -78,70 +75,66 @@
                       </span>
                     </div>
                   </div>
-
-                  <div class="box-header">
-                    <a id="hide-post-filters-btn" class="pull-right text-muted"><i class="fa fa-chevron-up"></i></a>
-                    <h3>
-                      <i class="fa fa-filter"></i>
-                      Параметры поиска
-                    </h3>
-                  </div>
-
-                  <div id="filters-block" class="box-body dker hidden"> 
-                    <ul class="list-unstyled m-t-n-sm">
+                  
+                  <%= link_to '#', id: 'hide-filter-btn', class: "list-group-item" do %>
+                    <span class="text-default"><i class="fa fa-filter"></i></span>
+                    <span class="pull-right text-default"><i id='hide-filter-icon' class="fa fa-chevron-down"></i></span>
+                    Параметры поиска
+                  <% end %>
+                  
+                  <div id='filter-block' class='box-body dker hidden'> 
+                    <ul class="list-unstyled filter-options">
                       <li class="checkbox">
                         <label class="ui-check">
-                          <input type="checkbox" name="post[pinned]" id="post_pinned"><i></i> Закрепленные
+                          <%= check_box_tag 'post[pinned]', nil, @filter_pinned %><i></i> Закрепленные
                         </label>
                       </li>
                       <li class="checkbox">
                         <label class="ui-check">
-                          <input type="checkbox" name="post[supplemented]" id="post_supplemented"><i></i> Обновленные
+                          <%= check_box_tag 'post[supplemented]', nil, @filter_supplemented %><i></i> Обновленные
                         </label>
                       </li>
                     </ul>
                   </div>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
+
 
               <%# Categories section  %>
               <div class="box">
                 <div class="box-header">
-                  <a id="hide-categories-btn" class="pull-right text-muted"><i class="fa fa-chevron-up"></i></a>
-                  <h3>
-                    <%= link_to new_diary_category_path, class: 'btn btn-sm btn-primary text-white', id: 'new-category-btn', remote: true do %>
-                      <i class="fa fa-plus-circle"></i>
-                    <% end %>
-                    Категории
-                  </h3>
+                  <%= link_to new_diary_category_path, class: 'text-muted pull-right', id: 'new-category-btn' do %>
+                    Создать
+                  <% end %>
+                  <h2 class="v-m">Категории</h2>
                 </div>
 
-                <ul id="categories-list" class="list inset">
-                  <% @categories.each do |category| %>
-                    <div id="category-<%= category.id %>">
-                      <li class="<%= define_active_category(category) %> category-item list-item">
-                      
-                        <%# Category options %>
-                        <div class="box-tool hidden">
-                          <ul class="nav">
-                            <li class="nav-item inline dropdown">
-                              <a class="nav-link" data-toggle="dropdown">
-                                <i class="material-icons md-18">&#xe5d4;</i>
-                              </a>
-                              <div class="dropdown-menu pull-right">
-                                <%= link_to 'Редактировать', edit_diary_category_path(category), class: 'dropdown-item', remote: true %>
-                                <%= link_to 'Удалить', diary_category_path(category), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                                
-                        <span class="category-color-label pull-left category-<%= category.color %>"><i class="fa fa-circle text-xs"></i></span>
-                        <div class="list-body"><%= link_to category.title, diary_category_path(category) %></div>
-                      </li>
+                <div id="new-category-block" class="m-a hidden">
+                  <%= form_for :category, url: diary_categories_path, method: :post do |f| %>
+                    <div class="input-group">
+                      <%= f.text_field :title, class: 'form-control form-control-sm', placeholder: 'Новая категория' %>
+                      <span class="input-group-btn">
+                        <%= button_tag class: "btn btn-default btn-sm no-shadow" do %>
+                          <i class="fa fa-plus"></i>
+                        <% end %>
+                      </span>
                     </div>
                   <% end %>
-                </ul>
+                </div>
+
+                <div id='category-list' class="list-group m-b">
+                  <%= link_to diary_posts_path, class: "list-group-item category-border-grey #{item_selected?(diary_posts_path)}" do %>
+                    <span class="pull-right"><i class="fa fa-list-ul"></i></span>
+                    Все записи
+                  <% end %>
+
+                  <% @categories.each do |category| %>
+                    <%= link_to diary_category_path(category), class: "list-group-item category-border-#{category.color} #{item_selected?(diary_category_path(category))}" do %>
+                      <span class="pull-right category-<%= category.color %>"><i class="fa fa-circle text-xs"></i></span>
+                      <%= category.title %>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
 
             </div>

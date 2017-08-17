@@ -6,12 +6,11 @@ class Diary::CategoriesController < DiaryController
                       .paginate(page: params[:page], per_page: 10)
   end
 
-  def new
-    respond_to { |format| format.js }
-  end
+  def new; end
 
   def edit
-    respond_to { |format| format.js }
+    @posts = @category.diary_posts
+                      .paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -24,7 +23,7 @@ class Diary::CategoriesController < DiaryController
       flash[:error] = 'Something went wrong.'
     end
 
-    redirect_to diary_posts_path
+    redirect_to diary_category_path(@category)
   end
 
   def update
@@ -34,7 +33,7 @@ class Diary::CategoriesController < DiaryController
       flash[:error] = 'Something went wrong.'
     end
 
-    redirect_to diary_posts_path
+    redirect_to diary_category_path(@category)
   end
 
   def destroy

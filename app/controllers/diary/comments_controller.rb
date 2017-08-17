@@ -3,7 +3,7 @@ class Diary::CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
 
   def new
-    @comment = @post.comments.new
+    # @comment = @post.comments.new
   end
 
   def edit

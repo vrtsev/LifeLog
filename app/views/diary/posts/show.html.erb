@@ -14,23 +14,34 @@
       <div class="box-tool">
         <ul class="nav">
           <li class="nav-item inline dropdown">
-            <a class="nav-link" data-toggle="dropdown">
-              <%# Category label %>
-              <% if @post.category.present? %>
-                <span class="label default pos-rlt m-r-xs">
+
+            <%# Category label %>
+            <% if @post.category.present? %>
+              <%= link_to diary_category_path(@post.category), class: 'm-r' do %>
+                <span class="label category-background-<%= @post.category.color %> pos-rlt m-r-xs">
                   <%= @post.category.title %>
                 </span>
               <% end %>
+            <% end %>
 
+            <a class="nav-link" data-toggle="dropdown">
               <i class="material-icons md-18">&#xe5d4;</i>
             </a>
             <div class="dropdown-menu pull-right">
               <%= link_to 'Редактировать', edit_diary_post_path(@post), class: 'dropdown-item' %>
               <%= link_to 'Удалить', diary_post_path(@post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+              <div class="dropdown-divider"></div>
 
               <% if @post.pinned %>
-                <div class="dropdown-divider"></div>
-                <%= link_to 'Открепить', '#', class: 'dropdown-item' %>
+                <%= form_for @post, as: 'post', url: diary_post_path(@post), method: :patch do |f| %>
+                  <%= f.hidden_field :pinned, value: false %>
+                  <%= f.submit 'Открепить', class: 'dropdown-item' %>
+                <% end %>
+              <% else %>
+                <%= form_for @post, as: 'post', url: diary_post_path(@post), method: :patch do |f| %>
+                  <%= f.hidden_field :pinned, value: true %>
+                  <%= f.submit 'Закрепить', class: 'dropdown-item' %>
+                <% end %>
               <% end %>
             </div>
           </li>

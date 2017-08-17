@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function() {
   });
 
   // Comment form
-  $('#new-comment-area', '#new-comment-box', '#comment-cancel-btn').click(function(e) {
+  $('.comment-action-btn').on('click', function(e) {
     e.preventDefault();
     $('#new-comment-box').toggleClass('hidden');
     $('#new-comment-form').toggleClass('hidden');
