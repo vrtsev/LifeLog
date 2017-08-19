@@ -82,6 +82,17 @@ a.nav-link.selected span.nav-text {
 }
 
 // Filters
-ul.filter-options {
-  margin-bottom: 0;
+  ul.filter-options {
+    margin-bottom: 0;
+  }
+
+.w-600 {
+  width: 600px;
+}
+
+.user-content {
+  img {
+    width: 300px !important;
+    height: initial !important;
+  }
 }

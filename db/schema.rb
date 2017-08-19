@@ -73,13 +73,14 @@ ActiveRecord::Schema.define(version: 20170811183938) do
   create_table "goals", force: :cascade do |t|
     t.string  "title"
     t.text    "description"
-    t.integer "status",      default: 0
-    t.integer "progress",    default: 0
+    t.integer "status",               default: 0
+    t.integer "progress",             default: 0
     t.date    "start_date"
     t.date    "end_date"
+    t.integer "overdue_notification"
     t.integer "parent_id"
     t.integer "category_id"
-    t.integer "user_id",                 null: false
+    t.integer "user_id",                          null: false
     t.index ["user_id"], name: "index_goals_on_user_id", using: :btree
   end
 
@@ -130,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170811183938) do
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.integer  "status",     default: 0
+    t.integer  "position",   default: 0
     t.integer  "user_id",                null: false
     t.integer  "goal_id",                null: false
     t.integer  "parent_id"

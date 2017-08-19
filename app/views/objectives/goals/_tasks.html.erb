@@ -3,40 +3,43 @@
     <%= render partial: 'objectives/tasks/form', locals: { object: :task, url: objectives_goal_tasks_path(@goal), method: :post } %>
   </div>
 
-  <% @tasks.each do |task| %>
-    <div id="task-<%= task.id %>" class="list-item">
+  <div class="tasks sortable" data-goal-id="<%= @goal.id %>">
+    <% @tasks.each do |task| %>
+      <div id="task-<%= task.id %>" class="task-item list-item" data-id="<%= task.id %>">
 
-      <div class="list-right">
-        <%= link_to edit_objectives_goal_task_path(@goal, task), class: 'text-muted', remote: true do %>
-          <i class="fa fa-lg fa-pencil"></i>
-        <% end %>
-
-        <%= link_to objectives_goal_task_path(@goal, task), method: :delete, data: { confirmation: 'Вы уверены?' }, class: 'text-muted text-danger' do %>
-          <i class="fa fa-lg fa-times"></i>
-        <% end %>
-      </div>
-
-      <div class="list-left">
-        <% if task.actual? %>
-          <%= link_to done_objectives_goal_task_path(@goal, task), method: :patch, class: 'text-muted text-success' do %>
-            <i class="fa fa-lg fa-square-o"></i>
+        <div class="list-right">
+          <%= link_to edit_objectives_goal_task_path(@goal, task), class: 'text-muted', remote: true do %>
+            <i class="fa fa-lg fa-pencil"></i>
           <% end %>
-        <% else %>
-          <%= link_to undone_objectives_goal_task_path(@goal, task), method: :patch, class: 'text-muted text-primary' do %>
-            <i class="fa fa-lg fa-check-square-o"></i>
+
+          <%= link_to objectives_goal_task_path(@goal, task), method: :delete, data: { confirmation: 'Вы уверены?' }, class: 'text-muted text-danger' do %>
+            <i class="fa fa-lg fa-times"></i>
           <% end %>
-        <% end %>
+
+          <i class="fa fa-reorder m-l text-muted"></i>
+        </div>
+
+        <div class="list-left">
+          <% if task.actual? %>
+            <%= link_to done_objectives_goal_task_path(@goal, task), method: :patch, class: 'text-muted text-success' do %>
+              <i class="fa fa-lg fa-square-o"></i>
+            <% end %>
+          <% else %>
+            <%= link_to undone_objectives_goal_task_path(@goal, task), method: :patch, class: 'text-muted text-primary' do %>
+              <i class="fa fa-lg fa-check-square-o"></i>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="list-body">
+          <% if task.actual? %>
+            <%= task.title %>
+          <% else %>
+            <s class="tex-muted"><%= task.title %></s>
+          <% end %>
+        </div>
       </div>
 
-      <div class="list-body">
-        <% if task.actual? %>
-          <%= task.title %>
-        <% else %>
-          <s class="tex-muted"><%= task.title %></s>
-        <% end %>
-      </div>
-    </div>
-
-  <% end %>
+    <% end %>
+  </div>
 </div>
-

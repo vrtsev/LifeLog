@@ -21,10 +21,10 @@ class Objectives::SearchController < ObjectivesController
 
   def find_goals
     scope = current_user.goals
-    return scope.none unless params[:goal].present?
+    return scope.none if params[:query].blank? && params[:goal].blank?
 
     GoalsSearchQuery.new(
-      current_user.goals, params[:query], params[:goal]
+      scope, params[:query], params[:goal]
     ).results
   end
 

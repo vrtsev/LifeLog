@@ -3,6 +3,7 @@ class CreateTasks < ActiveRecord::Migration[5.0]
     create_table :tasks do |t|
       t.string :title
       t.integer :status, default: 0
+      t.integer :position, default: 0
       t.integer :user_id, null: false, index: true
       t.integer :goal_id, null: false, index: true
       t.integer :parent_id

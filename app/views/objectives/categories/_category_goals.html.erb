@@ -1,23 +1,25 @@
-<div class="box primary dk">
+<div class="box category-background-<%= @category.color %> dk m-a-0">
   <div id="current-category-box" class="box-body">
     <div class="box-tool">
       <ul class="nav">
         <li class="nav-item inline dropdown">
-          <%= link_to 'Все цели', objectives_goals_path %>
+          <%= link_to objectives_goals_path, class: 'text-muted' do %>
+            <i class="fa fa-times"></i>
+          <% end %>
 
           <a class="nav-link" data-toggle="dropdown">
             <i class="material-icons md-18"></i>
           </a>
 
           <div class="dropdown-menu pull-right">
-            <%= link_to 'Редактировать', edit_objectives_category_path(@category), remote: true, class: 'dropdown-item' %>
+            <%= link_to 'Редактировать', edit_objectives_category_path(@category), class: 'dropdown-item' %>
             <%= link_to 'Удалить', objectives_category_path(@category), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'dropdown-item' %>
           </div>
         </li>
       </ul>
     </div>
     
-    <div class="clear">Категория <b>'<%= @category.title %>'</b> <span class="label info"><%= @category.goals.count %></span></div>
+    <div class="clear">Категория <b>'<%= @category.title %>'</b></div>
   </div>
 </div>
 

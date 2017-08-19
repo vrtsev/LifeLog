@@ -2,8 +2,21 @@
   <div class="box">
     <!-- goal header -->
     <div class="box-header dker">
+      <div id="goal-hide-btn" class="text-muted pull-right m-r-md">
+        <a><i id="hide-btn-icon" class="fa fa-expand text-primary"></i></a>
+      </div>
+
       <h3><b><%= @goal.title %></b></h3>
       <small><%= format_datetime(@goal.end_date) %></small>
+
+      <div class="goal-status-buttons m-t-xs">
+        <% if @goal.in_progress? %>
+          <%= link_to 'Завершить', objectives_goal_path(@goal, objective_goal: { status: 'completed' }), method: :patch, class: 'btn btn-success btn-sm' %>
+          <%= link_to 'Отменить', objectives_goal_path(@goal, objective_goal: { status: 'canceled' }), method: :patch, class: 'btn btn-outline b-danger text-danger btn-xs' %>
+        <% else %>
+          <%= link_to 'Возобновить', objectives_goal_path(@goal, objective_goal: { status: 'in_progress' }), method: :patch, class: 'btn btn-outline b-success text-success btn-xs' %>
+        <% end %>
+      </div>
     </div>
 
     <!-- goal dropdown menu & expand button -->
@@ -18,10 +31,7 @@
           </div>
         </li>
       </ul>
-      
-      <div id="goal-hide-btn" class="text-muted">
-        <a><i id="hide-btn-icon" class="fa fa-chevron-down text-primary"></i></a>
-      </div>
+
     </div>
 
     <!-- goal content -->
@@ -30,7 +40,7 @@
 
       <% if @goal.tags.present? %>
         <% @goal.tags.each do |tag| %>
-          <%= link_to "##{tag.name}", objectives_tag_path(tag), class: 'label' %>
+          <%= link_to "##{tag.name}", objectives_tag_path(tag.name), class: 'label' %>
         <% end %>
       <% end %>
     </div>

@@ -30,7 +30,7 @@
 
               <div class="sl-content">
                 <div class="sl-date text-muted"><%= format_datetime(action.created_at) %></div>
-                <div><%= action.content %></div>
+                <div class="user-content p-r"><%= action.content.html_safe %></div>
               </div>
             </div>
           <% end %> 
@@ -41,5 +41,13 @@
   
   <div class="text-center">
     <%= will_paginate @actions, renderer: ::PaginateHelper::LinkRenderer %>
+  </div>
+<% else %>
+  <div class="box p-a-sm no-content">
+    <div class="box-body">
+      <h3 class="text-muted">
+        <span class="w-32 m-r rounded default">:(</span> Лента действий пуста
+      </h3>
+    </div>
   </div>
 <% end %>

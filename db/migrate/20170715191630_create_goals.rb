@@ -7,6 +7,7 @@ class CreateGoals < ActiveRecord::Migration[5.0]
       t.integer :progress, default: 0
       t.date    :start_date
       t.date    :end_date
+      t.integer :overdue_notification
       t.integer :parent_id
       t.integer :category_id
       t.integer :user_id, null: false, index: true

@@ -25,18 +25,7 @@
       <div class="box-body">
         <p class="m-a-0"><%= f.cktext_area :description %></p>
 
-        <div class="row m-b m-t text-center">
-          <div class="col-sm-5">
-            <%= f.label :start_date, 'Дата начала цели' %>
-            <%= f.date_select :start_date %>   
-          </div>
-          <div class="col-sm-5">
-            <%= f.label :start_date, 'Срок выполнения' %>
-            <%= f.date_select :end_date %>   
-          </div>   
-        </div>
-
-        <div class="form-group">
+        <div class="form-group m-t">
           <%= f.select :status, Objective::Goal.statuses.keys.map { |s| [s.humanize, s] }, {}, class: 'form-control c-select' %>
         </div>
 
@@ -46,6 +35,24 @@
 
         <div class="form-group">
           <%= f.text_field :all_tags, class: "form-control", placeholder: "Теги" %>
+        </div>
+
+        <div class="m-y text-center text-sm-center">
+          <div class="inline p-x text-center">
+            <span class="h4 block m-a-0"><%= f.date_select :start_date %></span>
+            <small class=" text-muted">Дата начала</small>
+          </div>
+
+          <div class="inline p-x b-l b-r text-center">
+            <small class="text-muted">Предупредить за</small>
+            <span class="h4 block m-a-0"><%= f.select :overdue_notification, (1..30).to_a %></span>
+            <small class="text-muted">дней до окончания цели</small>
+          </div>
+          
+          <div class="inline p-x text-center">
+            <span class="h4 block m-a-0"><%= f.date_select :end_date %></span>
+            <small class="text-muted">Срок выполнения</small>
+          </div>
         </div>
       </div>
 

@@ -25,10 +25,19 @@ class Objective::Goal < ApplicationRecord
 
   belongs_to :user
   belongs_to :parent, optional: true, class_name: 'Objective::Goal'
+  belongs_to :category, class_name: 'Objective::Category', optional: true
 
   validates :title, :user_id, presence: true
 
   scope :base, (-> { where parent_id: nil })
 
-  enum status: %i[new_goal in_progress completed canceled overdue]
+  enum status: %i[in_progress completed canceled overdue]
+
+  def days_left
+    current_date = Date.today
+    days_left = (end_date - current_date).to_i
+
+    return false if days_left <= 0
+    days_left
+  end
 end

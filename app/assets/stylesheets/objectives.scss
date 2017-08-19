@@ -19,3 +19,28 @@ div.task-actions {
   padding: 5px !important;
   padding-left: 1rem !important;
 }
+
+#goals-section {
+  width: 20%;
+}
+
+div.list-item:hover {
+  background-color: #f1f1f1;
+}
+
+// Calendar widget
+  div.fc-left {
+    margin-left: 10px;
+  }
+
+  .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0;
+  }
+
+// Sortable styles
+.task-placeholder {
+  border: 1px dashed #787878;
+  background-color: #f1f0f0;
+  min-height: 40px;
+  list-style: none;
+}

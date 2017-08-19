@@ -1,1 +1,5 @@
 $('#goals-list').html('<%= escape_javascript(render partial: 'category_goals', locals: {goals: @goals} ) %>')
+$('.leftside-item').each(function() {
+  $(this).removeClass('active')
+})
+$('#categories-list #category-<%= @category.id %>').addClass('active')

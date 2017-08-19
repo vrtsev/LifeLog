@@ -10,7 +10,8 @@ CKEDITOR.editorConfig = function(config) {
 		{ name: 'links', groups: [ 'links' ] },
 		{ name: 'tools', groups: [ 'tools' ] },
 		{ name: 'others', groups: [ 'others' ] },
-		{ name: 'colors', groups: [ 'colors' ] },
+    { name: 'colors', groups: [ 'colors' ] },
+    { name: 'insert', groups: [ 'insert' ] },
 		{ name: 'about', groups: [ 'about' ] },
     { name: 'pbckcode'}
   ];

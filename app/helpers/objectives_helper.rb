@@ -1,17 +1,15 @@
 module ObjectivesHelper
   include Rails.application.routes.url_helpers
 
-  def build_filters_menu(filters)
+  def filter_menu_elements(filters)
     return unless filters.present?
 
-    menu = filters.inject('') do |string, (name, key)|
-      string << link_to(
-        name, 
-        objectives_search_index_path(goal: { status: key }), 
-        class: "nav-link #{set_active_link(key)}"
-      )
+    filters.inject([]) do |array, (name, key)|
+      items_count = current_user.goals.send(key).count 
+      array << { name: name, status: key, active: set_active_link(key), items_count: items_count }
+
+      array
     end
-    return menu.html_safe
   end
 
   def action_style(action)
@@ -22,6 +20,30 @@ module ObjectivesHelper
     when 'deletion'    then { color: 'danger',  icon: 'times' }
     when 'completion'  then { color: 'success', icon: 'check' }
     end
+  end
+
+  def set_icon_for(goal_status)
+    case goal_status
+    when 'new_goal'    then 'fa fa-plus'
+    when 'in_progress' then 'fa fa-spinner'
+    when 'completed'   then 'fa fa-check'
+    when 'canceled'    then 'fa fa-ban'
+    when 'overdue'     then 'fa fa-clock-o'
+    end
+  end
+
+  def define_current_page(controllers)
+    controllers.each do |controller|
+      return true if params[:controller].include?(controller)
+    end
+    false
+  end
+
+  def soon_overdued?(goal)
+    current_date = Date.today
+    days_left = (goal.end_date - current_date).to_i
+
+    return true if days_left <= goal.overdue_notification
   end
 
   private

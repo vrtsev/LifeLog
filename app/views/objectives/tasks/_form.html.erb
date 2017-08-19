@@ -1,21 +1,15 @@
 <%= form_for object, url: url, method: method do |f| %>
-
-  <div class="list-left">
-    <%= button_tag(type: 'submit', class: "btn btn-#{method == :post ? 'success' : 'warning' } btn-sm no-shadow") do %>
-      <i class="fa fa-<%= method == :post ? 'plus' : 'check' %>"></i>
-    <% end %>
-  </div>
-
-  <div class="list-body">
+  <div class="list-body p-x">
     <div class="row">
-      <div class="col-md-8">
-        <%= f.text_field :title, class: 'form-control form-control-sm' %>
+      <div class="col-md-10">
+        <%= f.text_field :title, placeholder: 'Введите задачу...', class: 'form-control' %>
       </div>
 
-      <div class="col-md-3">
-        <%= f.select :status, Objective::Task.statuses.keys.map { |s| [s.humanize, s] }, {}, class: 'form-control form-control-sm c-select' %>
+      <div class="col-md-2">
+        <%= button_tag(type: 'submit', class: "btn btn-#{method == :post ? 'success' : 'warning' } no-shadow") do %>
+          <i class="fa fa-<%= method == :post ? 'plus' : 'check' %>"></i> <%= method == :post ? 'Добавить' : 'Сохранить' %>
+        <% end %>
       </div>
     </div>
   </div>
-
 <% end %>

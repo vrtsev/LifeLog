@@ -2,7 +2,7 @@ class Objectives::GoalsController < ObjectivesController
   before_action :find_goal, only: %i[edit update destroy]
 
   def index
-    @goals = current_user.goals.all
+    # @goals = current_user.goals.all
   end
 
   def show
@@ -31,11 +31,10 @@ class Objectives::GoalsController < ObjectivesController
 
   def update
     @goal.assign_attributes(goal_params)
-    changes = @goal.changes
-    status  = @goal.status_change.last if @goal.status_changed?
+    status = @goal.status_change.last if @goal.status_changed?
     
     if @goal.save
-      create_logger_action(changes: changes, status: status)
+      create_logger_action(status: status)
       redirect_to objectives_goal_path(@goal),
                   notice: 'Goal was successfully updated.'
     else
@@ -69,7 +68,7 @@ class Objectives::GoalsController < ObjectivesController
   def goal_params
     params.require(:objective_goal).permit(
       :title, :description, :status, :start_date, :end_date, :parent_id,
-      :category_id, :all_tags
+      :overdue_notification, :category_id, :all_tags
     )
   end
 end

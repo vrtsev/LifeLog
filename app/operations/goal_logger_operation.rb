@@ -16,11 +16,7 @@ class GoalLoggerOperation < BaseLoggerOperation
   end
 
   def editing_message
-    return unless @options[:changes].present?
-    changes = @options[:changes].to_h
-    changes.map! {|attr, value| "#{attr}: #{value.last}" }.join(', ')
-
-    "Вы внесли следующие изменения в Вашу цель: #{changes}"
+    "Вы внесли некоторые изменения в Вашу цель"
   end
 
   def in_progress_message

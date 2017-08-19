@@ -31,7 +31,7 @@
           <div class="app-body-inner">
             <div class="row-col row-col-xs b-b">
 
-              <div class="col-md-3 light bg b-r">
+              <div id="goals-section" class="col-md-3 light bg b-r">
                 <div class="row-col">
                   <div class="p-a-xs b-b">
                     <%= form_tag objectives_search_index_path, method: :get do %>
@@ -68,51 +68,64 @@
                                   </ul>
                                 </div>
                                 
-                                <div class="clear">Поиск целей по тегу <b>'<%= @tag.name %>'</b> <span class="label info"><%= @goals.count %></span></div>
+                                <div class="clear">
+                                  <i class="fa fa-tags"></i>
+                                  Цели с тегом 
+                                  <b>'<%= @tag.name %>'</b> 
+                                  <span class="label default m-l-sm"><%= @goals.count %></span>
+                                </div>
                               </div>
                             </div>
                           <% end %>
 
-                          <% if @goals.present? %>
+                          <div id="goals-list" class="list" data-ui-list="b-r b-2x b-theme">
                             <% @goals.each do |goal| %>
-                              <div class="list-item pointer">
-                                <div id="goals-list" class="list-body">
+                              <div class="list-item">
+                                <% if goal.category.present? %>
+                                  <%= link_to objectives_category_path(goal.category), remote: true do %>
+                                    <span class="label category-background-<%= goal.category.color %> rounded pull-right"><%= goal.category.title %></span>
+                                  <% end %>
+                                <% end %>
 
+                                <div class="list-body">
                                   <% if goal.completed? %>
-                                    <i class="fa fa-check-circle-o icon-green"></i>
-                                    <strong class="text-muted">
-                                      <s><%= link_to goal.title, objectives_goal_path(goal) %></s>
-                                    </strong>
+                                    <s class="text-muted"><%= link_to goal.title, objectives_goal_path(goal), class: 'item-title _600' %></s>
+                                  <% elsif goal.canceled? %>
+                                    <span class="label default rounded">Отменено</span>
+                                    <%= link_to goal.title, objectives_goal_path(goal), class: 'item-title _600 text-muted' %>
+                                  <% elsif goal.overdue? %>
+                                    <span class="label danger rounded">Просрочено</span>
+                                    <%= link_to goal.title, objectives_goal_path(goal), class: 'item-title _600 text-danger' %>
                                   <% else %>
-                                    <strong><%= link_to goal.title, objectives_goal_path(goal) %></strong>
+                                    <%= link_to goal.title, objectives_goal_path(goal), class: 'item-title _600' %>
                                   <% end %>
 
-                                  <div class="text-sm">
-                                    <span class="text-muted">
-                                      <strong><%= format_datetime(goal.end_date) %>|</strong>
-                                      <strong><%= goal.tasks.count %></strong> задач
-                                    </span> 
-                                  </div>
+                                  <% if soon_overdued?(goal) %>
+                                    <div class="text-danger text-xs"><i class="fa fa-clock-o m-r"></i><%= goal.end_date.strftime("%d.%m.%Y") %> <%= "(#{goal.days_left} дней осталось)" if goal.days_left %></div>
+                                  <% else %>
+                                    <div class="text-muted text-xs"><i class="fa fa-clock-o m-r"></i><%= goal.end_date.strftime("%d.%m.%Y") %> <%= "(#{goal.days_left} дней осталось)" if goal.days_left %> </div>
+                                  <% end %>
+
+                                  <div class="text-muted text-xs"><i class="fa fa-list-ol m-r"></i><%= goal.tasks.count %> задач</div>
 
                                   <% if goal.tags.present? %>
-                                    <div class="text-sm">
+                                    <span class="text-muted">
                                       <% goal.tags.each do |tag| %>
-                                        <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag.name) %></span>
+                                        <%= link_to "##{tag.name}", objectives_tag_path(tag.name), class: "label" %>
                                       <% end %>
-                                    </div>
+                                    </span>
                                   <% end %>
 
+                                  <% unless goal.progress.zero? %>
+                                    <div class="progress-xxs m-y-sm lter progress">
+                                      <div class="progress-bar success" data-toggle="tooltip" title="" style="width: <%= goal.progress %>%"></div>
+                                    </div>
+                                  <% end %>
                                 </div>
                               </div>
                             <% end %>
-                          <% else %>
-                            <div class="p-y-lg clearfix">
-                              <div class="text-center text-muted">
-                                <h3 class="_700 m-b">Нет целей</h3>
-                              </div>
-                            </div>
-                          <% end %>
-                          
+                          </div>
+                  
 
                         </div>
                       </div>
@@ -141,43 +154,81 @@
               <div class="col-md-2">
                 <div class="row-col">
 
-                  <div class="col-sm w w-auto-xs light lt bg-auto">
-                    <div class="padding pos-rlt">
-                      <div class="hidden-xs-down m-t" id="inbox-menu">
+                  <div class="col-sm light">
+                    <div class="navside m-x-xs m-t">
+                      <nav class="nav-stacked nav-stacked-rounded nav-active-info">
+                        <ul class="nav" data-ui-nav="">
+                    
+                    
+                          <h5 class="m-y">
+                            Категории
+                            <%= link_to 'Добавить', new_objectives_category_path, class: "btn btn-sm primary pull-right" %>
+                          </h5>
 
+                          <div id="categories-list" class="p-a-sm">
+                            <li>
+                              <%= link_to objectives_goals_path, class: "nav-link leftside-item #{ 'active' unless define_current_page(['search', 'tags']) }" do %>
+                                Все цели 
 
-                        <h5 class="m-y">
-                          Категории
-                          <%= link_to 'Добавить', new_objectives_category_path, class: "btn btn-sm primary pull-right", remote: true %>
-                        </h5>
-
-                        <div class="nav-active-white">
-                          <ul class="nav nav-pills nav-stacked nav-sm">
-                            <li id="goal-category-list" class="nav-item">
-
-                              <% @categories.each do |category| %>
-                                <%= link_to objectives_category_path(category), class: 'nav-link', remote: true do %>
-                                  <i class="fa m-r-sm fa-circle category-<%= category.color %>"></i>
-                                  <%= category.title %>
-                                <% end %>
+                                <span class="pull-right">
+                                  <i class="fa fa-list-ul"></i>
+                                </span> 
                               <% end %>
-
                             </li>
-                          </ul>
-                        </div>
+                            <% @categories.each do |category| %>
+                              <li> <!-- class="active"-->
+                                <%= link_to objectives_category_path(category), id: "category-#{category.id}", class: 'nav-link leftside-item', remote: true do %>
+                                  <span class="nav-label">
+                                    <b class="label category-background-<%= category.color %> rounded"><%= category.goals.count %></b>
+                                  </span> 
+                                  
+                                  <span class="nav-icon">
+                                    <i class="ion-ios-filing"></i>
+                                  </span> 
+                                  
+                                  <span class="nav-text"><%= category.title %></span>
 
-
-                        <h5 class="m-y">Фильтры</h5>
-                        <div class="nav-active-primary">
-                          <div class="nav nav-pills nav-sm">
-                              <%= link_to 'Все цели', objectives_goals_path, class: "nav-link #{ 'active' unless current_page?(objectives_search_index_path) }" %>
-
-                              <%= build_filters_menu(@filters) %>
+                                <% end %>
+                              </li>
+                            <% end %>
                           </div>
-                        </div>
-
-                      </div>
+                        </ul>
+                      </nav>
                     </div>
+
+
+
+
+
+                    <div class="navside m-x-xs m-t">
+                      <nav class="nav-stacked nav-stacked-rounded nav-active-info">
+                        <ul class="nav" data-ui-nav="">
+                          <h5 class="m-y">
+                            Фильтры
+                          </h5>
+
+                          <div class="p-a-sm">
+                            <% filter_menu_elements(@filters).each do |el| %>
+                              <li>
+                                <%= link_to objectives_search_index_path(goal: { status: el[:status] }), class: "nav-link #{el[:active]}" do %>
+                                  <%= el[:name] %>
+                                  <% unless el[:items_count].zero? %>
+                                    <span class="pull-right">
+                                      <span class="label rounded"><%= el[:items_count] %></span>
+                                    </span>
+                                  <% end %>
+                                <% end %>
+                              </li>
+                            <% end %>
+                          </div>
+                        </ul>
+                      </nav>
+                    </div>
+
+
+
+
+                    
                   </div>
 
                 </div>

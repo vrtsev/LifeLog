@@ -20,6 +20,7 @@ class Objective::Task < ApplicationRecord
 
   validates :user_id, :goal_id, presence: true
 
+  default_scope { order("position ASC") }
   scope :base, (-> { where parent_id: nil })
 
   enum status: %i[actual completed]

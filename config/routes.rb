@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :goals do
       resources :actions
       resources :tasks, except: %i[index show] do
+        put :sort, on: :collection
         member do
           patch 'done'
           patch 'undone'

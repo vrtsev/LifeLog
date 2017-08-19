@@ -6,12 +6,11 @@ class Objectives::CategoriesController < ObjectivesController
   end
 
   def new
-    @category = current_user.goal_categories.new
+    # @category = current_user.goal_categories.new
   end
 
   def create
     @category = current_user.goal_categories.new(category_params)
-    @category.color = rand(1..6)
 
     if @category.save
       flash[:notice] = 'Category was successfully created.'
