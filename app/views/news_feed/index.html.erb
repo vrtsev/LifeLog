@@ -54,7 +54,7 @@
                     <%= image_tag(comment.user.photo_url, class: 'img-circle') %>
                   </div>
                   <div class="sl-content">
-                    <%= link_to comment.user.name, user_post_path(comment.user, comment.post), class: 'text-info' %>
+                    <%= link_to comment.user.name, user_post_path(comment.post.user, comment.post), class: 'text-info' %>
                     <span class="sl-date text-muted">в записи <b>"<%= link_to comment.post.title, user_post_path(comment.post.user, comment.post) %>"</b></span>
                     <div><%= comment.content %></div>
                   </div>
