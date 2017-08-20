@@ -12,6 +12,6 @@ class LandingPageController < ApplicationController
   private
 
   def check_auth
-    redirect_to posts_path if user_signed_in?
+    redirect_to news_feed_path if user_signed_in?
   end
 end

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Лента новостей | LifeLog</title>
+    <%= stylesheet_link_tag "news_feed", media: 'all', 'data-turbolinks-track': 'reload'  %>
+    <%= javascript_include_tag "news_feed", 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+
+    <!-- vendor style -->
+    <link rel="stylesheet" href="/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/font.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="app" id="app">
+      <div id="content" class="app-content box-shadow-z0" role="main">
+
+        <!-- Navbar -->
+        <div class="app-header navbar-md white box-shadow">
+          <%= render partial: 'layouts/shared/navbar'%>
+        </div>
+
+        <!-- Page -->
+        <%= yield %>
+
+      </div>
+    </div>    
+  </body>
+</html>

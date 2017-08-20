@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  get '/news_feed', to: 'news_feed#index'
+  
   # PUBLICATIONS
   # own resources
   resources :categories, except: :index, module: 'publications'

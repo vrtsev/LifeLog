@@ -30,7 +30,7 @@
     <div class="collapse navbar-toggleable-sm" id="navbar-1">
       <ul class="nav navbar-nav nav-active-border b-{{app.setting.theme.primary}}">
         <li class="nav-item">
-          <%= link_to '#', class: 'nav-link' do %>
+          <%= link_to news_feed_path, class: "nav-link #{nav_section_selected?('news_feed')}" do %>
             <span class="nav-text">Лента новостей</span>
           <% end %>
         </li>

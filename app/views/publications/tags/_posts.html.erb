@@ -23,21 +23,23 @@
         </small>
       </div>
 
-      <!-- post dropdown menu -->
-      <div class="box-tool">
-        <ul class="nav">
-          <li class="nav-item inline dropdown">
-            <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
-            </a>
-            <div class="dropdown-menu pull-right">
-              <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
-              <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
-              <div class="dropdown-divider"></div>
-              <%= link_to 'Открепить', post_path(post), class: 'dropdown-item' %>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <% if post.user == current_user %>
+        <!-- post dropdown menu -->
+        <div class="box-tool">
+          <ul class="nav">
+            <li class="nav-item inline dropdown">
+              <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
+              </a>
+              <div class="dropdown-menu pull-right">
+                <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
+                <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+                <div class="dropdown-divider"></div>
+                <%= link_to 'Открепить', post_path(post), class: 'dropdown-item' %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      <% end %>
 
       <!-- post content -->
       <div class="box-body">
@@ -78,19 +80,21 @@
           </small>
         </div>
 
-        <!-- post dropdown menu -->
-        <div class="box-tool">
-          <ul class="nav">
-            <li class="nav-item inline dropdown">
-              <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
-              </a>
-              <div class="dropdown-menu pull-right">
-                <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
-                <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <% if post.user == current_user %>
+          <!-- post dropdown menu -->
+          <div class="box-tool">
+            <ul class="nav">
+              <li class="nav-item inline dropdown">
+                <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
+                </a>
+                <div class="dropdown-menu pull-right">
+                  <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
+                  <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+                </div>
+              </li>
+            </ul>
+          </div>
+        <% end %>
 
         <!-- post content -->
         <div class="box-body">

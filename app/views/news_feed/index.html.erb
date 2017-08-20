@@ -1,0 +1,89 @@
+<div ui-view class="app-body container" id="view">
+  <div class="padding">
+
+    <div class="row p-a-sm">
+
+      <div class="col-md-8">
+        <div class="b-b b-primary nav-active-primary">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="" data-toggle="tab" data-target="#subscriptions-posts-tab">
+                Мои подписки
+                <span class="label primary m-l-xs"><%= @subscriptions_posts.count %></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" data-toggle="tab" data-target="#all-posts-tab">
+                Все записи
+                <span class="label primary m-l-xs"><%= @all_posts.count %></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-pane animated fadeIn text-muted active" id="subscriptions-posts-tab" aria-expanded="true">
+            <%= render partial: 'posts', locals: { scope: @subscriptions_posts, param_name: 'subscriptions_posts_page' } %>
+          </div>
+          <div class="tab-pane animated fadeIn text-muted" id="all-posts-tab" aria-expanded="false">
+            <%= render partial: 'posts', locals: { scope: @all_posts, param_name: 'all_posts_page' } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="box">
+          <div class="box-header">
+            <h3>Новые комментарии</h3>
+          </div>
+
+          <div class="box-divider m-a-0"></div>
+          
+          <div class="box-body">
+            <div class="streamline b-l m-b m-l">
+              <% @comments.each do |comment| %>
+                <div class="sl-item">
+                  <div class="sl-left">
+                    <%= image_tag(comment.user.photo_url, class: 'img-circle') %>
+                  </div>
+                  <div class="sl-content">
+                    <%= link_to comment.user.name, user_post_path(comment.user, comment.post), class: 'text-info' %>
+                    <span class="sl-date text-muted">в записи <b>"<%= link_to comment.post.title, user_post_path(comment.post.user, comment.post) %>"</b></span>
+                    <div><%= comment.content %></div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="box">
+          <div class="box-header">
+            <h3>Популярные пользователи</h3>
+          </div>
+
+          <div class="box-divider m-a-0"></div>
+          <ul class="list no-border p-b">
+            <% @popular_users.each do |user| %>
+              <li class="list-item">
+
+                <%= link_to user_posts_path(user), class: "list-left" do %>
+                  <span class="w-40 avatar"><%= image_tag(user.photo_url) %></span>
+                <% end %>
+
+                <div class="list-body">
+                  <%= link_to user.name, user_posts_path(user) %>
+                  <small class="text-muted text-ellipsis"><%= user.followers_count %> подписчиков</small>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'layouts/shared/theme_switcher' %>

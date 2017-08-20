@@ -29,4 +29,7 @@ Rails.application.config.assets.precompile += %w(
 
   user_profile.css 
   user_profile.js
+
+  news_feed.css 
+  news_feed.js
 )
