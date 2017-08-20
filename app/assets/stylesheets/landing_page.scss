@@ -4,9 +4,15 @@
   display: none;
 }
 
+
 .masthead.segment {
   min-height: 500px;
   padding: 1em 0em;
+  background-image: url(../images/banner.jpg) !important;
+}
+
+.ui.large.secondary.inverted.pointing.menu {
+  border-color: transparent !important;
 }
 
 .masthead .logo.item img {

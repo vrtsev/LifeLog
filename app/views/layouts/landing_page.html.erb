@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LifeLog приветствует Вас</title>
+    <%= stylesheet_link_tag "landing_page", media: 'all', 'data-turbolinks-track': 'reload'  %>
+    <%= javascript_include_tag "landing_page", 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    
+    <!-- Hidden navbar -->
+    <div class="ui large top fixed hidden menu">
+      <div class="ui container">
+        <%= link_to 'Главная', root_path, class: 'active item' %>
+        <%= link_to 'Новости', '/news', class: 'item' %>
+        <%= link_to 'О сайте', '/about', class: 'item' %>
+        <%= link_to 'Контакты', '/contacts', class: 'item' %>
+
+        <div class="right menu">
+          <div class="item">
+            <%= link_to 'Вход', new_user_session_path, class: 'ui button' %>
+          </div>
+
+          <div class="item">
+            <%= link_to 'Регистрация', new_user_registration_path, class: 'ui positive button' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page contents -->
+    <div class="pusher">
+      <!-- Head block -->
+      <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui container">
+          <div class="ui large secondary inverted pointing menu">
+            <%= link_to 'Главная', root_path, class: 'active item' %>
+            <%= link_to 'Новости', '/news', class: 'item' %>
+            <%= link_to 'О сайте', '/about', class: 'item' %>
+            <%= link_to 'Контакты', '/contacts', class: 'item' %>
+
+            <div class="right item">
+              <%= link_to 'Вход', new_user_session_path, class: 'ui inverted basic button' %>
+              <%= link_to 'Регистрация', new_user_registration_path, class: 'ui inverted green basic button' %>
+            </div>
+          </div>
+
+        <div class="ui text container">
+          <h1 class="ui inverted header">LifeLog</h1> 
+          <h2>Простой, эффективный и персональный</h2> 
+          <h3>
+            Сохраняйте все моменты своей жизни в Вашем персональном дневнике
+            Возьмите контроль над Вашей жизнью, целями, идеями и желаниями. Вместе с LifeLog
+            вы покорите любую недосягаемую вершину
+          </h3> 
+        </div>
+        
+        <br>
+        <%= link_to 'Зарегистрироваться', new_user_registration_path, class: 'ui huge positive button' %>
+        </div>
+      </div>
+
+      <!-- Benefits block -->
+      <div class="ui vertical stripe center aligned segment">
+        <div class="ui text container">
+          <h3 class="ui header">Будьте успешны и эффективны</h3> 
+          <p>LifeLog предоставит для Вас все необходимые средства и инструменты</p> 
+        </div>
+
+        <div class="ui center aligned feature stackable grid">
+          <div class="four wide column">
+            <div class="ui segment">
+              <i class="huge circular teal write icon"></i>
+              <h2>Публикуйте записи</h2> 
+              <p>Полноценный редактор позволит Вам форматировать и оформлять записи так, как Вы пожелаете. Обсуждайте и делитесь впечатлениями о записи в комментариях</p> 
+            </div>
+          </div>
+
+          <div class="four wide column">
+            <div class="ui segment">
+              <i class="huge circular green bookmark icon"></i>
+              <h2>Ведите личный дневник</h2> 
+              <p>Храните все важные события, мысли, идеи, проблемы, достижения в Вашем персональном дневнике. К каждой записи Вы можете прикреплять заметки и фотографии</p> 
+            </div>
+          </div>
+
+          <div class="four wide column">
+            <div class="ui segment">
+              <i class="huge circular red checkmark icon"></i>
+              <h2>Управляйте целями</h2> 
+              <p>Возьмите верх над своими желаниями и мечтами. Система управления целями поможет Вам быстро и эффективно добиваться поставленных целей во чтобы-то ни было</p> 
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rates block -->
+      <div class="ui vertical stripe center aligned dark segment">
+        <div class="ui container">
+          <h3 class="ui header">LifeLog в цифрах</h3> 
+          <p>Наши показатели растут, доказывая эффективность нашей системы</p> 
+        </div>
+        
+        <div class="ui center aligned rates stackable grid">
+          <div class="four wide column">
+            <i class="huge circular teal write icon"></i>
+            <h2><%= "#{@blog_posts_count} публикации" %></h2>
+          </div>
+          
+          <div class="four wide column">
+            <i class="huge circular pink bookmark icon"></i>
+            <h2><%= "#{@diary_posts_count} записей в дневниках" %></h2>
+          </div>
+
+          <div class="four wide column">
+            <i class="huge circular green checkmark icon"></i>
+            <h2><%= "#{@completed_goals_count} целей достигнуто" %></h2>
+          </div>
+
+          <div class="four wide column">
+            <i class="huge circular orange user icon"></i>
+            <h2><%= "#{@users_count} активных пользователей" %></h2>
+          </div>
+        </div>
+      </div>
+          
+      <!-- Registration form block -->
+      <div class="ui vertical stripe center aligned segment">
+        <div class="ui text container">
+          <h3 class="ui header">Начните прямо сейчас</h3> 
+          <p>Откройте для себя новый подход к раскрытию Вашего потенциала</p> 
+
+          <%= form_for :user, url: user_registration_path, html: { class: 'ui form' } do |f| %>
+            <div class="field"><%= f.text_field :name, placeholder: 'Ваше имя' %></div>
+            <div class="field"><%= f.email_field :email, placeholder: 'Электронная почта' %></div>
+            <div class="field"><%= f.password_field :password, placeholder: 'Пароль (минимум 6 символов)', autocomplete: "off" %></div>
+            <div class="field"><%= f.password_field :password_confirmation, placeholder: 'Повторите пароль', autocomplete: "off" %></div>
+            <div class="actions"><%= f.submit "Бесплатная регистрация", class: 'ui positive button' %></div>
+          <% end %>
+          <br>
+          <small>Присоединяйтесь к сообществу успешных целеустремленных людей и Вы увидите, как Ваши мечты и желания начнут осуществляться вместе с LifeLog</small> 
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+          <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+              <h4 class="ui inverted header">LifeLog</h4> 
+              <div class="ui inverted link list">
+                <%= link_to 'Главная', root_path, class: 'item' %>
+                <%= link_to 'Новости', '/news', class: 'item' %>
+                <%= link_to 'О сайте', '/about', class: 'item' %>
+                <%= link_to 'Контакты', '/contacts', class: 'item' %>
+              </div>
+            </div>
+            
+            <div class="three wide column">
+              <h4 class="ui inverted header">Проект</h4> 
+              <div class="ui inverted link list">
+                <%= link_to 'GitHub репозиторий', 'https://github.com/vrtsev/LifeLog', class: 'item' %>
+                <%= link_to 'Написать разработчику', '/contacts', class: 'item' %>
+                <%= link_to 'Тех. спецификации', 'https://github.com/vrtsev/LifeLog/wiki/Technical-Specification', class: 'item' %>
+                <%= link_to 'Исп. технологии', 'https://github.com/vrtsev/LifeLog/wiki/Tech.-stack', class: 'item' %>
+              </div>
+            </div>
+            
+            <div class="seven wide column">
+              <h4 class="ui inverted header">LifeLog Beta</h4> 
+              <p>Powered by Ruby on Rails. © LifeLog 2017. All rights reserved</p> 
+              <p>FlatKit Template by FlatFull</p> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
