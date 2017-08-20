@@ -17,11 +17,13 @@
     <%= will_paginate @posts, renderer: ::PaginateHelper::LinkRenderer %>
   </div>
 <% else %>
-  <div class="box m-t p-a-sm no-content">
-    <div class="box-body">
-      <h3 class="text-muted">
-        <span class="w-32 m-r rounded default">:(</span> Ничего не найдено
-      </h3>
+  <div class="box m-t">
+    <div class="p-a text-center">
+      <i class="fa fa-huge text-muted fa-pencil"></i> <br>
+      <h3 class="m-t block">Нет записей</h3>
+
+      <p>В Вашем дневнике пока что пусто</p>
+      <p><%= link_to 'Создать запись', new_diary_post_path, class: 'btn primary' %></p>
     </div>
   </div>
 <% end %>

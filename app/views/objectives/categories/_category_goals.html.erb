@@ -23,33 +23,42 @@
   </div>
 </div>
 
-<% goals.each do |goal| %>
-  <div class="list-item pointer">
-    <div id="goals-list" class="list-body">
+<% if @goals.present? %>
+  <% goals.each do |goal| %>
+    <div class="list-item pointer">
+      <div id="goals-list" class="list-body">
 
-      <% if goal.completed? %>
-        <i class="fa fa-check-circle-o icon-green"></i>
-        <strong class="text-muted">
-          <s><%= link_to goal.title, objectives_goal_path(goal) %></s>
-        </strong>
-      <% else %>
-        <strong><%= link_to goal.title, objectives_goal_path(goal) %></strong>
-      <% end %>
+        <% if goal.completed? %>
+          <i class="fa fa-check-circle-o icon-green"></i>
+          <strong class="text-muted">
+            <s><%= link_to goal.title, objectives_goal_path(goal) %></s>
+          </strong>
+        <% else %>
+          <strong><%= link_to goal.title, objectives_goal_path(goal) %></strong>
+        <% end %>
 
-      <div class="text-sm">
-        <span class="text-muted">
-          <strong><%= format_datetime(goal.end_date) %>|</strong>
-          <strong><%= goal.tasks.count %></strong> задач
-        </span> 
-      </div>
-
-      <% if goal.tags.present? %>
         <div class="text-sm">
-          <% goal.tags.each do |tag| %>
-            <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag) %></span>
-          <% end %>
+          <span class="text-muted">
+            <strong><%= format_datetime(goal.end_date) %>|</strong>
+            <strong><%= goal.tasks.count %></strong> задач
+          </span> 
         </div>
-      <% end %>
+
+        <% if goal.tags.present? %>
+          <div class="text-sm">
+            <% goal.tags.each do |tag| %>
+              <span class="label"><%= link_to "##{tag.name}", objectives_tag_path(tag) %></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="">
+    <div class="p-a text-center">
+      <i class="fa fa-huge text-muted fa-check-circle-o"></i> <br>
+      <h5 class="m-t block">Не найдено ни одной цели</h5>
     </div>
   </div>
 <% end %>

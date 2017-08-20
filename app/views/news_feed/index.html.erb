@@ -9,13 +9,15 @@
         <div class="b-b b-primary nav-active-primary">
           <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" href="" data-toggle="tab" data-target="#subscriptions-posts-tab">
-                Мои подписки
-                <span class="label primary m-l-xs"><%= @subscriptions_posts.count %></span>
-              </a>
+              <% if @subscriptions_posts.present? %>
+                <a class="nav-link active" href="" data-toggle="tab" data-target="#subscriptions-posts-tab">
+                  Мои подписки
+                  <span class="label primary m-l-xs"><%= @subscriptions_posts.count %></span>
+                </a>
+              <% end %>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="" data-toggle="tab" data-target="#all-posts-tab">
+              <a class="nav-link <%= 'active' unless @subscriptions_posts.present? %>" href="" data-toggle="tab" data-target="#all-posts-tab">
                 Все записи
                 <span class="label primary m-l-xs"><%= @all_posts.count %></span>
               </a>
@@ -24,10 +26,13 @@
         </div>
 
         <div class="tab-content">
-          <div class="tab-pane animated fadeIn text-muted active" id="subscriptions-posts-tab" aria-expanded="true">
-            <%= render partial: 'posts', locals: { scope: @subscriptions_posts, param_name: 'subscriptions_posts_page' } %>
-          </div>
-          <div class="tab-pane animated fadeIn text-muted" id="all-posts-tab" aria-expanded="false">
+          <% if @subscriptions_posts.present? %>
+            <div class="tab-pane animated fadeIn text-muted active" id="subscriptions-posts-tab" aria-expanded="true">
+              <%= render partial: 'posts', locals: { scope: @subscriptions_posts, param_name: 'subscriptions_posts_page' } %>
+            </div>
+          <% end %>
+          
+          <div class="tab-pane animated fadeIn text-muted <%= 'active' unless @subscriptions_posts.present? %>" id="all-posts-tab" aria-expanded="false">
             <%= render partial: 'posts', locals: { scope: @all_posts, param_name: 'all_posts_page' } %>
           </div>
         </div>

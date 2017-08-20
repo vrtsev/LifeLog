@@ -1,66 +1,11 @@
-<% @posts.pinned.each do |post| %>
-  <div class="box <%= 'post-hidden' unless post.visible %>">
-    <!-- post header -->
-    <div class="box-header pinned-post-header">
-      <h3>
-        <i class="fa fa-thumb-tack"></i>
-        <b><%= link_to post.title, post_path(post) %></b>
-
-        <% if post.supplemented %>
-          <span class="label success">Обновлено</span>
-        <% end %>
-
-        <% unless post.visible %>
-          <span class="label blue-grey">Скрыт</span>
-        <% end %>
-      </h3>
-      <small>
-        <%= format_datetime(post.created_at) %> 
-        <%= "(Обновлено #{format_datetime(post.supplemented_at)})" if post.supplemented %>
-      </small>
-    </div>
-
-    <!-- post dropdown menu -->
-    <div class="box-tool">
-      <ul class="nav">
-        <li class="nav-item inline dropdown">
-          <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
-          </a>
-          <div class="dropdown-menu pull-right">
-            <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
-            <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
-            <div class="dropdown-divider"></div>
-            <%= form_for post, as: 'post', url: post_path(post), method: :patch do |f| %>
-              <%= f.hidden_field :pinned, value: false %>
-              <%= f.submit 'Открепить', class: 'dropdown-item' %>
-            <% end %>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- post content -->
-    <div class="box-body">
-      <p class="m-a-0">
-        <%= truncate_html post.content, :length => 400 %>
-      </p>
-
-      <% if post.tags.present? %>
-        <% post.tags.each do |tag| %>
-          <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<div id="posts">
-  <% @posts.unpinned.each do |post| %>
+<% if @posts.present? %>
+  <% @posts.pinned.each do |post| %>
     <div class="box <%= 'post-hidden' unless post.visible %>">
       <!-- post header -->
-      <div class="box-header dker">
+      <div class="box-header pinned-post-header">
         <h3>
-          <%= link_to post.title, post_path(post) %>
+          <i class="fa fa-thumb-tack"></i>
+          <b><%= link_to post.title, post_path(post) %></b>
 
           <% if post.supplemented %>
             <span class="label success">Обновлено</span>
@@ -87,8 +32,8 @@
               <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
               <div class="dropdown-divider"></div>
               <%= form_for post, as: 'post', url: post_path(post), method: :patch do |f| %>
-                <%= f.hidden_field :pinned, value: true %>
-                <%= f.submit 'Закрепить', class: 'dropdown-item' %>
+                <%= f.hidden_field :pinned, value: false %>
+                <%= f.submit 'Открепить', class: 'dropdown-item' %>
               <% end %>
             </div>
           </li>
@@ -98,7 +43,7 @@
       <!-- post content -->
       <div class="box-body">
         <p class="m-a-0">
-          <%= truncate_html post.content, length: 400 %>
+          <%= truncate_html post.content, :length => 400 %>
         </p>
 
         <% if post.tags.present? %>
@@ -109,8 +54,75 @@
       </div>
     </div>
   <% end %>
-</div>
 
-<div class="text-center">
-  <%= will_paginate @posts, renderer: ::PaginateHelper::LinkRenderer %>
-</div>
+  <div id="posts">
+    <% @posts.unpinned.each do |post| %>
+      <div class="box <%= 'post-hidden' unless post.visible %>">
+        <!-- post header -->
+        <div class="box-header dker">
+          <h3>
+            <%= link_to post.title, post_path(post) %>
+
+            <% if post.supplemented %>
+              <span class="label success">Обновлено</span>
+            <% end %>
+
+            <% unless post.visible %>
+              <span class="label blue-grey">Скрыт</span>
+            <% end %>
+          </h3>
+          <small>
+            <%= format_datetime(post.created_at) %> 
+            <%= "(Обновлено #{format_datetime(post.supplemented_at)})" if post.supplemented %>
+          </small>
+        </div>
+
+        <!-- post dropdown menu -->
+        <div class="box-tool">
+          <ul class="nav">
+            <li class="nav-item inline dropdown">
+              <a class="nav-link" data-toggle="dropdown"><i class="material-icons md-18">&#xe5d4;</i>
+              </a>
+              <div class="dropdown-menu pull-right">
+                <%= link_to 'Редактировать', edit_post_path(post), class: 'dropdown-item' %>
+                <%= link_to 'Удалить', post_path(post), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+                <div class="dropdown-divider"></div>
+                <%= form_for post, as: 'post', url: post_path(post), method: :patch do |f| %>
+                  <%= f.hidden_field :pinned, value: true %>
+                  <%= f.submit 'Закрепить', class: 'dropdown-item' %>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- post content -->
+        <div class="box-body">
+          <p class="m-a-0">
+            <%= truncate_html post.content, length: 400 %>
+          </p>
+
+          <% if post.tags.present? %>
+            <% post.tags.each do |tag| %>
+              <%= link_to "##{tag.name}", tag_path(tag.name), class: "label" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-center">
+    <%= will_paginate @posts, renderer: ::PaginateHelper::LinkRenderer %>
+  </div>
+<% else %>
+  <div class="box">
+    <div class="p-a text-center">
+      <i class="fa fa-huge text-muted fa-pencil"></i> <br>
+      <h3 class="m-t block">Нет записей</h3>
+
+      <p>Давайте создадим Вашу первую запись</p>
+      <p><%= link_to 'Создать запись', new_post_path, class: 'btn primary' %></p>
+    </div>
+  </div>
+<% end %>

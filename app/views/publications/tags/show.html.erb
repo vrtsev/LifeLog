@@ -1,26 +1,38 @@
-<div class="box info dk">
-  <div class="box-body clear">
-    <span><i class="fa fa-tags"></i> Глобальный поиск всех записей по тегу <b>#<%= params[:name] %></b></span>
-    <small class="block text-muted"><b><%= @posts.count %></b> записей найдено</small>
+<% if @posts.present? %>
+  <div class="box info dk">
+    <div class="box-body clear">
+      <span><i class="fa fa-tags"></i> Глобальный поиск всех записей по тегу <b>#<%= params[:name] %></b></span>
+      <small class="block text-muted"><b><%= @posts.count %></b> записей найдено</small>
+    </div>
   </div>
-</div>
 
-<div class="b-b b-primary nav-active-primary diary-search-tabs">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active" href="" data-toggle="tab" data-target="#all-posts-tab">Все записи <span class="label label-sm primary m-l-xs"><%= @posts.count %></span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="" data-toggle="tab" data-target="#my-posts-tab">Только мои записи <span class="label label-sm primary m-l-xs"><%= @my_posts.count %></span></a>
-    </li>
-  </ul>
-</div>
+  <div class="b-b b-primary nav-active-primary diary-search-tabs">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="" data-toggle="tab" data-target="#all-posts-tab">Все записи <span class="label label-sm primary m-l-xs"><%= @posts.count %></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" data-toggle="tab" data-target="#my-posts-tab">Только мои записи <span class="label label-sm primary m-l-xs"><%= @my_posts.count %></span></a>
+      </li>
+    </ul>
+  </div>
 
-<div class="tab-content">
-  <div class="tab-pane animated fadeIn text-muted active" id="all-posts-tab" aria-expanded="true">
-    <%= render partial: 'posts', locals: { posts: @posts, param_name: 'posts_page' } %>
+  <div class="tab-content">
+    <div class="tab-pane animated fadeIn text-muted active" id="all-posts-tab" aria-expanded="true">
+      <%= render partial: 'posts', locals: { posts: @posts, param_name: 'posts_page' } %>
+    </div>
+    <div class="tab-pane animated fadeIn text-muted" id="my-posts-tab" aria-expanded="false">
+      <%= render partial: 'posts', locals: { posts: @my_posts, param_name: 'my_posts_page' } %>
+    </div>
   </div>
-  <div class="tab-pane animated fadeIn text-muted" id="my-posts-tab" aria-expanded="false">
-    <%= render partial: 'posts', locals: { posts: @my_posts, param_name: 'my_posts_page' } %>
+<% else %>
+  <div class="box">
+    <div class="p-a text-center">
+      <i class="fa fa-huge text-muted fa-tags"></i> <br>
+      <h3 class="m-t block">Нет записей</h3>
+
+      <p>Нет ни единой записи с тегом <b>#<%= params[:name] %></b></p>
+      <p><%= link_to 'Вернуться назад', :back, class: 'btn white' %></p>
+    </div>
   </div>
-</div>
+<% end %>
