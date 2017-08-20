@@ -7,7 +7,7 @@
 <div id='new-comment-form' class="box hidden">
   <%= form_for object, url: url, method: method do |f| %>
     <div class="box-header p-a-sm">
-        <%= f.cktext_area :content, rows: 1, class: 'form-control new-comment-input', placeholder: 'Ваши действия по достижению цели...' %>
+        <%= f.cktext_area :content, rows: 1, class: 'form-control new-comment-input ckeditor', placeholder: 'Ваши действия по достижению цели...' %>
     </div>
 
     <div class="box-footer dker clearfix">

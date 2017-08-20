@@ -20,6 +20,16 @@
 //= require publications/bootstrap
 //= require pagination
 
+
+var ready = function() {
+  $('.ckeditor').each(function() {
+    CKEDITOR.replace($(this).attr('id'))
+  })
+}
+
+$(document).on('turbolinks:load', ready)
+
+
 $(document).on('turbolinks:load', function() {
   $('pre').each(function(i, block) {
     hljs.highlightBlock(block);

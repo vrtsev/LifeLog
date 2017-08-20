@@ -2,7 +2,7 @@
   <%= form_for object, as: :goal_action, url: url, method: method do |f| %>
     <div class="sl-content">
       <div class="sl-date text-muted"><%= format_datetime(@action.created_at) %></div>
-      <div><%= f.cktext_area :content, class: 'form-control new-action-input' %></div>
+      <div><%= f.cktext_area :content, class: 'form-control new-action-input ckeditor' %></div>
       <%= f.submit 'Сохранить', class: 'btn btn-sm btn-success pull-right' %>
     </div>
   <% end %>

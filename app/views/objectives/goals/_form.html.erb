@@ -22,7 +22,7 @@
 
     <!-- goal content -->
     <div class="box-body">
-      <p class="m-a-0"><%= f.cktext_area :description %></p>
+      <p class="m-a-0"><%= f.cktext_area :description, class: 'ckeditor' %></p>
 
       <div class="form-group m-t">
         <%= f.select :status, Objective::Goal.statuses.keys.map { |s| [s.humanize, s] }, {}, class: 'form-control c-select' %>

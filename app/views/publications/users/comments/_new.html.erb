@@ -5,7 +5,7 @@
       <i class="on b-white bottom"></i>
     </span>
 
-    <textarea rows='1' id='new-comment-area' class="form-control new-comment-input" placeholder='Ваш комментарий'></textarea>
+    <textarea rows='1' id='new-comment-area' class="form-control new-comment-input comment-action-btn" placeholder='Ваш комментарий'></textarea>
   </div>
 </div>
 
@@ -23,8 +23,10 @@
         &nbsp;<%= current_user.name %>
       </span>
 
-      <%= f.submit 'Отправить', class: 'pull-right btn btn-sm btn-primary' %>
-      <%= link_to 'Отмена', '#', id: 'comment-cancel-btn', class: "pull-right btn btn-sm btn-default" %>
+      <div class="form-action-buttons pull-right"> 
+        <%= link_to 'Отмена', '#', id: 'comment-cancel-btn', class: "comment-action-btn btn btn-sm btn-default" %>
+        <%= f.submit 'Отправить', class: 'btn btn-sm btn-primary' %>
+      </div>
     </div>
   <% end %>
 </div>
