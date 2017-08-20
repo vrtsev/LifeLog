@@ -1,0 +1,19 @@
+<!-- Feedback form block -->
+<div class="ui vertical stripe center aligned segment">
+  <div class="ui text container">
+    <h3 class="ui header">Написать разработчику</h3> 
+    <p>
+      Вы заметили ошибку, недовольны нашим ресурсом или хотите похвалить разработчика?
+      Вы можете связаться с разработчиком по электронной почте <b>v.rtsev@gmail.com</b>, либо воспользоваться формой ниже:
+    </p> 
+
+    <%= form_for :feedback, url: contacts_send_feedback_path, method: :post, html: { class: 'ui form' } do |f| %>
+      <div class="field"><%= f.email_field :email, placeholder: 'Электронная почта' %></div>
+      <div class="field"><%= f.text_field :subject, placeholder: 'Тема' %></div>
+      <div class="field"><%= f.text_area :message, placeholder: 'Ваше сообщение' %></div>
+      <div class="actions"><%= f.submit "Отправить", class: 'ui positive button' %></div>
+    <% end %>
+    <br>
+    <small>Время ожидания ответа - около двое суток с момента отправки сообщения</small> 
+  </div>
+</div>

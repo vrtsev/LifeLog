@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LifeLog приветствует Вас</title>
+    <%= stylesheet_link_tag "landing_page", media: 'all', 'data-turbolinks-track': 'reload'  %>
+    <%= javascript_include_tag "landing_page", 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    
+    <!-- Hidden navbar -->
+    <div class="ui large top fixed hidden menu">
+      <div class="ui container">
+        <%= link_to 'Главная', root_path, class: 'item' %>
+        <%= link_to 'Новости', '/news', class: 'item' %>
+        <%= link_to 'О сайте', '/about', class: 'item' %>
+        <%= link_to 'Контакты', '/contacts', class: 'item' %>
+
+        <div class="right menu">
+          <div class="item m-r">
+            <%= link_to 'Вход', new_user_session_path, class: 'ui button' %>
+          </div>
+
+          <div class="item">
+            <%= link_to 'Регистрация', new_user_registration_path, class: 'ui positive button' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page contents -->
+    <div class="pusher">
+      <!-- Head block -->
+      <div class="ui vertical center aligned segment">
+        <div class="ui container">
+          <div class="ui large secondary pointing menu info-pages-navmenu">
+            <%= link_to 'Главная', root_path, class: 'item' %>
+            <%= link_to 'Новости', '/news', class: 'item' %>
+            <%= link_to 'О сайте', '/about', class: 'item' %>
+            <%= link_to 'Контакты', '/contacts', class: 'item' %>
+
+            <div class="right item">
+              <%= link_to 'Вход', new_user_session_path, class: 'ui  basic button m-r' %>
+              <%= link_to 'Регистрация', new_user_registration_path, class: 'ui green basic button' %>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+
+      <%= yield %>
+
+      <!-- Footer -->
+      <%= render partial: 'layouts/shared/footer' %>
+    </div>
+  </body>
+</html>

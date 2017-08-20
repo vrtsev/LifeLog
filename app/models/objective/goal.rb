@@ -2,16 +2,17 @@
 #
 # Table name: goals
 #
-#  id          :integer          not null, primary key
-#  title       :string
-#  description :text
-#  status      :integer          default("0")
-#  progress    :integer          default("0")
-#  start_date  :date
-#  end_date    :date
-#  parent_id   :integer
-#  category_id :integer
-#  user_id     :integer          not null
+#  id                   :integer          not null, primary key
+#  title                :string
+#  description          :text
+#  status               :integer          default("0")
+#  progress             :integer          default("0")
+#  start_date           :date
+#  end_date             :date
+#  overdue_notification :integer
+#  parent_id            :integer
+#  category_id          :integer
+#  user_id              :integer          not null
 #
 
 class Objective::Goal < ApplicationRecord

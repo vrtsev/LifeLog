@@ -1,0 +1,31 @@
+<div class="ui inverted vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">LifeLog</h4> 
+        <div class="ui inverted link list">
+          <%= link_to 'Главная', root_path, class: 'item' %>
+          <%= link_to 'Новости', '/news', class: 'item' %>
+          <%= link_to 'О сайте', '/about', class: 'item' %>
+          <%= link_to 'Контакты', '/contacts', class: 'item' %>
+        </div>
+      </div>
+      
+      <div class="three wide column">
+        <h4 class="ui inverted header">Проект</h4> 
+        <div class="ui inverted link list">
+          <%= link_to 'GitHub репозиторий', 'https://github.com/vrtsev/LifeLog', class: 'item' %>
+          <%= link_to 'Написать разработчику', '/contacts', class: 'item' %>
+          <%= link_to 'Тех. спецификации', 'https://github.com/vrtsev/LifeLog/wiki/Technical-Specification', class: 'item' %>
+          <%= link_to 'Исп. технологии', 'https://github.com/vrtsev/LifeLog/wiki/Tech.-stack', class: 'item' %>
+        </div>
+      </div>
+      
+      <div class="seven wide column">
+        <h4 class="ui inverted header">LifeLog Beta</h4> 
+        <p>Powered by Ruby on Rails. © LifeLog 2017. All rights reserved</p> 
+        <p>FlatKit Template by FlatFull</p> 
+      </div>
+    </div>
+  </div>
+</div>

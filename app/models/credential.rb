@@ -3,11 +3,9 @@
 # Table name: credentials
 #
 #  id         :integer          not null, primary key
-#  provider   :string
-#  uid        :string
-#  user_id    :integer
-#  token      :string
-#  secret     :string
+#  provider   :string           not null
+#  uid        :string           not null
+#  user_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

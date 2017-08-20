@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811183938) do
+ActiveRecord::Schema.define(version: 20170820120157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,15 @@ ActiveRecord::Schema.define(version: 20170811183938) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_credentials_on_user_id", using: :btree
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.string   "email"
+    t.string   "subject"
+    t.text     "message"
+    t.boolean  "readed",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "goals", force: :cascade do |t|

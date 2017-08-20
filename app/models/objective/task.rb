@@ -5,6 +5,7 @@
 #  id         :integer          not null, primary key
 #  title      :string
 #  status     :integer          default("0")
+#  position   :integer          default("0")
 #  user_id    :integer          not null
 #  goal_id    :integer          not null
 #  parent_id  :integer

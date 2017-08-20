@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   }
 
   get '/news_feed', to: 'news_feed#index'
+
+  get '/about', to: 'info_pages#about'
+  get '/contacts', to: 'info_pages#contacts'
+  post '/contacts/send_feedback', to: 'info_pages#send_feedback'
   
   # PUBLICATIONS
   # own resources
