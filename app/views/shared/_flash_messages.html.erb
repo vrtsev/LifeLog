@@ -1,0 +1,21 @@
+<% if flash[:notice].present? %>
+  <div class="box flash-message-box">
+    <div class="box-header primary">
+      <h3>
+        <i class="fa fa-check"></i>
+        <%= flash[:notice] %>
+      </h3>
+    </div>
+  </div>
+<% end %>
+
+<% if flash[:error].present? %>
+  <div class="box flash-message-box">
+    <div class="box-header danger">
+      <h3>
+        <i class="fa fa-exclamation"></i>
+        <%= flash[:error] %>
+      </h3>
+    </div>
+  </div>
+<% end %>

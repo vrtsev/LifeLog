@@ -1,10 +1,8 @@
-<div class="padding">
-  <div class="box center-block w-600 m-t">
-    <div class="box-header category-background-<%= @category.color %>">
-      <h2>Редактирование категории <b>'<%= @category.title %>'</b></h2>
-    </div>
-
-    <div class="box-divider m-a-0"></div>
-    <%= render partial: 'form', locals: { object: :category, url: objectives_category_path(@category), method: :patch } %>
+<div class="box center-block w-600 m-t">
+  <div class="box-header category-background-<%= @category.color %>">
+    <h2>Редактирование категории <b>'<%= @category.title %>'</b></h2>
   </div>
+
+  <div class="box-divider m-a-0"></div>
+  <%= render partial: 'form', locals: { object: :category, url: objectives_category_path(@category), method: :patch } %>
 </div>

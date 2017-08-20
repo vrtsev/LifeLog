@@ -38,6 +38,9 @@
             <!-- Content -->
             <div class="content col-md-6">
               <ul class="timeline">
+
+                <%= render partial: 'shared/flash_messages' %>
+                
                 <%= yield %>
               </ul>
             </div>

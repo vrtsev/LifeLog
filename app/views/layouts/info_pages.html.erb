@@ -50,6 +50,23 @@
         </div>
       </div>
 
+      <div class="ui container message-container m-t">
+        <% if flash[:notice].present? %>
+          <div class="ui positive message">
+            <div class="header">
+              <%= flash[:notice] %>
+            </div>
+          </div>
+        <% elsif flash[:error].present? %>
+          <div class="ui error message">
+            <div class="header">
+              Произошла ошибка
+            </div>
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+      </div>
+
       <%= yield %>
 
       <!-- Footer -->

@@ -1,65 +1,63 @@
 <%= form_for object, url: url, method: method do |f| %>
-  <div class="padding">
-    <div class="box">
-      
-      <!-- goal errors -->
-      <% if @goal.errors.any? %>
-        <div class="box-header error-box">
-          <h2><%= "#{pluralize(@goal.errors.count, "error")} prohibited this goal from being saved:" %>
-          <small>
-            <ul>
-              <% @goal.errors.full_messages.each do |message| %>
-                <li><%= message %>
-              <% end %>
-            </ul>
-          </small>
-        </div>
-      <% end %>
-      
-      <!-- goal header -->
-      <div class="box-header dker">
-        <h3><b><%= f.text_field :title, placeholder: 'Название цели', class: 'form-control' %></b></h3>
+  <div class="box">
+    
+    <!-- goal errors -->
+    <% if @goal.errors.any? %>
+      <div class="box-header error-box">
+        <h2><%= "#{pluralize(@goal.errors.count, "error")} prohibited this goal from being saved:" %>
+        <small>
+          <ul>
+            <% @goal.errors.full_messages.each do |message| %>
+              <li><%= message %>
+            <% end %>
+          </ul>
+        </small>
+      </div>
+    <% end %>
+    
+    <!-- goal header -->
+    <div class="box-header dker">
+      <h3><b><%= f.text_field :title, placeholder: 'Название цели', class: 'form-control' %></b></h3>
+    </div>
+
+    <!-- goal content -->
+    <div class="box-body">
+      <p class="m-a-0"><%= f.cktext_area :description %></p>
+
+      <div class="form-group m-t">
+        <%= f.select :status, Objective::Goal.statuses.keys.map { |s| [s.humanize, s] }, {}, class: 'form-control c-select' %>
       </div>
 
-      <!-- goal content -->
-      <div class="box-body">
-        <p class="m-a-0"><%= f.cktext_area :description %></p>
-
-        <div class="form-group m-t">
-          <%= f.select :status, Objective::Goal.statuses.keys.map { |s| [s.humanize, s] }, {}, class: 'form-control c-select' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { prompt: 'Без категории' }, class: "form-control c-select" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.text_field :all_tags, class: "form-control", placeholder: "Теги" %>
-        </div>
-
-        <div class="m-y text-center text-sm-center">
-          <div class="inline p-x text-center">
-            <span class="h4 block m-a-0"><%= f.date_select :start_date %></span>
-            <small class=" text-muted">Дата начала</small>
-          </div>
-
-          <div class="inline p-x b-l b-r text-center">
-            <small class="text-muted">Предупредить за</small>
-            <span class="h4 block m-a-0"><%= f.select :overdue_notification, (1..30).to_a %></span>
-            <small class="text-muted">дней до окончания цели</small>
-          </div>
-          
-          <div class="inline p-x text-center">
-            <span class="h4 block m-a-0"><%= f.date_select :end_date %></span>
-            <small class="text-muted">Срок выполнения</small>
-          </div>
-        </div>
+      <div class="form-group">
+        <%= f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { prompt: 'Без категории' }, class: "form-control c-select" %>
       </div>
 
-      <div class="dker p-a text-right">
-        <%= link_to 'Отмена', objectives_goals_path, class: 'btn white' %>
-        <%= f.submit 'Сохранить', class: 'btn success' %>
+      <div class="form-group">
+        <%= f.text_field :all_tags, class: "form-control", placeholder: "Теги" %>
       </div>
+
+      <div class="m-y text-center text-sm-center">
+        <div class="inline p-x text-center">
+          <span class="h4 block m-a-0"><%= f.date_select :start_date %></span>
+          <small class=" text-muted">Дата начала</small>
+        </div>
+
+        <div class="inline p-x b-l b-r text-center">
+          <small class="text-muted">Предупредить за</small>
+          <span class="h4 block m-a-0"><%= f.select :overdue_notification, (1..30).to_a %></span>
+          <small class="text-muted">дней до окончания цели</small>
+        </div>
+        
+        <div class="inline p-x text-center">
+          <span class="h4 block m-a-0"><%= f.date_select :end_date %></span>
+          <small class="text-muted">Срок выполнения</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="dker p-a text-right">
+      <%= link_to 'Отмена', objectives_goals_path, class: 'btn white' %>
+      <%= f.submit 'Сохранить', class: 'btn success' %>
     </div>
   </div>
 <% end %>

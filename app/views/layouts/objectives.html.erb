@@ -144,7 +144,11 @@
                   <div class="row-row">
                     <div class="row-body scrollable">
                       <div class="row-inner">
-                        <%= yield %>
+                        <div class="padding">
+                          <%= render partial: 'shared/flash_messages' %>
+
+                          <%= yield %>
+                        </div>
                       </div>
                     </div>
                   </div>
