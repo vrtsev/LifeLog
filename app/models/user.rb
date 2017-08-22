@@ -54,6 +54,8 @@ class User < ApplicationRecord
   has_many :goals, class_name: 'Objective::Goal'
   has_many :goal_categories, class_name: 'Objective::Category'
 
+  enum role: %i[default_user admin support]
+
   def follow(other_user)
     following << other_user
   end

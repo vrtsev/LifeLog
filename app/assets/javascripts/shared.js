@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require ahoy
 //= require semantic-ui
 //= require ckeditor/init
 //= require highlight.pack

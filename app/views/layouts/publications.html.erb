@@ -43,8 +43,11 @@
                 <div class="box">
                   <div class="p-a-md text-center">
                     <p><%= image_tag(current_user.photo_url, class: 'img-circle w-160') %></p>
+
+                    <%= set_role_label(current_user) %>
                     <%= link_to current_user.name, posts_path, class: "text-md block" %>
                     <p><small><%= current_user.status %></small></p>
+                    
                     <div class="text-center m-t">
                       <%= link_to 'Создать запись', new_post_path, class: 'btn btn-sm rounded primary m-y-xs' %>
                       <%= link_to 'Профиль', edit_user_registration_path, class: "btn btn-sm rounded btn-outline b-primary " %>

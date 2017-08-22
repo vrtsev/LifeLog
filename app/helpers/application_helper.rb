@@ -17,4 +17,13 @@ module ApplicationHelper
     return false unless params[:controller] 
     params[:controller].include?(names)
   end
+
+  def set_role_label(user)
+    label = case user.role
+    when 'admin' then '<span class="label label-md rounded danger">Admin</span>'
+    when 'support' then '<span class="label label-md rounded deep-purple">Поддержка</span>'
+    end
+
+    label.html_safe if label.present?
+  end
 end

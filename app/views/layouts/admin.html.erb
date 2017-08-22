@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Админ-панель | LifeLog</title>
+    <%= stylesheet_link_tag "admin", media: 'all', 'data-turbolinks-track': 'reload'  %>
+    <%= javascript_include_tag "admin", 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+
+    <!-- vendor style -->
+    <link rel="stylesheet" href="/assets/animate.css/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/glyphicons/glyphicons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/material-design-icons/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/styles/app.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/font.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="app" id="app">
+      <div id="content" class="app-content box-shadow-z0" role="main">
+
+        <!-- Navbar -->
+        <div class="app-header navbar-md white box-shadow">
+          <%= render partial: 'layouts/shared/navbar'%>
+        </div>
+
+        <!-- Page content -->
+        <div ui-view class="app-body container" id="view">
+          <div class="padding">
+            <div class="row">
+              <div class="col-sm-6 col-md-3">
+
+                <div class="box text-center">
+
+                  <div class="p-a-md">
+                    <p><%= image_tag(current_user.photo_url, class: 'img-circle w-96') %></p>
+                    <a href="" class="text-md block"><%= current_user.name %></a>
+                    <p><small>Администратор LifeLog</small></p>
+
+                    <%= link_to 'На сайт', news_feed_path, class: 'btn btn-sm btn-outline rounded b-accent' %>
+                  </div>
+
+                  <div class="row row-col no-gutter b-t warn">
+                    <div class="col-xs-4 b-r">
+                      <a class="p-y block text-center" ui-toggle-class="">
+                        <strong class="block"><%= @users.count %></strong>
+                        <span class="block">Польз.</span>
+                      </a>
+                    </div>
+                    <div class="col-xs-4 b-r">
+                      <a class="p-y block text-center" ui-toggle-class="">
+                        <strong class="block">12</strong>
+                          <span class="block">Посещений</span>
+                      </a>
+                    </div>
+                    <div class="col-xs-4">
+                      <a class="p-y block text-center" ui-toggle-class="">
+                        <strong class="block">20</strong>
+                          <span class="block">Событий</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="box">
+                  <div id='category-list' class="list-group m-b">
+                    <%= link_to admin_statistics_events_path, class: "list-group-item category-border-red" do %>
+                      <span class="pull-right"><i class="fa fa-asterisk"></i></span>
+                      События
+                    <% end %>
+
+                    <%= link_to admin_statistics_trackings_path, class: "list-group-item category-border-red" do %>
+                      <span class="pull-right"><i class="fa fa-line-chart"></i></span>
+                      Trackings
+                    <% end %>
+
+                    <%= link_to admin_statistics_visits_path, class: "list-group-item category-border-red" do %>
+                      <span class="pull-right"><i class="fa fa-users "></i></span>
+                      Посещения
+                    <% end %>
+
+                    <hr>
+
+                    <%= link_to admin_users_path, class: "list-group-item category-border-red" do %>
+                      <span class="pull-right"><i class="fa fa-user"></i></span>
+                      Пользователи
+                    <% end %>
+
+                    <%= link_to admin_feedbacks_path, class: "list-group-item category-border-red" do %>
+                      <span class="pull-right"><i class="fa fa-comments-o"></i></span>
+                      Feedbacks
+                    <% end %>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-12 col-md-9">
+                <%= yield %>
+              </div>
+            </div>
+        </div>
+
+      <%= render partial: 'layouts/shared/theme_switcher' %>
+    </div>
+  </body>
+</html>

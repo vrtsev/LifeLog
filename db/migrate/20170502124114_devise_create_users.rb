@@ -5,6 +5,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.string :name,                 null: false
       t.string :status
       t.string :photo
+      t.integer :role,                default: 0
       t.boolean :allow_subscriptions, default: true
       t.boolean :visible,             default: true
 

@@ -1,0 +1,15 @@
+<% @feedbacks.each do |feedback| %>
+  <div class="box">
+    <div class="box-header dker">
+      <h3><%= feedback.subject %></h3>
+      <small><%= feedback.email %></small>
+    </div>
+    <div class="box-body">
+      <p class="m-a-0"><%= feedback.message %></p>
+    </div>
+  </div>
+<% end %>
+
+<div class="text-center">
+  <%= will_paginate @posts, renderer: ::PaginateHelper::LinkRenderer %>
+</div>

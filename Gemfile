@@ -26,6 +26,7 @@ gem 'devise'
 gem "omniauth-google-oauth2"
 
 # Other
+gem 'ahoy_matey'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 

@@ -32,4 +32,7 @@ Rails.application.config.assets.precompile += %w(
 
   news_feed.css 
   news_feed.js
+
+  admin.css 
+  admin.js
 )

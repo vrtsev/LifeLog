@@ -12,6 +12,16 @@ Rails.application.routes.draw do
   get '/about', to: 'info_pages#about'
   get '/contacts', to: 'info_pages#contacts'
   post '/contacts/send_feedback', to: 'info_pages#send_feedback'
+
+  namespace :admin do
+    namespace :statistics do
+      get '/visits', to: 'statistics#visit'
+      get '/events', to: 'statistics#events'
+      get '/trackings', to: 'statistics#trackings'
+    end
+    resources :feedbacks
+    resources :users
+  end
   
   # PUBLICATIONS
   # own resources

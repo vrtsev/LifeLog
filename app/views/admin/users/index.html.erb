@@ -1,0 +1,35 @@
+<div class="box">
+  <div class="box-header">
+    <h2>Список всех пользователей</h2>
+  </div>
+  <table class="table table-striped b-t">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Фото</th>
+        <th>Имя</th>
+        <th>Подписки</th>
+        <th>Видимость</th>
+        <th>email</th>
+        <th>Зарегистрирован</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= image_tag(user.photo_url, class: 'img-circle w-48') %></td>
+          <td><%= user.name %></td>
+          <td><%= user.allow_subscriptions ? 'Разрешены' : 'Запрещены' %></td>
+          <td><%= user.visible ? 'Видимый' : 'Скрыт' %></td>
+          <td><%= user.email %></td>
+          <td><%= format_datetime(user.created_at) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="text-center">
+  <%= will_paginate @posts, renderer: ::PaginateHelper::LinkRenderer %>
+</div>

@@ -43,8 +43,11 @@
                 <div class="box">
                   <div class="p-a-md text-center">
                     <p><%= image_tag(@user.photo_url, class: 'img-circle w-160') %></p>
+                    
+                    <%= set_role_label(@user) %>
                     <%= link_to @user.name, user_posts_path(@user), class: "text-md block" %>
                     <p><small><%= @user.status %></small></p>
+                    
                     <div id="follow_form" class="text-center m-t">
                       <% if current_user.following?(@user) %>
                         <%= render partial: 'layouts/user_publications/unfollow' %>
