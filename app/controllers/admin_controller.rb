@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   layout 'admin'
   before_action :set_variables
+  skip_before_action :track_activity
 
   private
 
