@@ -1,0 +1,25 @@
+<div class="box">
+  <div class="box-header">
+    <h2>Статистика количества посещений</h2>
+  </div>
+  <table class="table table-striped b-t">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Кол-во посещений</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @grouped_visits.each do |date, visits| %>
+        <tr>
+          <td><%= format_datetime(date) %></td>
+          <td><%= visits.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="text-center">
+  <%= will_paginate @paged_visits, renderer: ::PaginateHelper::LinkRenderer %>
+</div>

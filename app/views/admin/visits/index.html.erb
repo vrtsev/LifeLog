@@ -1,0 +1,37 @@
+<div class="box">
+  <div class="box-header">
+    <h2>Список всех пользователей</h2>
+    <small>By default, a new visit is created after 4 hours of inactivity</small>
+  </div>
+  <table class="table table-striped b-t">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Пользователь</th>
+        <th>IP-адрес</th>
+        <th>Дата</th>
+        <th>...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @visits.each do |visit| %>
+        <tr>
+          <td><%= visit.id %></td>
+          <td>
+            <% if visit.user.present? %>
+              <%= image_tag(visit.user.photo_url, class: 'img-circle w-32') %> 
+              <%= link_to visit.user.name, user_posts_path(visit.user) %>
+            <% end %>
+          </td>
+          <td><%= visit.ip %></td>
+          <td><%= format_datetime(visit.started_at) %></td>
+          <td><%= link_to 'Подробнее', admin_visit_path(visit) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="text-center">
+  <%= will_paginate @visits, renderer: ::PaginateHelper::LinkRenderer %>
+</div>

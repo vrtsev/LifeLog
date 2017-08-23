@@ -1,0 +1,30 @@
+<div class="b-b b-primary nav-active-primary">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="" data-toggle="tab" data-target="#visit-events-tab">События и действия</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="" data-toggle="tab" data-target="#visit-info-tab">Детальная информация</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="box">
+  <div class="box-header clear">
+    <%= link_to 'Список всех посещений', admin_visits_path, class: 'btn btn-default pull-right' %>
+    <h2>
+      <%= image_tag(@visit.user.photo_url, class: 'img-circle w-32') %>
+      <b><%= @visit.user.name %></b> / <span class="text-muted"><%= format_datetime(@visit.started_at) %></span>
+    </h2>
+  </div>
+
+  <div class="tab-content p-a m-b-md">
+    <div class="tab-pane animated fadeIn text-muted active" id="visit-events-tab">
+      <%= render partial: 'visit_events' %>
+    </div>
+    <div class="tab-pane animated fadeIn text-muted" id="visit-info-tab">
+      <%= render partial: 'visit_info' %>
+    </div>
+  </div>
+</div>

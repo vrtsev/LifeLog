@@ -44,22 +44,16 @@
                   </div>
 
                   <div class="row row-col no-gutter b-t warn">
-                    <div class="col-xs-4 b-r">
+                    <div class="col-xs-6 b-r">
                       <a class="p-y block text-center" ui-toggle-class="">
                         <strong class="block"><%= @users.count %></strong>
                         <span class="block">Польз.</span>
                       </a>
                     </div>
-                    <div class="col-xs-4 b-r">
+                    <div class="col-xs-6">
                       <a class="p-y block text-center" ui-toggle-class="">
-                        <strong class="block">12</strong>
+                        <strong class="block"><%= @visits_per_day %></strong>
                           <span class="block">Посещений</span>
-                      </a>
-                    </div>
-                    <div class="col-xs-4">
-                      <a class="p-y block text-center" ui-toggle-class="">
-                        <strong class="block">20</strong>
-                          <span class="block">Событий</span>
                       </a>
                     </div>
                   </div>
@@ -67,22 +61,15 @@
                
                 <div class="box">
                   <div id='category-list' class="list-group m-b">
-                    <%= link_to admin_statistics_events_path, class: "list-group-item category-border-red" do %>
-                      <span class="pull-right"><i class="fa fa-asterisk"></i></span>
-                      События
-                    <% end %>
-
-                    <%= link_to admin_statistics_trackings_path, class: "list-group-item category-border-red" do %>
-                      <span class="pull-right"><i class="fa fa-line-chart"></i></span>
-                      Trackings
-                    <% end %>
-
-                    <%= link_to admin_statistics_visits_path, class: "list-group-item category-border-red" do %>
+                    <%= link_to admin_visits_path, class: "list-group-item category-border-red" do %>
                       <span class="pull-right"><i class="fa fa-users "></i></span>
-                      Посещения
+                      Список посещений
                     <% end %>
 
-                    <hr>
+                    <%= link_to admin_visit_statistics_path, class: "list-group-item category-border-red" do %>
+                      <span class="pull-right"><i class="fa fa-line-chart "></i></span>
+                      Статистика посещений
+                    <% end %>
 
                     <%= link_to admin_users_path, class: "list-group-item category-border-red" do %>
                       <span class="pull-right"><i class="fa fa-user"></i></span>

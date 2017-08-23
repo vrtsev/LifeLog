@@ -6,6 +6,7 @@
 #  name                   :string           not null
 #  status                 :string
 #  photo                  :string
+#  role                   :integer          default("0")
 #  allow_subscriptions    :boolean          default("true")
 #  visible                :boolean          default("true")
 #  email                  :string           default(""), not null

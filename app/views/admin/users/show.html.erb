@@ -1,0 +1,68 @@
+<div class="box">
+  <div class="box-header clear">
+    <%= link_to 'Список всех пользователей', admin_users_path, class: 'btn btn-default pull-right' %>
+    <h2>
+      <%= image_tag(@user.photo_url, class: 'img-circle w-32') %>
+      <b><%= @user.name %></b>
+    </h2>
+  </div>
+
+  <table class="table table-striped b-t">
+    <tr>
+      <th>ID<td>
+      <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <th>Имя<td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th>Статус<td>
+      <td><%= @user.status %></td>
+    </tr>
+    <tr>
+      <th>Роль<td>
+      <td><%= @user.role %></td>
+    </tr>
+    <tr>
+      <th>Подписки<td>
+      <td><%= @user.allow_subscriptions %></td>
+    </tr>
+    <tr>
+      <th>Видимость<td>
+      <td><%= @user.visible %></td>
+    </tr>
+    <tr>
+      <th>email<td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <th>Кол-во входов<td>
+      <td><%= @user.sign_in_count %></td>
+    </tr>
+    <tr>
+      <th>Текущий вход в <td>
+      <td><%= @user.current_sign_in_at %></td>
+    </tr>
+    <tr>
+      <th>Последний вход в<td>
+      <td><%= @user.last_sign_in_at %></td>
+    </tr>
+    <tr>
+      <th>Текущий IP<td>
+      <td><%= @user.current_sign_in_ip %></td>
+    </tr>
+    <tr>
+      <th>Последний IP<td>
+      <td><%= @user.last_sign_in_ip %></td>
+    </tr>
+    <tr>
+      <th>Зарегистрирован<td>
+      <td><%= @user.created_at %></td>
+    </tr>
+    <tr>
+      <th>Профиль обновлен<td>
+      <td><%= @user.updated_at %></td>
+    </tr>
+  </table>
+</div>

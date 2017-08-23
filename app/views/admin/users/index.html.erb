@@ -6,24 +6,27 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Фото</th>
         <th>Имя</th>
         <th>Подписки</th>
         <th>Видимость</th>
-        <th>email</th>
         <th>Зарегистрирован</th>
+        <th>...</th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
-          <td><%= image_tag(user.photo_url, class: 'img-circle w-48') %></td>
-          <td><%= user.name %></td>
+          <td>
+            <%= link_to user_posts_path(user) do %>
+              <%= image_tag(user.photo_url, class: 'img-circle w-48') %>
+              <%= user.name %>
+            <% end %>
+          </td>
           <td><%= user.allow_subscriptions ? 'Разрешены' : 'Запрещены' %></td>
           <td><%= user.visible ? 'Видимый' : 'Скрыт' %></td>
-          <td><%= user.email %></td>
           <td><%= format_datetime(user.created_at) %></td>
+          <td><%= link_to 'Подробнее', admin_user_path(user) %></td>
         </tr>
       <% end %>
     </tbody>

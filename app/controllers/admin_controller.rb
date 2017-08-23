@@ -6,5 +6,6 @@ class AdminController < ApplicationController
 
   def set_variables
     @users = User.all
+    @visits_per_day = Visit.where("DATE(started_at) = ?", DateTime.now).count
   end
 end

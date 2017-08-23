@@ -14,13 +14,10 @@ Rails.application.routes.draw do
   post '/contacts/send_feedback', to: 'info_pages#send_feedback'
 
   namespace :admin do
-    namespace :statistics do
-      get '/visits', to: 'statistics#visit'
-      get '/events', to: 'statistics#events'
-      get '/trackings', to: 'statistics#trackings'
-    end
-    resources :feedbacks
-    resources :users
+    resources :feedbacks, only: :index
+    resources :users, only: %i[index show]
+    resources :visits, only: %i[index show]
+    get '/visit_statistics', to: 'visits#statistic'
   end
   
   # PUBLICATIONS
