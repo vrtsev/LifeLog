@@ -1,7 +1,16 @@
+// Standart
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+
+// Third party
 //= require semantic-ui
+
+// Custom
+//= require shared
+
+// JS Code
+//= require_self
 
 $(document).ready(function() {
   // fix menu when passed

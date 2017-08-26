@@ -35,7 +35,7 @@ Ckeditor.setup do |config|
   # To reduce the asset precompilation time, you can limit plugins and/or languages to those you need:
   # By default: nil (no limit)
   config.assets_languages = ['en', 'ru']
-  # config.assets_plugins = ['image', 'smiley']
+  config.assets_plugins   = ['pbckcode']
 
   # CKEditor CDN
   # More info here http://cdn.ckeditor.com/

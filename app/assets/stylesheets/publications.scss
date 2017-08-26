@@ -1,68 +1,9 @@
-@import 'shared';
+// third-party
+@import 'lib/highlight_js';
 
-.comment-dropdown {
-  float: right;
-};
+// ours
+@import 'lib/colors';
+@import 'lib/shared';
 
-.post-hidden {
-  opacity: 0.4;
-  filter: blur(1px);
-  transition:.5s;
-}
-
-.post-hidden:hover {
-  opacity: 1;
-  filter: none;
-}
-
-.sl-content {
-  padding-bottom: 0 !important;
-}
-
-.comment-likes, .comment-post-link {
-  float: right;
-  margin-right: 10px;
-}
-
-.liked-icon {
-  color: #2ABBA8;
-}
-
-.p-x, .no-content {
-  text-align: center;
-}
-
-.search-comment-item {
-  margin-left: 1rem;
-}
-
-.search-comment-post {
-  padding: 10px;
-}
-
-.pinned-post-header {
-  background-color: #F0BABA !important;
-}
-
-
-
-// Colors
-.color-grey {
-  background-color: #F6F6F6;
-}
-
-.color-red, .b-l-red, .text-red {
-  background-color: #F09A9A;
-}
-
-.color-yellow {
-  background-color: #EDC74C;
-}
-
-.color-green {
-  background-color: #A7E753;
-}
-
-.color-blue {
-  background-color: #3F51B5;
-}
+// pages
+@import 'publications/main';

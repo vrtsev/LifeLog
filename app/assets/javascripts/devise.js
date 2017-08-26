@@ -1,6 +1,10 @@
+// Standart
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+
+// JS Code
+//= require_self
 
 $(document)
   .ready(function() {

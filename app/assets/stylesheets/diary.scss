@@ -1,74 +1,9 @@
-@import 'shared';
+// third-party
+@import 'lib/highlight_js';
 
-span.tl-date {
-  text-align: center;
-  font-size: 1.2em;
-  margin-left: -6em;
-}
+// ours
+@import 'lib/colors';
+@import 'lib/shared';
 
-span.tl-back-btn {
-  top: 50px;
-  span.label {
-    font-size: 1.1em;
-  }
-}
-
-div.tl-wrap {
-  padding: 15px 0 0px 20px;
-}
-
-.sidebar {
-  margin-top: 15px;
-}
-
-.post-borderline {
-  min-height: 100%;
-}
-
-ul.nav.nav-pills.nav-sm {
-  border: none;
-
-  li.nav-item a.nav-link {
-    font-size: large;
-  }
-}
-
-.active-btn {
-  color: #00489d
-}
-
-// Comments
-.sl-content {
-  padding-right: 30px;
-}
-
-// Categories
-.category-fields {
-  display: flex;
-}
-
-.list-body {
-  margin: 0 !important;
-}
-
-.category-color-label {
-  margin-right: 5px;
-}
-
-.active-category {
-  border-left: 5px solid #0cc2aa;
-  background-color: rgba(12, 194, 170, 0.05);
-}
-
-.diary-avatar {
-  margin-bottom: -3rem
-}
-
-// Search
-.search {
-  margin-top: 15px;
-}
-
-.flash-message-box {
-  margin-top: 15px;
-}
+// pages
+@import 'diary/main';
