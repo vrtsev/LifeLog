@@ -21,6 +21,8 @@
         <!-- User dropdown -->
         <div class="dropdown-menu pull-right dropdown-menu-scale">
           <%= link_to 'Админ-панель', admin_users_path, class: "dropdown-item" if (current_user.admin? || current_user.support?) %>
+          <%= link_to 'Поддержка', '/support', class: "dropdown-item" %>
+          <%= link_to 'Написать разработчикам', '/contacts', class: "dropdown-item" %>
           <%= link_to 'Настройки', edit_user_registration_path, class: "dropdown-item" %>
           <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
         </div>

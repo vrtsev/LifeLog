@@ -7,6 +7,7 @@
       <tr>
         <th>#</th>
         <th>Имя</th>
+        <th>url</th>
         <th>Подписки</th>
         <th>Видимость</th>
         <th>Зарегистрирован</th>
@@ -23,6 +24,7 @@
               <%= user.name %>
             <% end %>
           </td>
+          <td><%= link_to "/#{user.unique_url}", user_posts_path(user) %></td>
           <td><%= user.allow_subscriptions ? 'Разрешены' : 'Запрещены' %></td>
           <td><%= user.visible ? 'Видимый' : 'Скрыт' %></td>
           <td><%= format_datetime(user.created_at) %></td>

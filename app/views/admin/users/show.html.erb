@@ -3,7 +3,7 @@
     <%= link_to 'Список всех пользователей', admin_users_path, class: 'btn btn-default pull-right' %>
     <h2>
       <%= image_tag(@user.photo_url, class: 'img-circle w-32') %>
-      <b><%= @user.name %></b>
+      <b><%= link_to @user.name, user_posts_path(@user) %></b>
     </h2>
   </div>
 
@@ -11,6 +11,10 @@
     <tr>
       <th>ID<td>
       <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <th>url<td>
+      <td><%= link_to "/#{@user.unique_url}", user_posts_path(@user) %></td>
     </tr>
     <tr>
       <th>Имя<td>

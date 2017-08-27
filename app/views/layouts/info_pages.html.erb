@@ -19,11 +19,8 @@
         <%= link_to 'Контакты', '/contacts', class: 'item' %>
 
         <div class="right menu">
-          <div class="item m-r">
+          <div class="ui buttons">
             <%= link_to 'Вход', new_user_session_path, class: 'ui button' %>
-          </div>
-
-          <div class="item">
             <%= link_to 'Регистрация', new_user_registration_path, class: 'ui positive button' %>
           </div>
         </div>
@@ -42,8 +39,14 @@
             <%= link_to 'Контакты', '/contacts', class: 'item' %>
 
             <div class="right item">
-              <%= link_to 'Вход', new_user_session_path, class: 'ui  basic button m-r' %>
-              <%= link_to 'Регистрация', new_user_registration_path, class: 'ui green basic button' %>
+              <% if current_user.present? %>
+                <%= link_to posts_path, class: 'ui labaled icon button m-r' do %>
+                  <i class="user icon"></i> <%= current_user.name %>
+                <% end %>
+              <% else %>
+                <%= link_to 'Вход', new_user_session_path, class: 'ui button m-r' %>
+                <%= link_to 'Регистрация', new_user_registration_path, class: 'ui green button' %>
+              <% end %>
             </div>
           </div>
         
