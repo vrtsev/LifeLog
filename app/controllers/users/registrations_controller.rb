@@ -22,6 +22,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit \
       :account_update,
-      keys: %i[name photo status visible allow_subscriptions]
+      keys: %i[name photo status visible allow_subscriptions unique_url]
   end
 end

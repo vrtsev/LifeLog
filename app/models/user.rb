@@ -24,6 +24,9 @@
 #
 
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :unique_url, use: :slugged
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -56,6 +59,8 @@ class User < ApplicationRecord
   has_many :goal_categories, class_name: 'Objective::Category'
 
   enum role: %i[default_user admin support]
+
+  validates :unique_url, uniqueness: true, if: :unique_url?
 
   def follow(other_user)
     following << other_user

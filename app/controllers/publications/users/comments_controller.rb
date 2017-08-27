@@ -1,5 +1,5 @@
 class Publications::Users::CommentsController < Publications::UsersController
-  before_action :authenticate_user!, :set_user, :set_post, :check_commentable
+  before_action :authenticate_user!, :set_post, :check_commentable
   before_action :set_comment, :check_author, only: %i[edit update destroy]
 
   def new
@@ -43,10 +43,6 @@ class Publications::Users::CommentsController < Publications::UsersController
   end
 
   private
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
 
   def set_post
     @post = Publication::Post.find(params[:post_id])

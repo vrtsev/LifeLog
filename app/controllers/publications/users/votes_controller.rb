@@ -1,5 +1,5 @@
 class Publications::Users::VotesController < ApplicationController
-  before_action :set_user, :set_post, :set_comment
+  before_action :set_post, :set_comment
 
   def create
     @vote = @comment.votes.new(user: current_user)
@@ -20,10 +20,6 @@ class Publications::Users::VotesController < ApplicationController
   end
 
   private
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
 
   def set_post
     @post = @user.publication_posts.find(params[:post_id])

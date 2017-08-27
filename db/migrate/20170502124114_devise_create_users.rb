@@ -8,6 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.integer :role,                default: 0
       t.boolean :allow_subscriptions, default: true
       t.boolean :visible,             default: true
+      t.string  :unique_url,          unique: true
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

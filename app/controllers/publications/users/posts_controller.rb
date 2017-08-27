@@ -1,6 +1,4 @@
 class Publications::Users::PostsController < Publications::UsersController
-  before_action :set_user
-
   def index
     @posts = @user.publication_posts.visible.paginate(page: params[:page], per_page: 10)
     @categories = @user.publication_categories
@@ -12,11 +10,5 @@ class Publications::Users::PostsController < Publications::UsersController
     redirect_to user_posts_path(@user) unless @post.visible
     @comments = @post.comments.order(created_at: :desc)
                      .paginate(page: params[:page], per_page: 10)
-  end
-
-  private
-
-  def set_user
-    @user = User.find(params[:user_id])
   end
 end

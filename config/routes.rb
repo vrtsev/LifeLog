@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   resources :search, only: :index, module: 'publications'
 
   # resources of other people
+  get ':user_id', to: 'publications/users/posts#index'
+
   resources :users, only: %i[index show], module: 'publications' do
     resources :categories, only: :show, module: 'users'
     resources :posts, only: %i[index show], module: 'users' do
