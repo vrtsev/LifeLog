@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :track_activity
+  before_action :authenticate_user!, :track_activity
 
   private
 
