@@ -1,6 +1,7 @@
 class LandingPageController < ApplicationController
   layout 'landing_page'
   before_action :check_auth
+  skip_before_action :authenticate_user!
 
   def index
     @blog_posts_count      = Publication::Post.count

@@ -1,5 +1,6 @@
 class InfoPagesController < ApplicationController
   layout 'info_pages'
+  skip_before_action :authenticate_user!
 
   def about
   end
