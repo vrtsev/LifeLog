@@ -8,12 +8,11 @@ class Publications::CommentsController < PublicationsController
   end
 
   def create
-    @comment = @post.comments.new(comment_params)
-    @comment.user = current_user
+    @comment = @post.comments.new(comment_params.merge(user: current_user))
 
     if @comment.save
-      redirect_to post_path(@post),
-                  notice: 'Comment was successfully created.'
+      flash[:notice] = 'Comment was successfully created'
+      redirect_to post_path(@post)
     else
       render :new
     end
@@ -21,8 +20,8 @@ class Publications::CommentsController < PublicationsController
 
   def update
     if @comment.update(comment_params)
-      redirect_to post_path(@post),
-                  notice: 'Comment was successfully updated.'
+      flash[:notice] = 'Comment was successfully updated'
+      redirect_to post_path(@post)
     else
       render :edit
     end
@@ -30,8 +29,9 @@ class Publications::CommentsController < PublicationsController
 
   def destroy
     @comment.destroy
-    redirect_to post_path(@post),
-                notice: 'Comment was successfully destroyed.'
+    flash[:notice] = 'Comment was successfully updated.'
+
+    redirect_to post_path(@post)
   end
 
   private

@@ -18,7 +18,6 @@
 #
 
 class Publication::Post < Post
-  self.per_page = 10
   belongs_to :category,
              optional: true,
              class_name: 'Publication::Category'

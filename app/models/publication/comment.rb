@@ -14,6 +14,5 @@
 class Publication::Comment < Comment
   belongs_to :post, class_name: 'Publication::Post'
 
-  has_many   :votes, class_name: 'Publication::Vote'
-  # has_many   :replies, class_name: 'Publication::Comment'
+  has_many   :votes, class_name: 'Publication::Vote', counter_cache: true
 end

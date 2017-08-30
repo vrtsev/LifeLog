@@ -1,14 +1,16 @@
 class Publications::PostsController < PublicationsController
-  before_action :set_post, only: %i[show edit update destroy pin unpin]
+  before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = current_user.publication_posts.order(created_at: :desc)
-                         .paginate(page: params[:page], per_page: 10)
+    scope = current_user.publication_posts.includes(:tags, :taggings).newly
+
+    @pinned_posts = scope.pinned
+    @posts        = scope.page(params[:page])
   end
 
   def show
-    @comments = @post.comments.all.order(created_at: :desc)
-                     .paginate(page: params[:page], per_page: 10)
+    @comments = @post.comments.includes(:votes).newly
+                     .page(params[:page])
   end
 
   def new
@@ -20,8 +22,9 @@ class Publications::PostsController < PublicationsController
 
     if @post.save
       notify_followers
-      redirect_to post_path(@post),
-                  notice: 'Post was successfully created.'
+      flash[:notice] = 'Post was successfully created'
+
+      redirect_to post_path(@post)
     else
       render :new
     end
@@ -30,10 +33,13 @@ class Publications::PostsController < PublicationsController
   def edit; end
 
   def update
-    if @post.update(post_params)
-      set_supplement_date if @post.supplemented
-      redirect_to post_path(@post),
-                  notice: 'Post was successfully updated.'
+    @post.assign_attributes(post_params)
+    @post.supplemented_at = DateTime.now if @post.supplemented_changed?
+
+    if @post.save
+      flash[:notice] = 'Post was successfully updated'
+
+      redirect_to post_path(@post)
     else
       render :edit
     end
@@ -41,7 +47,9 @@ class Publications::PostsController < PublicationsController
 
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: 'Post was successfully destroyed.'
+    flash[:notice] = 'Post was successfully destroyed'
+
+    redirect_to posts_url
   end
 
   private
@@ -53,12 +61,8 @@ class Publications::PostsController < PublicationsController
   end
 
   def set_post
-    @post = current_user.publication_posts.find(params[:id])
-  end
-
-  def set_supplement_date
-    @post.supplemented_at = DateTime.now
-    @post.save
+    @post = current_user.publication_posts.includes(:tags, :taggings)
+                        .find(params[:id])
   end
 
   def post_params

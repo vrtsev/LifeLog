@@ -26,8 +26,8 @@ class Post < ApplicationRecord
   validates :content, length: { minimum: 2 }
 
   scope :supplemented, (-> { where supplemented: true })
-  scope :pinned, (-> { where pinned: true })
-  scope :unpinned, (-> { where pinned: false })
-  scope :visible, (-> { where visible: true })
-  scope :commentable, (-> { where commentable: true })
+  scope :pinned,       (-> { where pinned: true })
+  scope :unpinned,     (-> { where pinned: false })
+  scope :visible,      (-> { where visible: true })
+  scope :commentable,  (-> { where commentable: true })
 end

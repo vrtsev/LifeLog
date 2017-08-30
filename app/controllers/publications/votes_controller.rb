@@ -9,14 +9,15 @@ class Publications::VotesController < PublicationsController
     else
       flash[:error] = 'Error. Try again'
     end
+
     redirect_to post_path(@post)
   end
 
   def destroy
-    @vote = @comment.votes.find(params[:id])
-    @vote.destroy
-    redirect_to post_path(@post),
-                notice: 'Vote was successfully destroyed.'
+    @vote = @comment.votes.find(params[:id]).destroy
+    flash[:notice] = 'Vote was successfully destroyed.'
+
+    redirect_to post_path(@post)
   end
 
   private
@@ -26,6 +27,7 @@ class Publications::VotesController < PublicationsController
   end
 
   def set_comment
-    @comment = @post.comments.find(params[:comment_id])
+    @comment = @post.comments.includes(:user, :votes)
+                    .find(params[:comment_id])
   end
 end

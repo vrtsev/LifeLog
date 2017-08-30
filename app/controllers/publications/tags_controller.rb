@@ -1,12 +1,17 @@
 class Publications::TagsController < PublicationsController
   def show
     @tag = Tag.find_by(name: params[:name])
-
     return unless @tag.present?
-    scope = Publication::Post.joins(:tags)
-                             .where(tags: { name: @tag.name })
-    
-    @posts    = scope.paginate(page: params[:posts_page], per_page: 10)
-    @my_posts = scope.where(posts: { user: current_user }).paginate(page: params[:my_posts_page], per_page: 10)
+
+    @posts    = scope.page(params[:posts_page])
+    @my_posts = scope.where(posts: { user: current_user })
+                     .page(params[:my_posts_page])
+  end
+
+  private
+
+  def scope
+    Publication::Post.includes(:tags, :taggings, :user)
+                     .where(tags: { name: @tag.name })
   end
 end

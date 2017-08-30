@@ -1,8 +1,8 @@
 class Publications::CategoriesController < PublicationsController
-  before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_category, except: %i[new create]
 
   def show
-    @posts = @category.publication_posts.paginate(page: params[:page], per_page: 10)
+    @posts = @category.publication_posts.page(params[:page])
   end
 
   def new; end
@@ -13,8 +13,8 @@ class Publications::CategoriesController < PublicationsController
     @category = current_user.publication_categories.new(category_params)
 
     if @category.save
-      redirect_to category_path(@category),
-                  notice: 'Category was successfully created.'
+      flash[:notice] = 'Category was successfully created'
+      redirect_to category_path(@category)
     else
       render :new
     end
@@ -22,8 +22,8 @@ class Publications::CategoriesController < PublicationsController
 
   def update
     if @category.update(category_params)
-      redirect_to category_path(@category),
-                  notice: 'Category was successfully updated.'
+      flash[:notice] = 'Category was successfully updated'
+      redirect_to category_path(@category)
     else
       render :edit
     end
@@ -31,8 +31,9 @@ class Publications::CategoriesController < PublicationsController
 
   def destroy
     @category.destroy
-    redirect_to posts_url,
-                notice: 'Category was successfully destroyed.'
+    flash[:notice] = 'Category was successfully destroyed'
+
+    redirect_to posts_url
   end
 
   private
