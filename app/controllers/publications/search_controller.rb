@@ -10,7 +10,7 @@ class Publications::SearchController < PublicationsController
   private
 
   def find_tags
-    scope = Tag.joins(:taggings).joins(:posts)
+    scope = Tag.includes(:taggings, :posts)
                .where(posts: { user: current_user, type: 'Publication::Post' })
                .distinct
     return scope.none unless params[:query].present?

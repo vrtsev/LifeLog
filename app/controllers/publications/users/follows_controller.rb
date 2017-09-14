@@ -1,20 +1,20 @@
-class Publications::Users::FollowsController < ApplicationController
+class Publications::Users::FollowsController < Publications::UsersController
+  # @user variable defined in parent controller and means user's profile you visited
+
   def create
-    @user = User.find(params[:followed_id])
     current_user.follow(@user)
 
     respond_to do |format|
-      format.html { redirect_to user_publications_path(@user) }
+      format.html { redirect_to user_publications_path(user) }
       format.js
     end
   end
 
   def destroy
-    @user = Publication::Relationship.find(params[:id]).followed
     current_user.unfollow(@user)
 
     respond_to do |format|
-      format.html { redirect_to user_publications_path(@user) }
+      format.html { redirect_to user_publications_path(user) }
       format.js
     end
   end

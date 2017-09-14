@@ -1,5 +1,5 @@
 class Publications::Users::CommentsController < Publications::UsersController
-  before_action :authenticate_user!, :set_post, :check_commentable
+  before_action :set_post, :check_commentable
   before_action :set_comment, :check_author, only: %i[edit update destroy]
 
   def new
@@ -7,13 +7,13 @@ class Publications::Users::CommentsController < Publications::UsersController
   end
 
   def create
-    @comment = @post.comments.new(comment_params)
-    @comment.user = current_user
+    @comment = @post.comments.new(comment_params.merge(user: current_user))
 
     if @comment.save
       notify_post_author
-      redirect_to user_post_path(@user, @post),
-                  notice: 'Comment was successfully created.'
+      flash[:notice] = 'Comment was successfully created'
+
+      redirect_to user_post_path(@user, @post)
     else
       render :new
     end
@@ -25,8 +25,8 @@ class Publications::Users::CommentsController < Publications::UsersController
 
   def update
     if @comment.update(comment_params)
-      redirect_to user_post_path(@user, @post),
-                  notice: 'Comment was successfully updated.'
+      flash[:notice] = 'Comment was successfully updated.'
+      redirect_to user_post_path(@user, @post)
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class Publications::Users::CommentsController < Publications::UsersController
     if @comment.destroy
       flash[:notice] = 'Successfully destroyed'
     else
-      flash[:error] = 'Error hapenned. Try again'
+      flash[:error]  = 'Error hapenned. Try again'
     end
 
     redirect_to user_post_path(@user, @post)
@@ -45,7 +45,7 @@ class Publications::Users::CommentsController < Publications::UsersController
   private
 
   def set_post
-    @post = Publication::Post.find(params[:post_id])
+    @post = Publication::Post.visible.find(params[:post_id])
   end
 
   def set_comment
@@ -67,9 +67,8 @@ class Publications::Users::CommentsController < Publications::UsersController
   end
 
   def notify_post_author
-    UserMailer.notify_post_author(
-      current_user, @post.user, @comment
-    ).deliver_later
+    UserMailer.notify_post_author(current_user, @post.user, @comment)
+              .deliver_later
   end
 
   def comment_params

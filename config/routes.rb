@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   root 'landing_page#index'
-  devise_for :users, controllers: { 
+  devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :visits, only: %i[index show]
     get '/visit_statistics', to: 'visits#statistic'
   end
-  
+
   # PUBLICATIONS
   # own resources
   resources :categories, except: :index, module: 'publications'

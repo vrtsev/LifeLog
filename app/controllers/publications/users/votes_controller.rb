@@ -7,22 +7,24 @@ class Publications::Users::VotesController < ApplicationController
     if @vote.save
       flash[:notice] = 'Vote was successfully created'
     else
-      flash[:error] = 'Error. Try again'
+      flash[:error]  = 'Error. Try again'
     end
+
     redirect_to user_post_path(@user, @post)
   end
 
   def destroy
     @vote = @comment.votes.find(params[:id])
     @vote.destroy
-    redirect_to user_post_path(@user, @post),
-                notice: 'Vote was successfully destroyed.'
+    flash[:notice] = 'Vote was successfully destroyed'
+
+    redirect_to user_post_path(@user, @post)
   end
 
   private
 
   def set_post
-    @post = @user.publication_posts.find(params[:post_id])
+    @post = @user.publication_posts.visible.find(params[:post_id])
   end
 
   def set_comment
