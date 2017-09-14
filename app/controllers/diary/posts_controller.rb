@@ -1,12 +1,13 @@
 class Diary::PostsController < DiaryController
-  before_action :set_post,            only: %i[show edit update destroy]
-  before_action :collect_posts,       only: %i[index new edit]
+  before_action :set_post, except: %i[index new create]
 
-  def index; end
+  def index
+    @posts = current_user.diary_posts.includes(:category, :tags, :taggings)
+                         .newly.page(params[:page])
+  end
 
   def show
-    @categories = current_user.diary_categories
-    @comments   = @post.comments.order(created_at: :desc)
+    @comments = @post.comments.newly
   end
 
   def new; end
@@ -15,11 +16,11 @@ class Diary::PostsController < DiaryController
     @post = current_user.diary_posts.new(post_params)
 
     if @post.save
-      flash[:notice] = 'Post was successfully created.'
+      flash[:notice] = 'Post was successfully created'
+      redirect_to diary_posts_path
     else
-      flash[:error] = 'Произошла ошибка при создании.'
+      render :new
     end
-    redirect_to diary_posts_path
   end
 
   def edit; end
@@ -27,26 +28,23 @@ class Diary::PostsController < DiaryController
   def update
     if @post.update(post_params)
       flash[:notice] = 'Post was successfully updated.'
+      redirect_to diary_posts_path
     else
-      flash[:error] = 'Произошла ошибка при редактировании.'
+      render :edit
     end
-    redirect_to diary_posts_path
   end
 
   def destroy
     @post.destroy
-    redirect_to diary_posts_path, notice: 'Post was successfully destroyed.'
+    flash[:notice] = 'Post was successfully destroyed'
+
+    redirect_to diary_posts_path
   end
 
   private
 
   def set_post
     @post = current_user.diary_posts.find(params[:id])
-  end
-
-  def collect_posts
-    @posts = current_user.diary_posts.order(created_at: :desc)
-                         .paginate(page: params[:page], per_page: 10)
   end
 
   def post_params

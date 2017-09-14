@@ -1,6 +1,6 @@
 class NewsFeedController < ApplicationController
   layout 'news_feed'
-  
+
   def index
     @all_posts           = load_posts.page(params[:all_posts_page])
     @subscriptions_posts = load_posts.where(

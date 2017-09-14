@@ -1,14 +1,11 @@
 class DiaryController < ApplicationController
-  before_action :set_user, :set_user_categories
+  before_action :set_layout_variables
   layout 'diary'
 
   private
 
-  def set_user
-    @user = current_user
-  end
-
-  def set_user_categories
-    @categories = set_user.diary_categories.order(created_at: :desc)
+  def set_layout_variables
+    @posts_count = current_user.diary_posts.count
+    @categories  = current_user.diary_categories.newly
   end
 end

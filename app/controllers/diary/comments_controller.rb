@@ -1,40 +1,38 @@
-class Diary::CommentsController < ApplicationController
+class Diary::CommentsController < DiaryController
   before_action :set_post
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, except: %i[new create]
 
-  def new
-    # @comment = @post.comments.new
+  def new; end
+
+  def create
+    @comment = @post.comments.new(comment_params.merge(user: current_user))
+
+    if @comment.save
+      flash[:notice] = 'Comment was successfully created.'
+    else
+      flash[:error] = 'Something went wrong.'
+    end
+    redirect_to diary_post_path(@post)
   end
 
   def edit
     respond_to { |format| format.js }
   end
 
-  def create
-    @comment = @post.comments.new(comment_params)
-    @comment.user = current_user
-
-    if @comment.save
-      redirect_to diary_post_path(@post),
-                  notice: 'Comment was successfully created.'
-    else
-      render :new
-    end
-  end
-
   def update
     if @comment.update(comment_params)
-      redirect_to diary_post_path(@post),
-                  notice: 'Comment was successfully updated.'
+      flash[:notice] = 'Comment was successfully updated.'
     else
-      render :edit
+      flash[:error] = 'Something went wrong.'
     end
+    redirect_to diary_post_path(@post)
   end
 
   def destroy
     @comment.destroy
-    redirect_to diary_post_path(@post),
-                notice: 'Comment was successfully destroyed.'
+    flash[:notice] = 'Comment was successfully destroyed.'
+
+    redirect_to diary_post_path(@post)
   end
 
   private

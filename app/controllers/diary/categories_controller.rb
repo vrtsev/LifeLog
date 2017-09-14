@@ -1,45 +1,40 @@
 class Diary::CategoriesController < DiaryController
-  before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_category, except: %i[new create]
 
   def show
-    @posts = @category.diary_posts
-                      .paginate(page: params[:page], per_page: 10)
+    @posts = @category.diary_posts.includes(:category, :tags, :taggings).newly
+                      .page(params[:page])
   end
 
   def new; end
 
-  def edit
-    @posts = @category.diary_posts
-                      .paginate(page: params[:page], per_page: 10)
-  end
-
   def create
     @category = current_user.diary_categories.new(category_params)
-    @category.color = rand(0..6)
 
     if @category.save
       flash[:notice] = 'Category was successfully created.'
+      redirect_to diary_category_path(@category)
     else
-      flash[:error] = 'Something went wrong.'
+      render :new
     end
-
-    redirect_to diary_category_path(@category)
   end
+
+  def edit; end
 
   def update
     if @category.update(category_params)
       flash[:notice] = 'Category was successfully updated.'
+      redirect_to diary_category_path(@category)
     else
-      flash[:error] = 'Something went wrong.'
+      render :edit
     end
-
-    redirect_to diary_category_path(@category)
   end
 
   def destroy
     @category.destroy
-    redirect_to diary_posts_url,
-                notice: 'Category was successfully destroyed.'
+    flash[:notice] = 'Category was successfully destroyed.'
+
+    redirect_to diary_posts_url
   end
 
   private

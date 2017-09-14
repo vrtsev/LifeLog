@@ -1,10 +1,10 @@
 class Diary::SearchController < DiaryController
-  before_action :set_search_values
+  before_action :set_filter_values
 
   def index
     @tags     = find_tags
-    @posts    = find_posts.paginate(page: params[:posts_page], per_page: 10)
-    @comments = find_comments.paginate(page: params[:comments_page], per_page: 10)
+    @posts    = find_posts.page(params[:posts_page])
+    @comments = find_comments.page(params[:comments_page])
   end
 
   private
@@ -15,30 +15,26 @@ class Diary::SearchController < DiaryController
                .distinct
     return scope.none unless params[:query].present?
 
-    TagsSearchQuery.new(
-      scope, params[:query], params[:tag]
-    ).results
+    TagsSearchQuery.new(scope, params[:query], params[:tag]).results
   end
 
   def find_posts
-    scope = current_user.diary_posts
+    scope = current_user.diary_posts.includes(:tags, :taggings)
     return scope.none if params[:query].blank? && params[:post].blank?
-    
+
     PostsSearchQuery.new(
       current_user.diary_posts, params[:query], params[:post]
     ).results
   end
 
   def find_comments
-    scope = current_user.diary_comments
+    scope = current_user.diary_comments.includes(:post)
     return scope.none unless params[:query].present?
 
-    CommentsSearchQuery.new(
-      scope, params[:query], params[:comment]
-    ).results
+    CommentsSearchQuery.new(scope, params[:query], params[:comment]).results
   end
 
-  def set_search_values
+  def set_filter_values
     return unless params[:post].present?
 
     @filter_pinned       = params[:post][:pinned]
