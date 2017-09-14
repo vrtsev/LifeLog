@@ -1,12 +1,12 @@
 class Objectives::CategoriesController < ObjectivesController
-  before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_category, except: %i[new create]
 
   def show
     @goals = @category.goals.order(end_date: :desc)
   end
 
   def new
-    # @category = current_user.goal_categories.new
+    @category = current_user.goal_categories.new
   end
 
   def create
@@ -14,11 +14,10 @@ class Objectives::CategoriesController < ObjectivesController
 
     if @category.save
       flash[:notice] = 'Category was successfully created.'
+      redirect_to objectives_goals_path
     else
-      flash[:error] = 'Something went wrong'
+      render :new
     end
-
-    redirect_to objectives_goals_path
   end
 
   def edit; end
@@ -26,17 +25,17 @@ class Objectives::CategoriesController < ObjectivesController
   def update
     if @category.update(category_params)
       flash[:notice] = 'Category was successfully updated.'
+      redirect_to objectives_goals_path
     else
-      flash[:error] = 'Something went wrong'
+      render :edit
     end
-    
-    redirect_to objectives_goals_path
   end
 
   def destroy
     @category.destroy
-    redirect_to objectives_goals_url,
-                notice: 'Category was successfully destroyed.'
+    flash[:notice] = 'Category was successfully destroyed.'
+
+    redirect_to objectives_goals_url
   end
 
   private

@@ -1,7 +1,7 @@
 class Objectives::ActionsController < ObjectivesController
   before_action :set_goal
   before_action :set_action, except: :create
-  
+
   def create
     @action = @goal.actions.new(action_params)
 
@@ -30,9 +30,9 @@ class Objectives::ActionsController < ObjectivesController
 
   def destroy
     @action.destroy
-    redirect_to \
-      objectives_goal_path(@goal), 
-      notice: 'Action has been deleted'
+    flash[:notice] = 'Action has been deleted'
+
+    redirect_to objectives_goal_path(@goal)
   end
 
   private

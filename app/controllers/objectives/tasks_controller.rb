@@ -1,20 +1,19 @@
-class Objectives::TasksController < ApplicationController
+class Objectives::TasksController < ObjectivesController
   before_action :find_goal
-  before_action :find_task, only: %i[edit update destroy done undone]
+  before_action :find_task, except: %i[new create]
 
   def new
     @task = @goal.tasks.new
   end
 
   def create
-    @task = @goal.tasks.new(task_params)
-    @task.user = current_user
+    @task = @goal.tasks.new(task_params.merge(user: current_user))
 
     if @task.save
-      create_logger_action(:addition, task: @task.title)
+      TaskLoggerOperation.new(:addition, @task, @goal).call
       recalculate_progress
-      redirect_to objectives_goal_path(@goal),
-                  notice: 'Task was successfully created.'
+      flash[:notice] = 'Task was successfully created.'
+      redirect_to objectives_goal_path(@goal)
     else
       render :new
     end
@@ -24,42 +23,44 @@ class Objectives::TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      create_logger_action(:editing, task: @task.title)
-      redirect_to objectives_goal_path(@goal),
-                  notice: 'Task was successfully updated.'
+      TaskLoggerOperation.new(:editing, @task, @goal).call
+      flash[:notice] = 'Task was successfully updated.'
+      redirect_to objectives_goal_path(@goal)
     else
       render :edit
     end
   end
 
   def destroy
-    title = @task.title
-
     @task.destroy
-    create_logger_action(:deletion, task: title)
+    TaskLoggerOperation.new(:deletion, @task, @goal).call
     recalculate_progress
-    redirect_to objectives_goal_path(@goal),
-                notice: 'Task was successfully destroyed.'
+    flash[:notice] = 'Task was successfully destroyed.'
+
+    redirect_to objectives_goal_path(@goal)
   end
 
   def done
     @task.completed!
-    create_logger_action(:completion, task: @task.title)
+    TaskLoggerOperation.new(:completion, @task, @goal).call
     recalculate_progress
-    redirect_to objectives_goal_path(@goal),
-                notice: 'Task has been completed'
+    flash[:notice] = 'Task has been completed'
+
+    redirect_to objectives_goal_path(@goal)
   end
 
   def undone
     @task.actual!
     recalculate_progress
-    redirect_to objectives_goal_path(@goal),
-                notice: 'Task is actual now'
+    flash[:notice] = 'Task is actual now'
+
+    redirect_to objectives_goal_path(@goal)
   end
 
   def sort
-    params[:order].each do |key,value|
-      @goal.tasks.find(value[:id]).update_attribute(:position, value[:position])
+    params[:order].each do |key, value|
+      task = @goal.tasks.find(value[:id])
+      task.update_attribute(:position, value[:position])
     end
 
     head :ok
@@ -68,27 +69,19 @@ class Objectives::TasksController < ApplicationController
   private
 
   def recalculate_progress
-    all_tasks       = @goal.tasks.count.to_f
-    completed_tasks = @goal.tasks.completed.count.to_f
-    
-    if completed_tasks.zero?
-      @goal.update(progress: 0)  
-    else
-      progress = (completed_tasks / all_tasks ) * 100
-      @goal.update(progress: progress)
+    all_tasks_count       = @goal.tasks.count.to_f
+    completed_tasks_count = @goal.tasks.completed.count.to_f
+    return @goal.update(progress: 0) if completed_tasks_count.zero?
 
-      complete_goal if @goal.progress == 100
-    end
+    progress = (completed_tasks_count / all_tasks_count ) * 100
+    @goal.update(progress: progress)
+
+    complete_goal! if @goal.progress == 100
   end
 
-  def complete_goal
+  def complete_goal!
     @goal.completed!
-    GoalLoggerOperation.new(@goal, :completion, status: @goal.status).call
     flash[:notice] = 'Поздравляем! Вы успешно выполнили цель'
-  end
-
-  def create_logger_action(kind, **options)
-    TaskLoggerOperation.new(@goal, kind, options).call
   end
 
   def find_goal

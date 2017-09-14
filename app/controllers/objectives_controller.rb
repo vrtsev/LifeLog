@@ -1,34 +1,21 @@
 class ObjectivesController < ApplicationController
-  before_action :set_user, :set_categories, :set_goals, :set_filters, :set_overdue_goals
+  before_action :set_layout_variables
   layout 'objectives'
 
-  # private
+  private
 
-  def set_user
-   @user = current_user
+  def set_layout_variables
+    @categories = current_user.goal_categories.newly
+    @goals      = current_user.goals.includes(:tasks)
+                              .where(status: %i[in_progress overdue])
+                              .order(end_date: :desc)
   end
 
-  def set_categories
-   @categories = set_user.goal_categories.order(created_at: :desc)
-  end
+  # TODO move this operation to scheduled job
+  # def update_overdued_goals
+  #   overdued_goals = @goals.where('goals.end_date < ?', DateTime.now)
+  #   return unless overdued_goals.present?
 
-  def set_goals
-   @goals = set_user.goals.where(status: %i[in_progress overdue]).order(end_date: :desc)
-  end
-
-  def set_filters
-    @filters = {
-      'В процессе':   :in_progress,
-      'Завершенные':  :completed,
-      'Отмененные':   :canceled,
-      'Просроченные': :overdue
-    }
-  end
-
-  def set_overdue_goals
-    current_date = DateTime.now
-    overdued_goals = @goals.where('goals.end_date < ?', current_date)
-    
-    overdued_goals.update_all(status: 'overdue') if overdued_goals.present?
-  end
+  #   overdued_goals.update_all(status: 'overdue')
+  # end
 end

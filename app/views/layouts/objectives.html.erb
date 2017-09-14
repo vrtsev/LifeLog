@@ -69,10 +69,16 @@
                                 </div>
                                 
                                 <div class="clear">
-                                  <i class="fa fa-tags"></i>
-                                  Цели с тегом 
-                                  <b>'<%= @tag.name %>'</b> 
-                                  <span class="label default m-l-sm"><%= @goals.count %></span>
+                                  <% if @tag.present? %>
+                                    <i class="fa fa-tags"></i>
+                                    Цели с тегом 
+                                    <b>'<%= @tag.name %>'</b> 
+                                    <span class="label default m-l-sm"><%= @goals.count %></span>
+                                  <% else %>
+                                    <i class="fa fa-tags"></i>
+                                    У вас нет целей с тегом
+                                    <b>'<%= params[:name] %>'</b> 
+                                  <% end %>
                                 </div>
                               </div>
                             </div>
@@ -221,7 +227,7 @@
                           </h5>
 
                           <div class="p-a-sm">
-                            <% filter_menu_elements(@filters).each do |el| %>
+                            <% filter_menu_elements.each do |el| %>
                               <li>
                                 <%= link_to objectives_search_index_path(goal: { status: el[:status] }), class: "nav-link #{el[:active]}" do %>
                                   <%= el[:name] %>

@@ -1,15 +1,11 @@
 class Objectives::GoalsController < ObjectivesController
-  before_action :find_goal, only: %i[edit update destroy]
+  before_action :find_goal, except: %i[index new create]
 
-  def index
-    # @goals = current_user.goals.all
-  end
+  def index; end
 
   def show
-    @goal    = current_user.goals.find(params[:id])
-    @tasks   = @goal.tasks.base.order(created_at: :desc)
-    @actions = @goal.actions.order(created_at: :desc)
-                    .paginate(page: params[:page], per_page: 10)
+    @tasks   = @goal.tasks.base.newly
+    @actions = @goal.actions.newly.page(params[:page])
   end
 
   def new
@@ -20,8 +16,8 @@ class Objectives::GoalsController < ObjectivesController
     @goal = current_user.goals.new(goal_params)
 
     if @goal.save
-      redirect_to objectives_goal_path(@goal),
-                  notice: 'Goal was successfully created.'
+      flash[:notice] = 'Goal was successfully created.'
+      redirect_to objectives_goal_path(@goal)
     else
       render :new
     end
@@ -31,12 +27,10 @@ class Objectives::GoalsController < ObjectivesController
 
   def update
     @goal.assign_attributes(goal_params)
-    status = @goal.status_change.last if @goal.status_changed?
-    
+
     if @goal.save
-      create_logger_action(status: status)
-      redirect_to objectives_goal_path(@goal),
-                  notice: 'Goal was successfully updated.'
+      flash[:notice] = 'Goal was successfully updated.'
+      redirect_to objectives_goal_path(@goal)
     else
       render :edit
     end
@@ -44,22 +38,12 @@ class Objectives::GoalsController < ObjectivesController
 
   def destroy
     @goal.destroy
-    redirect_to objectives_goals_path,
-                notice: 'Goal was successfully destroyed.'
+    flash[:notice] = 'Goal was successfully destroyed.'
+
+    redirect_to objectives_goals_path
   end
 
   private
-
-  def create_logger_action(**options)
-    kind = case options[:status]
-    when 'completed' then :completion
-    when 'canceled'  then :deletion
-    when 'overdue'   then :deletion
-    else :editing
-    end
-
-    GoalLoggerOperation.new(@goal, kind, options).call
-  end
 
   def find_goal
     @goal = current_user.goals.find(params[:id])

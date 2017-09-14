@@ -1,10 +1,10 @@
 module ObjectivesHelper
   include Rails.application.routes.url_helpers
 
-  def filter_menu_elements(filters)
-    return unless filters.present?
+  def filter_menu_elements
+    return unless set_filters.present?
 
-    filters.inject([]) do |array, (name, key)|
+    set_filters.inject([]) do |array, (name, key)|
       items_count = current_user.goals.send(key).count 
       array << { name: name, status: key, active: set_active_link(key), items_count: items_count }
 
@@ -53,5 +53,14 @@ module ObjectivesHelper
     return unless params[:goal].present?
 
     'active' if params[:goal][:status] == key.to_s
+  end
+
+  def set_filters
+    {
+      'В процессе':   :in_progress,
+      'Завершенные':  :completed,
+      'Отмененные':   :canceled,
+      'Просроченные': :overdue
+    }
   end
 end
