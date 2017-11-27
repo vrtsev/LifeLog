@@ -32,6 +32,14 @@ gem 'carrierwave', '~> 1.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'mini_magick'
 
+# Trailblazer
+gem "cells-rails"
+gem "cells-erb"
+gem "dry-validation"
+gem "trailblazer"
+gem "trailblazer-rails"
+gem "trailblazer-cells"
+
 group :development, :test do
   gem 'pry-rails', platform: :mri
 end

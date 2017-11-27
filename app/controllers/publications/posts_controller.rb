@@ -1,73 +1,56 @@
 class Publications::PostsController < PublicationsController
-  before_action :set_post, only: %i[show edit update destroy]
-
   def index
-    scope = current_user.publication_posts.includes(:tags, :taggings).newly
+    result = Publications::Post::Index.(params, current_user: current_user)
 
-    @pinned_posts = scope.pinned
-    @posts        = scope.page(params[:page])
+    @pinned_posts = result['scope'].pinned
+    @posts        = result['scope'].page(params[:page])
   end
 
   def show
-    @comments = @post.comments.includes(:votes).newly
-                     .page(params[:page])
+    result = Publications::Post::Show.(params, current_user: current_user)
+
+    @post     = result['model']
+    @comments = result['comments']
   end
 
   def new
-    @post = current_user.publication_posts.new
+    result = Publications::Post::Create::Present.(params, current_user: current_user)   # run will pass params and set variables '@model' and '@form'
+
+    @model = result['model']
   end
 
   def create
-    @post = current_user.publication_posts.new(post_params)
+    result = Publications::Post::Create.(params, current_user: current_user)
 
-    if @post.save
-      notify_followers
+    if result.success?
       flash[:notice] = 'Post was successfully created'
-
-      redirect_to post_path(@post)
+      redirect_to post_path(result['model'])
     else
       render :new
     end
   end
 
-  def edit; end
+  def edit
+    result = Publications::Post::Update::Present.(params, current_user: current_user)
+
+    @model = result['model']
+  end
 
   def update
-    @post.assign_attributes(post_params)
-    @post.supplemented_at = DateTime.now if @post.supplemented_changed?
+    result = Publications::Post::Update.(params, current_user: current_user)
 
-    if @post.save
+    if result.success?
       flash[:notice] = 'Post was successfully updated'
-
-      redirect_to post_path(@post)
+      redirect_to post_path(result['model'])
     else
       render :edit
     end
   end
 
   def destroy
-    @post.destroy
+    result = Publications::Post::Destroy.(params, current_user: current_user)
     flash[:notice] = 'Post was successfully destroyed'
 
     redirect_to posts_url
-  end
-
-  private
-
-  def notify_followers
-    current_user.followers.each do |follower|
-      UserMailer.notify_follower(follower, @post.user, @post).deliver_later
-    end
-  end
-
-  def set_post
-    @post = current_user.publication_posts.includes(:tags, :taggings)
-                        .find(params[:id])
-  end
-
-  def post_params
-    params.require(:post).permit \
-      :title, :content, :supplemented, :pinned, :visible, :commentable,
-      :category_id, :all_tags
   end
 end

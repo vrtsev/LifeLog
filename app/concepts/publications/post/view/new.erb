@@ -1,41 +1,20 @@
-<%= form_for object, url: path, method: method do |f| %>
+<%# its view of a widget\cell  %>
+
+<%= form_for @model, url: posts_path, method: :post do |f| %>
   <div class="box">
 
     <!-- Error messages -->
-    <% if object.errors.any? %>
-      <div class="box-header dker error-box">
-        <h2><%= "#{pluralize(object.errors.count, "error")} prohibited this post from being saved:" %>
-        <small>
-          <ul>
-            <% object.errors.full_messages.each do |message| %>
-              <li><%= message %>
-            <% end %>
-          </ul>
-        </small>
-      </div>
-    <% end %>
+    
 
     <!-- title header -->
     <div class="box-header dker">
-      <% if action_name == 'new' %>
         <%= f.text_field :title, class: "form-control", placeholder: "Заголовок записи" %>
-      <% else %>
-        <div class="form-group">
-          <%= f.text_field :title, class: "form-control", placeholder: "Заголовок записи" %>
-        </div>
-
-        <label class="md-switch">
-          <%= f.check_box :supplemented %>
-          <i class="green"></i>
-          Пометить запись как обновленную (дополненную)
-        </label>
-      <% end %>
     </div>
 
     <div class="box-body">
       <div class="form-group row">
         <div class="col-sm-12">
-          <%= f.cktext_area :content, html: { rows: '10' }, class: "form-control ckeditor", ckeditor: { toolbar: 'mini' } %>
+          <%= f.text_area :content, html: { rows: '10' }, class: "form-control ckeditor", ckeditor: { toolbar: 'mini' } %>
         </div>
       </div>
 
@@ -47,7 +26,6 @@
         </div>
 
         <div class="form-group">
-          <%= f.select :category_id, @categories.collect {|c| [ c.title, c.id ] }, { prompt: 'Без категории' }, class: "form-control c-select" %>
         </div>
 
         <div class="form-group text-center">
@@ -75,7 +53,6 @@
 
     <div class="box-body dker clearfix">
       <div class="form-action-buttons pull-right">
-        <%= link_to 'Назад', :back, class: "btn btn-default" %>
         <%= f.submit 'Сохранить', class: "btn btn-success" %>
       </div>
     </div>

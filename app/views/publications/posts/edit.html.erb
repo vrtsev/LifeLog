@@ -1,5 +1,5 @@
 <%= render partial: 'form', locals: {
-  object: :post,
-  path: post_path(@post),
+  object: @model,
+  path:   post_path(@model),
   method: :patch
 } %>
