@@ -1,4 +1,4 @@
-$('#posts').append("<%= j render partial: 'post', locals: { posts: @posts.unpinned } %>");
+$('#posts').append('<%= j concept("publications/post/cell/index_post_block", collection: @posts.unpinned).to_s %>');
 
 <% if @posts.next_page %>
   $('.pagination').replaceWith("<%= j will_paginate @posts %>");
