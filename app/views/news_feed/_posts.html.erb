@@ -4,8 +4,8 @@
       <!-- post header -->
       <div class="box-header dker">
         <h3>
-          <%= image_tag(post.user.photo_url, class: 'img-circle w-32 m-r pull-left') %>
-          <%= link_to post.title, user_post_path(post.user, post) %>
+          <%= image_tag(post.user.photo_url, class: 'img-circle w-32 m-r pull-left') if post.user %>
+          <%= link_to post.title, (post.user ? user_post_path(post.user.id, post) : '#' ) %>
 
           <% if post.supplemented %>
             <span class="label success">Обновлено</span>
@@ -16,7 +16,7 @@
           <% end %>
         </h3>
         <small>
-          <b><%= post.user.name %></b> 
+          <b><%= post.user ? post.user.name : 'Удален' %></b> 
           <%= format_datetime(post.created_at) %> 
           <%= "(Обновлено #{format_datetime(post.supplemented_at)})" if post.supplemented %>
         </small>

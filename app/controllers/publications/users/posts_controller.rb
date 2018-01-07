@@ -1,6 +1,6 @@
 class Publications::Users::PostsController < Publications::UsersController
   def index
-    @posts      = @user.publication_posts.visible.page(params[:page])
+    @posts      = @user.publication_posts.visible.newly.page(params[:page])
     @categories = @user.publication_categories
   end
 

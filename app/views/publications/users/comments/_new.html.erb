@@ -1,7 +1,7 @@
 <div id='new-comment-box' class="box">
   <div class="box-header comment-box-header">
     <span class="avatar w-32">
-      <%= image_tag(current_user.photo_url, class: 'img-circle') %>
+      <%= image_tag(current_user.photo_url, class: 'img-circle') if current_user %>
       <i class="on b-white bottom"></i>
     </span>
 
@@ -18,9 +18,9 @@
 
     <div class="box-body dker">
       <span class="avatar w-32">
-        <%= image_tag(current_user.photo_url, class: 'img-circle') %>
+        <%= image_tag(current_user.photo_url, class: 'img-circle') if current_user %>
         <i class="on b-white bottom"></i>
-        &nbsp;<%= current_user.name %>
+        &nbsp;<%= current_user.name if current_user %>
       </span>
 
       <div class="form-action-buttons pull-right"> 

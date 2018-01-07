@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<% if @post.commentable %>
+<% if @post.commentable && current_user %>
   <%= render partial: 'publications/users/comments/new' %>
 <% end %>
 

@@ -24,8 +24,8 @@
 #
 
 class User < ApplicationRecord
-  extend FriendlyId
-  friendly_id :unique_url, use: :slugged
+  # extend FriendlyId
+  # friendly_id :unique_url, use: :slugged
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
